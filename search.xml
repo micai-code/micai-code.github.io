@@ -1,35 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[Elasticsearch Getting Started (三)]]></title>
-    <url>%2F2019%2F10%2F06%2F%E7%AD%89%E5%BE%85%2F</url>
-    <content type="text"><![CDATA[Elasticsearch Getting Started (三) 一：Introduction 二：Description 三：Summary]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Elasticsearch Getting Started (二）]]></title>
-    <url>%2F2019%2F10%2F06%2FElasticsearch-Getting-Started-%E4%BA%8C%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[Elasticsearch Getting Started (二) 一：Introduction 二：Description 三：Summary]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Elasticsearch Getting Started (三)</title>
+      <link href="/2019/10/06/%E7%AD%89%E5%BE%85/"/>
+      <url>/2019/10/06/%E7%AD%89%E5%BE%85/</url>
+      
+        <content type="html"><![CDATA[<p>Elasticsearch Getting Started (三)</p><p>一：Introduction <br><br>二：Description <br><br>三：Summary</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Elasticsearch Getting Started (二）</title>
+      <link href="/2019/10/06/Elasticsearch-Getting-Started-%E4%BA%8C%EF%BC%89/"/>
+      <url>/2019/10/06/Elasticsearch-Getting-Started-%E4%BA%8C%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<p>Elasticsearch Getting Started (二)</p><p>一：Introduction <br><br>二：Description <br><br>三：Summary</p>]]></content>
+      
+      
       <categories>
-        <category>Elasticsearch</category>
+          
+          <category> Elasticsearch </category>
+          
       </categories>
-      <tags>
-        <tag>Elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Elasticsearch Getting Started (一）]]></title>
-    <url>%2F2019%2F10%2F06%2FElasticsearch-Getting-Started-%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[Elasticsearch Getting Started (一) 一：Introduction 二：Description 三：Summary]]></content>
+      
+      
+        <tags>
+            
+            <tag> Elasticsearch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Elasticsearch Getting Started (一）</title>
+      <link href="/2019/10/06/Elasticsearch-Getting-Started-%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2019/10/06/Elasticsearch-Getting-Started-%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<p>Elasticsearch Getting Started (一)</p><p>一：Introduction <br><br>二：Description <br><br>三：Summary</p>]]></content>
+      
+      
       <categories>
-        <category>Elasticsearch</category>
+          
+          <category> Elasticsearch </category>
+          
       </categories>
-      <tags>
-        <tag>Elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[My Wedding Photo]]></title>
-    <url>%2F2019%2F10%2F06%2FMy%20Wedding%20Photo%2F</url>
-    <content type="text"><![CDATA[]]></content>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> Elasticsearch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>My Wedding Photo</title>
+      <link href="/2019/10/06/My%20Wedding%20Photo/"/>
+      <url>/2019/10/06/My%20Wedding%20Photo/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://i.loli.net/2019/10/08/ywjdXMPxET5c6Ca.jpg" alt="22.jpg"><br><img src="https://i.loli.net/2019/10/08/AaosuTZfbmntexL.jpg" alt="01.jpg"><br><img src="https://i.loli.net/2019/10/08/8bSWzU1APphxFLm.jpg" alt="28.jpg"><br><img src="https://i.loli.net/2019/10/08/OwQJ7ELFcBhlMPX.jpg" alt="07.jpg"><br><img src="https://i.loli.net/2019/10/08/1pH2b65dtLAjPTa.jpg" alt="18.jpg"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
