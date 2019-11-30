@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://micai-code.github.io/about/index.html</loc>
+    
+    <lastmod>2019-11-30T05:12:37.557Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://micai-code.github.io/2019/10/10/Ubuntu-Installed-Jdk%E3%80%81Tomcat%E3%80%81Nginx%E3%80%81Redis%E3%80%81Zookeeper%E3%80%81Elasticsearch/</loc>
     
     <lastmod>2019-10-10T14:29:01.532Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://micai-code.github.io/2019/10/06/My%20Wedding%20Photo/</loc>
     
     <lastmod>2019-10-08T12:51:01.252Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://micai-code.github.io/about/index.html</loc>
-    
-    <lastmod>2019-10-06T11:57:23.070Z</lastmod>
     
   </url>
   
