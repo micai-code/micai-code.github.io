@@ -1,57 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[记一篇迟到的2019年年终总结]]></title>
-    <url>%2F2020%2F01%2F30%2F%E8%AE%B0%E4%B8%80%E7%AF%87%E8%BF%9F%E5%88%B0%E7%9A%842019%E5%B9%B4%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[前奏：2019年已经过去，现在才写年终总结似乎有些晚了，之前一直想着在2020年到来之前写，结果由于各种外因导致延迟到现在了，不过该总结的还是要总结，不然对不起过去一年发生的各种故事。 工作：2019年我是进入新公司的第一年，2018年底由于公司项目发展规划裁员，我在11月底拿了N+1赔偿离开了供职将近2年的公司，其中还是有些舍不得，毕竟是大公司，各种制度毕竟完善，算是我待过的公司综合起来最好的一个了。离开了上家公司，中间就回老家休息了1周就又回来帝都找下家了，这里感谢当时为我推荐工作的各位朋友，虽然最后我选择了我自己找的公司，但是还是谢谢他们，感谢和他们的相遇，期待后续有机会再一起合作。 从老家回到帝都，差不多一周的样子就找好了下家，入职是2018年11月30日，公司算创业公司，搞医药电商的，药兜网，这里给公司打个广告，目前成立4年多，团队规模不算大，产品，技术、测试加起来差不多30个人的样子，但是各个环节都有对应的负责人，还算相对完善团队规模。来到这家公司主要担任后端研发工程师，主要负责公司的B2B产品线的后端开发工作，涉及到得业务主要包括：商品、促销等，日常工作主要是根据产品的需求设计对应的数据结构、开发后端接口，和前端联调接口，修复测试发现的缺陷，协助各组按需求上线功能，其中在做促销这块业务的时候是最忙得时候，还有几次通宵上线的情景，现在想起来，那会儿的忙真的是让自己学到了很多东西，尤其是业务方面和产品迭代流程，包括发布流程，测试流程，上线流程等等。2019年的上半年主要参与了B2B电商平台的后端开发，也是本年度最忙得一个阶段，2019年下半年由于公司产品线的发展，我被抽调到数据组做了一段时间的数据方面的工作，主要包括：数据大屏系统的开发、数据仓库的建设，虽然我们的数据产品只是给公司内部使用，但是在这个过程中，也学到很多东西，比如ElasticSearch、Kettle等，更重要的是学到了一些数据处理方案，比如全量同步数据、增量同步数据、不同环境之间数据同步、百万级别数据同步等方案的落地，这些都让我学到了很多东西，在做完上面那些工作之后，时间已经到2019年10月份了，这个时候，公司又发现了一个新的产品方向，所以就抽调人力成立了一个独立的项目组去做这个项目，也是我2019年年底一直在忙得项目，该项目主要是做医疗行业的舆情和监控，在这个项目组我从原来的后端开发角色增加了一个业务负责人的角色，虽然只是个头衔，但是我还是很看重公司给我的机会的，所以也是在一直边摸索，边实践，虽然在过程中遇到一些问题，但是最后在团队小伙伴的努力下，都一一解决了，最后的成果就是完成了项目的PC版本按时上线，同时在春节前还上线了项目的小程序，这里提一点，上线小程序踩了很多坑，由于之前没有开发过小程序，也没有上线经验，导致最后走了一些弯路，这个后面有时间再详细聊聊，最后总结下，2019年过的还是很充实的，业务上有新的突破，技术上也学到一些新技术，个人发展上也跟上了当时来公司的目标，在做技术的同时，可以学习一下管理，虽然还是个管理菜鸟，但是万事开头难，已经开头了，后面努力坚持，总有突破的一天。 放一张我们一家三口的照片： 生活：生活方面，2019年也是我人生中最重要的一年，爱人在18年底检查怀孕了，所以整个19年我都是精神状态最紧绷的一年，不但要应对工作中的各种问题，还要照顾怀孕的爱人，虽然我爱人是个比较坚强的女汉子，因为工作的原因，在爱人怀孕整个孕期，我只陪过2次去医院产检，这点我觉得作为男人还是不够的，还好爱人算比较坚强的那类人，没有和我计较，我能做的只有在日后的生活中多多分担生活中的琐事了。2019年08月30日下午16点35迎来了我的小佩奇，从待产到生，我们一起度过了比较难熬的2天，随着小朋友的到来，我感受到了初为人父的喜悦，也心疼爱人从怀孕到生产的辛苦付出，在这里很感谢爱人的付出，期待我们往后余生的精彩生活，也祝福我的小佩奇健康，快乐的成长。 总结：回想整个2019年，算是我人生中比较重要的一年，经历了工作的变动，也经历了孩子的降生，算是挑战比较多的一年，现在想想有些事只有经历了才会值得回忆，眼下已经是2020年01月30日21点14分，相信大部分人都在家里，因为我们遇到了肺炎病毒，尤其是武汉的同胞们更是处在离病毒最近的地方，在这里盼望病毒早日远离我们，也为武汉加油。]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>记一篇迟到的2019年年终总结</title>
+      <link href="/2020/01/30/%E8%AE%B0%E4%B8%80%E7%AF%87%E8%BF%9F%E5%88%B0%E7%9A%842019%E5%B9%B4%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+      <url>/2020/01/30/%E8%AE%B0%E4%B8%80%E7%AF%87%E8%BF%9F%E5%88%B0%E7%9A%842019%E5%B9%B4%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<p><strong>前奏：</strong><br>2019年已经过去，现在才写年终总结似乎有些晚了，之前一直想着在2020年到来之前写，结果由于各种外因导致延迟到现在了，不过该总结的还是要总结，不然对不起过去一年发生的各种故事。</p><p><strong>工作：</strong><br>2019年我是进入新公司的第一年，2018年底由于公司项目发展规划裁员，我在11月底拿了N+1赔偿离开了供职将近2年的公司，其中还是有些舍不得，毕竟是大公司，各种制度毕竟完善，算是我待过的公司综合起来最好的一个了。离开了上家公司，中间就回老家休息了1周就又回来帝都找下家了，这里感谢当时为我推荐工作的各位朋友，虽然最后我选择了我自己找的公司，但是还是谢谢他们，感谢和他们的相遇，期待后续有机会再一起合作。</p><p>从老家回到帝都，差不多一周的样子就找好了下家，入职是2018年11月30日，公司算创业公司，搞医药电商的，药兜网，这里给公司打个广告，目前成立4年多，团队规模不算大，产品，技术、测试加起来差不多30个人的样子，但是各个环节都有对应的负责人，还算相对完善团队规模。来到这家公司主要担任后端研发工程师，主要负责公司的B2B产品线的后端开发工作，涉及到得业务主要包括：商品、促销等，日常工作主要是根据产品的需求设计对应的数据结构、开发后端接口，和前端联调接口，修复测试发现的缺陷，协助各组按需求上线功能，其中在做促销这块业务的时候是最忙得时候，还有几次通宵上线的情景，现在想起来，那会儿的忙真的是让自己学到了很多东西，尤其是业务方面和产品迭代流程，包括发布流程，测试流程，上线流程等等。2019年的上半年主要参与了B2B电商平台的后端开发，也是本年度最忙得一个阶段，2019年下半年由于公司产品线的发展，我被抽调到数据组做了一段时间的数据方面的工作，主要包括：数据大屏系统的开发、数据仓库的建设，虽然我们的数据产品只是给公司内部使用，但是在这个过程中，也学到很多东西，比如ElasticSearch、Kettle等，更重要的是学到了一些数据处理方案，比如全量同步数据、增量同步数据、不同环境之间数据同步、百万级别数据同步等方<br>案的落地，这些都让我学到了很多东西，在做完上面那些工作之后，时间已经到2019年10月份了，这个时候，公司又发现了一个新的产品方向，所以就抽<br>调人力成立了一个独立的项目组去做这个项目，也是我2019年年底一直在忙得项目，该项目主要是做医疗行业的舆情和监控，在这个项目组我从原来的后端开发角色增加了一个业务负责人的角色，虽然只是个头衔，但是我还是很看重公司给我的机会的，所以也是在一直边摸索，边实践，虽然在过程中遇到一些问题，但是最后在团队小伙伴的努力下，都一一解决了，最后的成果就是完成了项目的PC版本按时上线，同时在春节前还上线了项目的小程序，这里提一点，上线小程序踩了很多坑，由于之前没有开发过小程序，也没有上线经验，导致最后走了一些弯路，这个后面有时间再详细聊聊，最后总结下，2019年过的还是很充实的，业务上有新的突破，技术上也学到一些新技术，个人发展上也跟上了当时来公司的目标，在<br>做技术的同时，可以学习一下管理，虽然还是个管理菜鸟，但是万事开头难，已经开头了，后面努力坚持，总有突破的一天。</p><p>放一张我们一家三口的照片：<br><img src="https://img-blog.csdnimg.cn/2020013021281133.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly96aGFveGluZ3VvLmJsb2cuY3Nkbi5uZXQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p><strong>生活：</strong><br>生活方面，2019年也是我人生中最重要的一年，爱人在18年底检查怀孕了，所以整个19年我都是精神状态最紧绷的一年，不但要应对工作中的各种问题，还要照顾怀孕的爱人，虽然我爱人是个比较坚强的女汉子，因为工作的原因，在爱人怀孕整个孕期，我只陪过2次去医院产检，这点我觉得作为男人还是不够的，还好爱人算比较坚强的那类人，没有和我计较，我能做的只有在日后的生活中多多分担生活中的琐事了。2019年08月30日下午16点35迎来了我的小佩奇，从待产到生，我们一起度过了比较难熬的2天，随着小朋友的到来，我感受到了初为人父的喜悦，也心疼爱人从怀孕到生产的辛苦付出，在这里很感谢爱人的付出，期待我们往后余生的精彩生活，也祝福我的小佩奇健康，快乐的成长。</p><p><strong>总结：</strong><br>回想整个2019年，算是我人生中比较重要的一年，经历了工作的变动，也经历了孩子的降生，算是挑战比较多的一年，现在想想有些事只有经历了才会值得回忆，眼下已经是2020年01月30日21点14分，相信大部分人都在家里，因为我们遇到了肺炎病毒，尤其是武汉的同胞们更是处在离病毒最近的地方，在这里盼望病毒早日远离我们，也为武汉加油。</p>]]></content>
+      
+      
       <categories>
-        <category>年终总结</category>
+          
+          <category> 年终总结 </category>
+          
       </categories>
-      <tags>
-        <tag>年终总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Ubuntu Installed Jdk、Tomcat、Nginx、Redis、Zookeeper、Elasticsearch]]></title>
-    <url>%2F2019%2F10%2F10%2FUbuntu-Installed-Jdk%E3%80%81Tomcat%E3%80%81Nginx%E3%80%81Redis%E3%80%81Zookeeper%E3%80%81Elasticsearch%2F</url>
-    <content type="text"><![CDATA[Ubuntu1.jdk 1.8 安装安装目录：/usr/local/software/ jdk-8u161-linux-x64.tar.gz tar -zxvf jdk-8u161-linux-x64.tar.gz vi /etc/profile export JAVA_HOME=/usr/local/software/jdk1.8.0_161 export CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/ export PATH=$PATH:$JAVA_HOME/bin source /etc/profile java -version 【JDK】Ubuntu 程序“java”已包含在下列软件包中 解决方法：(手动设置系统默认JDK) 在终端中依次输入命令： sudo update-alternatives –install /usr/bin/java java /usr/local/software/jdk1.8.0_161/bin/java 300 sudo update-alternatives –install /usr/bin/javac javac /usr/local/software/jdk1.8.0_161/bin/javac 300 2.tomcat 8.x 安装tar -zxvf apache-tomcat-8.5.24.tar.gz 3.nginx 安装安装gcc g++的依赖库 apt-get install build-essential apt-get install libtool 安装 pcre依赖库 sudo apt-get update sudo apt-get install libpcre3 libpcre3-dev 安装 ssl依赖库 apt-get install openssl 安装Nginx#下载最新版本：wget http://nginx.org/download/nginx-1.11.3.tar.gz#解压：tar -zxvf nginx-1.11.3.tar.gz#进入解压目录：cd nginx-1.11.3#配置：./configure –prefix=/usr/local/nginx#编辑nginx：make注意：这里可能会报错，提示“pcre.h No such file or directory”,具体详见：http://stackoverflow.com/questions/22555561/error-building-fatal-error-pcre-h-no-such-file-or-directory需要安装 libpcre3-dev,命令为：sudo apt-get install libpcre3-dev#安装nginx：sudo make install#启动nginx：sudo /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf注意：-c 指定配置文件的路径，不加的话，nginx会自动加载默认路径的配置文件，可以通过 -h查看帮助命令。#查看nginx进程：ps -ef|grep nginx 启动 Nginx cd /usr/local/nginx/sbin/nginx ./sbin/nginx 停止 Nginx 停止 Nginx ./sbin/nginx -s stop ./sbin/nginx -s quit -s都是采用向 Nginx 发送信号的方式 Nginx重新加载配置 ./sbin/nginx -s reload 指定配置文件 ./sbin/nginx -c /usr/local/nginx/conf/nginx.conf -c表示configuration，指定配置文件 查看 Nginx 版本 有两种可以查看 Nginx 的版本信息的参数。第一种如下： ./sbin/nginx -v 另一种显示的是详细的版本信息：./sbin/nginx -V 检查配置文件是否正确 ./sbin/nginx -t nginx+tomcat负载均衡配置 4.redis安装参考地址：https://blog.csdn.net/qq_30242609/article/details/52913145 安装Redis服务器端sudo apt-get install redis-server 安装完成后，Redis服务器会自动启动，我们检查Redis服务器程序 检查Redis服务器系统进程ps -aux|grep redis返回结果：redis 4162 0.1 0.0 10676 1420 ? Ss 23:24 0:00 /usr/bin/redis-server /etc/redis/redis.confconan 4172 0.0 0.0 11064 924 pts/0 S+ 23:26 0:00 grep –color=auto redis 通过启动命令检查Redis服务器状态netstat -nlt|grep 6379返回结果：tcp 0 0 127.0.0.1:6379 0.0.0.0:* LISTEN 通过启动命令检查Redis服务器状态sudo /etc/init.d/redis-server status返回结果：redis-server is running 通过命令行客户端访问Redis安装Redis服务器，会自动地一起安装Redis命令行客户端程序。 在本机输入redis-cli命令就可以启动，客户端程序访问Redis服务器。 redis-cliredis 127.0.0.1:6379&gt; #命令行的帮助 redis 127.0.0.1:6379&gt; helpredis-cli 2.2.12Type: “help @” to get a list of commands in “help “ for help on “help “ to get a list of possible help topics “quit” to exit #查看所有的key列表 redis 127.0.0.1:6379&gt; keys *(empty list or set) 修改Redis的配置 使用Redis的访问账号默认情况下，访问Redis服务器是不需要密码的，为了增加安全性我们需要设置Redis服务器的访问密码。设置访问密码为redisredis。 用vi打开Redis服务器的配置文件redis.confsudo vi /etc/redis/redis.conf #取消注释requirepassrequirepass redisredis 让Redis服务器被远程访问 默认情况下，Redis服务器不允许远程访问，只允许本机访问，所以我们需要设置打开远程访问的功能。 用vi打开Redis服务器的配置文件redis.conf sudo vi /etc/redis/redis.conf #注释bind#bind 127.0.0.1 修改后，重启Redis服务器sudo /etc/init.d/redis-server restart 未使用密码登陆Redis服务器redis-cli redis 127.0.0.1:6379&gt; keys *(error) ERR operation not permitted 发现可以登陆，但无法执行命令了。 登陆Redis服务器，输入密码 redis-cli -a redisredis redis 127.0.0.1:6379&gt; keys * 1) “key2”2) “key3”3) “key4” 登陆后，一切正常。 我们检查Redis的网络监听端口 检查Redis服务器占用端口netstat -nlt|grep 6379tcp 0 0 0.0.0.0:6379 0.0.0.0:* LISTEN 5.zookeeper安装下载zookeeper-3.4.5版本的安装包 解压zookeeper到/usr/local tar -xzvf zookeeper-3.4.5.tar.gz -C /usr/local cd /usr/local/zookeeper-3.4.5 拷贝一份zookeeper的配置文件，zoo_sample.cfg =&gt; zoo.cfg cd conf cp zoo_sample.cfg zoo.cfg 变更zoo.cfg配置 vi zoo.cfg 主要更改zookeeper的数据存放地址和日志地址 dataDir=/HD/logs/zookeeper dataLogDir=/HD/logs/zookeeper 启动zookeeper cd ../bin sh zkServer.sh start //启动 sh zkServer.sh status //检查状态 sh zkServer.sh stop //停止]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Elasticsearch Getting Started (三)]]></title>
-    <url>%2F2019%2F10%2F06%2F%E7%AD%89%E5%BE%85%2F</url>
-    <content type="text"><![CDATA[一：Introduction 二：Description 三：Summary]]></content>
+      
+      
+        <tags>
+            
+            <tag> 年终总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ubuntu Installed Jdk、Tomcat、Nginx、Redis、Zookeeper、Elasticsearch</title>
+      <link href="/2019/10/10/Ubuntu-Installed-Jdk%E3%80%81Tomcat%E3%80%81Nginx%E3%80%81Redis%E3%80%81Zookeeper%E3%80%81Elasticsearch/"/>
+      <url>/2019/10/10/Ubuntu-Installed-Jdk%E3%80%81Tomcat%E3%80%81Nginx%E3%80%81Redis%E3%80%81Zookeeper%E3%80%81Elasticsearch/</url>
+      
+        <content type="html"><![CDATA[<h5 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h5><h4 id="1-jdk-1-8-安装"><a href="#1-jdk-1-8-安装" class="headerlink" title="1.jdk 1.8 安装"></a>1.jdk 1.8 安装</h4><p>安装目录：/usr/local/software/</p><p>jdk-8u161-linux-x64.tar.gz</p><p>tar -zxvf jdk-8u161-linux-x64.tar.gz</p><p>vi /etc/profile</p><p>export JAVA_HOME=/usr/local/software/jdk1.8.0_161 <br><br>export  CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/ <br><br>export  PATH=$PATH:$JAVA_HOME/bin</p><p>source /etc/profile</p><p>java -version</p><p>【JDK】Ubuntu 程序“java”已包含在下列软件包中</p><p>解决方法：(手动设置系统默认JDK)</p><p>在终端中依次输入命令：</p><p>sudo update-alternatives –install /usr/bin/java java /usr/local/software/jdk1.8.0_161/bin/java 300 <br><br>sudo update-alternatives –install /usr/bin/javac javac /usr/local/software/jdk1.8.0_161/bin/javac 300</p><hr><h4 id="2-tomcat-8-x-安装"><a href="#2-tomcat-8-x-安装" class="headerlink" title="2.tomcat 8.x 安装"></a>2.tomcat 8.x 安装</h4><p>tar -zxvf apache-tomcat-8.5.24.tar.gz</p><hr><h4 id="3-nginx-安装"><a href="#3-nginx-安装" class="headerlink" title="3.nginx 安装"></a>3.nginx 安装</h4><p>安装gcc g++的依赖库 <br><br>apt-get install build-essential <br><br>apt-get install libtool</p><p>安装 pcre依赖库 <br><br>sudo apt-get update <br><br>sudo apt-get install libpcre3 libpcre3-dev</p><p>安装 ssl依赖库 <br><br>apt-get install openssl</p><p>安装Nginx<br>#下载最新版本：<br>wget <a href="http://nginx.org/download/nginx-1.11.3.tar.gz" target="_blank" rel="noopener">http://nginx.org/download/nginx-1.11.3.tar.gz</a><br>#解压：<br>tar -zxvf nginx-1.11.3.tar.gz<br>#进入解压目录：<br>cd nginx-1.11.3<br>#配置：<br>./configure –prefix=/usr/local/nginx<br>#编辑nginx：<br>make<br>注意：这里可能会报错，提示“pcre.h No such file or directory”,具体详见：<a href="http://stackoverflow.com/questions/22555561/error-building-fatal-error-pcre-h-no-such-file-or-directory" target="_blank" rel="noopener">http://stackoverflow.com/questions/22555561/error-building-fatal-error-pcre-h-no-such-file-or-directory</a><br>需要安装 libpcre3-dev,命令为：sudo apt-get install libpcre3-dev<br>#安装nginx：<br>sudo make install<br>#启动nginx：<br>sudo /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf<br>注意：-c 指定配置文件的路径，不加的话，nginx会自动加载默认路径的配置文件，可以通过 -h查看帮助命令。<br>#查看nginx进程：<br>ps -ef|grep nginx</p><p>启动 Nginx <br><br>cd /usr/local/nginx/sbin/nginx <br></p><p>./sbin/nginx　 <br><br>停止 Nginx <br></p><p>停止 Nginx <br><br>./sbin/nginx -s stop <br></p><p>./sbin/nginx -s quit <br></p><p>-s都是采用向 Nginx 发送信号的方式 <br></p><p>Nginx重新加载配置 <br><br>./sbin/nginx -s reload</p><p>指定配置文件 <br><br>./sbin/nginx -c /usr/local/nginx/conf/nginx.conf <br><br>-c表示configuration，指定配置文件 <br></p><p>查看 Nginx 版本 <br><br>有两种可以查看 Nginx 的版本信息的参数。第一种如下： <br><br>./sbin/nginx -v</p><p>另一种显示的是详细的版本信息：<br><br>./sbin/nginx -V</p><p>检查配置文件是否正确 <br><br>./sbin/nginx -t</p><p>nginx+tomcat负载均衡配置</p><hr><h4 id="4-redis安装"><a href="#4-redis安装" class="headerlink" title="4.redis安装"></a>4.redis安装</h4><p>参考地址：<a href="https://blog.csdn.net/qq_30242609/article/details/52913145" target="_blank" rel="noopener">https://blog.csdn.net/qq_30242609/article/details/52913145</a></p><p>安装Redis服务器端<br>sudo apt-get install redis-server</p><p>安装完成后，Redis服务器会自动启动，我们检查Redis服务器程序</p><p>检查Redis服务器系统进程<br>ps -aux|grep redis<br>返回结果：<br>redis     4162  0.1  0.0  10676  1420 ?        Ss   23:24   0:00 /usr/bin/redis-server /etc/redis/redis.conf<br>conan     4172  0.0  0.0  11064   924 pts/0    S+   23:26   0:00 grep –color=auto redis</p><p>通过启动命令检查Redis服务器状态<br>netstat -nlt|grep 6379<br>返回结果：<br>tcp        0      0 127.0.0.1:6379          0.0.0.0:*               LISTEN</p><p>通过启动命令检查Redis服务器状态<br>sudo /etc/init.d/redis-server status<br>返回结果：<br>redis-server is running</p><p>通过命令行客户端访问Redis<br>安装Redis服务器，会自动地一起安装Redis命令行客户端程序。</p><p>在本机输入redis-cli命令就可以启动，客户端程序访问Redis服务器。</p><p>redis-cli<br>redis 127.0.0.1:6379&gt;</p><p>#命令行的帮助</p><p>redis 127.0.0.1:6379&gt; help<br>redis-cli 2.2.12<br>Type: “help @” to get a list of commands in<br>      “help “ for help on<br>      “help “ to get a list of possible help topics<br>      “quit” to exit</p><p>#查看所有的key列表</p><p>redis 127.0.0.1:6379&gt; keys *<br>(empty list or set)</p><p>修改Redis的配置</p><p>使用Redis的访问账号<br>默认情况下，访问Redis服务器是不需要密码的，为了增加安全性我们需要设置Redis服务器的访问密码。设置访问密码为redisredis。</p><p>用vi打开Redis服务器的配置文件redis.conf<br>sudo vi /etc/redis/redis.conf</p><p>#取消注释requirepass<br>requirepass redisredis</p><p>让Redis服务器被远程访问</p><p>默认情况下，Redis服务器不允许远程访问，只允许本机访问，所以我们需要设置打开远程访问的功能。</p><p>用vi打开Redis服务器的配置文件redis.conf</p><p>sudo vi /etc/redis/redis.conf</p><p>#注释bind<br>#bind 127.0.0.1</p><p>修改后，重启Redis服务器<br>sudo /etc/init.d/redis-server restart</p><p>未使用密码登陆Redis服务器<br>redis-cli</p><p>redis 127.0.0.1:6379&gt; keys *<br>(error) ERR operation not permitted</p><p>发现可以登陆，但无法执行命令了。</p><p>登陆Redis服务器，输入密码</p><p>redis-cli -a redisredis</p><p>redis 127.0.0.1:6379&gt; keys *</p><p>1) “key2”<br>2) “key3”<br>3) “key4”</p><p>登陆后，一切正常。</p><p>我们检查Redis的网络监听端口</p><p>检查Redis服务器占用端口<br>netstat -nlt|grep 6379<br>tcp        0      0 0.0.0.0:6379            0.0.0.0:*               LISTEN</p><hr><h4 id="5-zookeeper安装"><a href="#5-zookeeper安装" class="headerlink" title="5.zookeeper安装"></a>5.zookeeper安装</h4><p>下载zookeeper-3.4.5版本的安装包</p><p>解压zookeeper到/usr/local <br></p><p>tar -xzvf zookeeper-3.4.5.tar.gz -C /usr/local <br><br>cd /usr/local/zookeeper-3.4.5</p><p>拷贝一份zookeeper的配置文件，zoo_sample.cfg =&gt; zoo.cfg <br><br>cd conf <br><br>cp zoo_sample.cfg zoo.cfg</p><p>变更zoo.cfg配置 <br><br>vi zoo.cfg</p><p>主要更改zookeeper的数据存放地址和日志地址 <br><br>dataDir=/HD/logs/zookeeper <br><br>dataLogDir=/HD/logs/zookeeper <br></p><p>启动zookeeper <br><br>cd ../bin</p><p>sh zkServer.sh start //启动 <br><br>sh zkServer.sh status //检查状态 <br><br>sh zkServer.sh stop //停止</p><hr>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Elasticsearch Getting Started (三)</title>
+      <link href="/2019/10/06/%E7%AD%89%E5%BE%85/"/>
+      <url>/2019/10/06/%E7%AD%89%E5%BE%85/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://i.loli.net/2019/10/08/AaosuTZfbmntexL.jpg" alt="01.jpg"></p><h4 id="一：Introduction"><a href="#一：Introduction" class="headerlink" title="一：Introduction "></a>一：Introduction <br></h4><h4 id="二：Description"><a href="#二：Description" class="headerlink" title="二：Description "></a>二：Description <br></h4><h4 id="三：Summary"><a href="#三：Summary" class="headerlink" title="三：Summary"></a>三：Summary</h4>]]></content>
+      
+      
       <categories>
-        <category>Elasticsearch</category>
+          
+          <category> Elasticsearch </category>
+          
       </categories>
-      <tags>
-        <tag>Elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Elasticsearch Getting Started (二）]]></title>
-    <url>%2F2019%2F10%2F06%2FElasticsearch-Getting-Started-%E4%BA%8C%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[一：Introduction 二：Description 三：Summary]]></content>
+      
+      
+        <tags>
+            
+            <tag> Elasticsearch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Elasticsearch Getting Started (二）</title>
+      <link href="/2019/10/06/Elasticsearch-Getting-Started-%E4%BA%8C%EF%BC%89/"/>
+      <url>/2019/10/06/Elasticsearch-Getting-Started-%E4%BA%8C%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://i.loli.net/2019/10/08/1pH2b65dtLAjPTa.jpg" alt="18.jpg"></p><h4 id="一：Introduction"><a href="#一：Introduction" class="headerlink" title="一：Introduction "></a>一：Introduction <br></h4><h4 id="二：Description"><a href="#二：Description" class="headerlink" title="二：Description "></a>二：Description <br></h4><h4 id="三：Summary"><a href="#三：Summary" class="headerlink" title="三：Summary"></a>三：Summary</h4>]]></content>
+      
+      
       <categories>
-        <category>Elasticsearch</category>
+          
+          <category> Elasticsearch </category>
+          
       </categories>
-      <tags>
-        <tag>Elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Elasticsearch Getting Started (一）]]></title>
-    <url>%2F2019%2F10%2F06%2FElasticsearch-Getting-Started-%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[一：Introduction 二：Description 三：Summary]]></content>
+      
+      
+        <tags>
+            
+            <tag> Elasticsearch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Elasticsearch Getting Started (一）</title>
+      <link href="/2019/10/06/Elasticsearch-Getting-Started-%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2019/10/06/Elasticsearch-Getting-Started-%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://i.loli.net/2019/10/08/8bSWzU1APphxFLm.jpg" alt="28.jpg"></p><h4 id="一：Introduction"><a href="#一：Introduction" class="headerlink" title="一：Introduction "></a>一：Introduction <br></h4><h4 id="二：Description"><a href="#二：Description" class="headerlink" title="二：Description "></a>二：Description <br></h4><h4 id="三：Summary"><a href="#三：Summary" class="headerlink" title="三：Summary"></a>三：Summary</h4>]]></content>
+      
+      
       <categories>
-        <category>Elasticsearch</category>
+          
+          <category> Elasticsearch </category>
+          
       </categories>
-      <tags>
-        <tag>Elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[My Wedding Photo]]></title>
-    <url>%2F2019%2F10%2F06%2FMy%20Wedding%20Photo%2F</url>
-    <content type="text"><![CDATA[]]></content>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> Elasticsearch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>My Wedding Photo</title>
+      <link href="/2019/10/06/My%20Wedding%20Photo/"/>
+      <url>/2019/10/06/My%20Wedding%20Photo/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://i.loli.net/2019/10/08/ywjdXMPxET5c6Ca.jpg" alt="22.jpg"><br><img src="https://i.loli.net/2019/10/08/AaosuTZfbmntexL.jpg" alt="01.jpg"><br><img src="https://i.loli.net/2019/10/08/8bSWzU1APphxFLm.jpg" alt="28.jpg"><br><img src="https://i.loli.net/2019/10/08/OwQJ7ELFcBhlMPX.jpg" alt="07.jpg"><br><img src="https://i.loli.net/2019/10/08/1pH2b65dtLAjPTa.jpg" alt="18.jpg"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
