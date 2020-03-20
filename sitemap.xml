@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://micai-code.github.io/2020/03/20/%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E8%A1%A8%E8%AE%BE%E8%AE%A1%E3%80%81%E5%8F%AF%E4%BB%A5%E6%9F%A5%E8%AF%A2%E3%80%81%E6%81%A2%E5%A4%8D%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2020-03-20T10:00:56.966Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://micai-code.github.io/2020/03/20/Java%E4%B9%8BConcurrentHashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
     
     <lastmod>2020-03-20T09:42:00.277Z</lastmod>
