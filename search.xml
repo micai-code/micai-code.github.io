@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Untitled阿里云服务器、CentOS7开启、关闭防火墙命令]]></title>
+    <title><![CDATA[阿里云服务器、CentOS7开启、关闭防火墙命令]]></title>
     <url>%2F2020%2F03%2F23%2FUntitled%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81CentOS7%E5%BC%80%E5%90%AF%E3%80%81%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[CentOS7使用的是firewall防火墙，不再是原来的iptables1：查看firewall防火墙状态 1firewall-cmd --state 或者 1systemctl status firewalld 2：打开防火墙 1systemctl start firewalld 3：关闭防火墙 1systemctl stop firewalld 4：重启防火墙 1firewall-cmd --relaod 或者 1systemctl reload firewalld 5：开机自启动防火墙 1systemctl enable firewalld 6：禁止开机启动防火墙 1systemctl disable firewalld 6：查看已打开的端口 1firewall-cmd --list-ports 7：打开端口 1firewall-cmd --permanent --zone=public --add-port=8080/tcp 其中permanent表示永久生效，public表示作用域，8080/tcp表示端口和类型 8：关闭端口 1firewall-cmd --permanent --zone=public --remove-port=8080/tcp]]></content>
       <categories>
