@@ -1,6 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Spring Boot 2 + MyBatis 实现动态传递表名称, 字段名称 查询数据]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-Boot-2-MyBatis-%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E4%BC%A0%E9%80%92%E8%A1%A8%E5%90%8D%E7%A7%B0-%E5%AD%97%E6%AE%B5%E5%90%8D%E7%A7%B0-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%2F</url>
+    <content type="text"><![CDATA[Spring Boot 2 + MyBatis 实现动态传递表名称, 字段名称 查询数据摘要：之前有个需求,需要动态查询某一个表的某些字段,看了下MyBatis的文档,它可以支持的,具体做法如下: 一:Controller层1234567891011121314151617181920212223242526272829303132333435363738package boss.portal.web.controller; import boss.base.web.controller.BaseController;import boss.base.web.support.ResponseModel;import boss.portal.web.service.CommonService;import io.swagger.annotations.Api;import io.swagger.annotations.ApiOperation;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RequestMethod;import org.springframework.web.bind.annotation.RequestParam;import org.springframework.web.bind.annotation.RestController;import java.util.List;import java.util.Map;/** * 描述： * &lt;p&gt; * Author: 赵新国 * Date: 2018/1/31 17:48 */@RestController@Api(value = "公共接口管理", description = "公共接口管理")@RequestMapping(value = "/common")public class CommonController extends BaseController &#123; @Autowired private CommonService commonService; @ApiOperation(value = "根据ID获取指定实体,字段对应的返回值", notes = "根据ID获取指定实体,字段对应的返回值") @RequestMapping(value = "/get", method = RequestMethod.GET) public ResponseModel get(@RequestParam(required = false) String ids, @RequestParam(required = false) String tableName, @RequestParam(required = false) String fields) &#123; List&lt;Map&lt;String, Object&gt;&gt; maps = commonService.get(ids, tableName, fields); return renderSuccess(maps); &#125; &#125; 二:Service层123456789101112131415161718192021222324package boss.portal.web.service; import boss.auth.user.provider.IUserProvider;import com.alibaba.boot.dubbo.annotation.DubboConsumer;import org.springframework.stereotype.Component;import java.util.List;import java.util.Map;/** * 描述： * &lt;p&gt; * Author: 赵新国 * Date: 2018/1/31 17:48 */@Componentpublic class CommonService &#123; @DubboConsumer(lazy = true) private IUserProvider userProvider; public List&lt;Map&lt;String,Object&gt;&gt; get(String ids, String tableName, String fields) &#123; List&lt;Map&lt;String, Object&gt;&gt; maps = userProvider.get(ids, tableName, fields); return maps; &#125;&#125; 三:Provider层12345678@Overridepublic List&lt;Map&lt;String, Object&gt;&gt; get(String ids, String tableName, String fields) &#123; List&lt;Map&lt;String, Object&gt;&gt; maps = userMapper.get(ids, tableName, fields); if (maps != null &amp;&amp; !maps.isEmpty()) &#123; return maps; &#125; return null;&#125; 四:Mapper层1List&lt;Map&lt;String,Object&gt;&gt; get(@Param("ids") String ids, @Param("tableName") String tableName, @Param("fields") String fields); 五:Mapper.xml1234&lt;!-- 根据指定ID获取指定数据表的指定字段的数据集 --&gt;&lt;select id="get" resultType="java.util.Map" statementType="STATEMENT" &gt; select $&#123;fields&#125; from $&#123;tableName&#125; where id in ( $&#123;ids&#125; )&lt;/select&gt; 六：附录最后说明一下,fields代表你要查询的字段,tableName代表你要查询的表名称,ids代表你要查询的id集合, 这样你就可以随意查询任何你想要的表和字段了,再也不用担心其他人让你加接口了! 七：结束语以上就是Spring Boot, MyBatis 实现动态传递表名称, 字段名称 查询数据的全部代码了，如有问题，请加群讨论：715224124]]></content>
+      <categories>
+        <category>Spring Boot</category>
+        <category>MyBatis</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>MyBatis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Maven之自定义archetype生成多模块结构的基础项目骨架（二）]]></title>
+    <url>%2F2020%2F10%2F23%2FMaven%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89archetype%E7%94%9F%E6%88%90%E5%A4%9A%E6%A8%A1%E5%9D%97%E7%BB%93%E6%9E%84%E7%9A%84%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE%E9%AA%A8%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[一：项目骨架介绍该项目骨架集成了Spring，SpringMVC，MyBatis，jsp，jquery，bootstrap等 二：项目骨架使用介绍1.首先下载该项目到你的本地工程 2.通过dos窗口进入到该工程的pom.xml所在目录 3.搭建nexus私服 4.配置发布到私服的用户，主要是maven的settings.xml，如下 releases admin admin123 snapshots admin admin123 5.执行mvn clean install命令 6.执行mvn deploy命令 7.登录nexus可以查看到你刚才发布的archetype包 三：在eclipse或者sts里面配置你刚才发布到私服的自定义archetype1.打开你的开发工具，eclipse或者sts，我这里是sts 2.选择Window-&gt;Preferences-&gt;Maven-&gt;Archetypes 3.点击Add Remote Catalog，输入你的nexus私服中archetype的地址，我这里是 http://127.0.0.1:8081/nexus/content/groups/public/archetype-catalog.xml 输入Description，随便输入都可以，我这里是micaicms-web-modules-archetype 4.点击Ok，点击Apply 5.重新启动你的开发工具eclipse或者sts 四：使用自定义的archetype生成自定义的项目骨架1.选择New-&gt;Maven Project-&gt;Next 2.选择你刚才配置好的那个archetype 3.输入对应的groupId，artifactId，package，点击Finish就会生成四个工程，一个父工程，三个子工程，这样通过自定义的archetype生成多模块基础框架就完成了 ，接下来你可以很好的在此基础上写自己的代码了 五：下载地址https://github.com/sxdtzhaoxinguo/micaicms-web-modules-archetype]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Maven之自定义archetype创建自定义模板项目骨架（一）]]></title>
+    <url>%2F2020%2F10%2F23%2FMaven%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89archetype%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E9%A1%B9%E7%9B%AE%E9%AA%A8%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[描述：通过maven的自定义archetype创建自定义的项目模板骨架1.下载项目到你的本地workspace2.进入到你该项目的根目录(也就是pom.xml所在的目录)3.执行命令把该项目安装到你的本地仓库 mvn clean install4.执行命令更新你的本地仓库的索引 mvn archetype:update-local-catalog5.再次回到你的workspace工程目录，执行命令选择本地仓库的archetype创建项目 mvn archetype:generate -DarchetypeCatalog=local6.选择你的archetype的编号，然后根据提示输入你自己的groupId，artifactId，packaging，version等等7.导入创建成功的项目到eclipse，就可以使用该项目了8.下载地址https://github.com/sxdtzhaoxinguo/micaicms-web-archetype 9.博客地址https://blog.csdn.net/sxdtzhaoxinguo/article/details/46895013]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring+Hibernate+SpringMVC+MySql实现多数据源]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-Hibernate-SpringMVC-MySql%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[Spring+Hibernate+SpringMVC+MySql实现多数据源1.下载下项目源代码，导入工程目录下2.项目要求开发环境： jdk 1.6+ tomcat 6.0+ mysql 5.0+ maven 3.23.导入后，先根据数据库配置文件，新建两个数据库dataSource1，dataSource24.选择项目的pom.xml，运行Maven test即可,顺利的话，会在控制台和target目录下看到执行测试的内容！5.下载地址：https://gitee.com/micai-code/SpringTwoDataSource.git]]></content>
+      <categories>
+        <category>Spring</category>
+        <category>Spring MVC</category>
+        <category>Hibernate</category>
+        <category>MySql</category>
+      </categories>
+      <tags>
+        <tag>MySql</tag>
+        <tag>Spring</tag>
+        <tag>Spring MVC</tag>
+        <tag>Hibernate</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring，SpringMVC，MyBatis，bootstrap，jquery，jstl等集成的基础开发框架！]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring%EF%BC%8CSpringMVC%EF%BC%8CMyBatis%EF%BC%8Cbootstrap%EF%BC%8Cjquery%EF%BC%8Cjstl%E7%AD%89%E9%9B%86%E6%88%90%E7%9A%84%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%81%2F</url>
+    <content type="text"><![CDATA[Spring，SpringMVC，MyBatis，bootstrap，jquery，jstl等集成的基础开发框架！项目介绍：1.软件架构组成：Maven Spring SpringMVC MyBatis jquery bootstrap jsp 2.软件集成依赖：Spring SpringMVC MyBatis Log4j jstl checkstyle findbugs 3.该项目中继承的父项目请看： https://github.com/sxdtzhaoxinguo/micaicms-pom4.下载地址：https://gitee.com/micai-code/micaicms-ssmb.git]]></content>
+      <categories>
+        <category>Spring MVC</category>
+        <category>Spring</category>
+        <category>MyBatis</category>
+      </categories>
+      <tags>
+        <tag>MyBatis</tag>
+        <tag>Spring</tag>
+        <tag>Spring MVC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring+Quartz集成实现的定时任务调度器，支持集群环境下的定时任务调用！]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-Quartz%E9%9B%86%E6%88%90%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%EF%BC%8C%E6%94%AF%E6%8C%81%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%81%2F</url>
+    <content type="text"><![CDATA[Spring+Quartz集成实现的定时任务调度器，支持集群环境下的定时任务调用！项目整体介绍：Spring+Quartz集成实现的定时任务调度器，支持集群环境下的定时任务调用！ 项目开发环境：jdk1.7+，tomcat7.0+，sql server 2000+，mysql 5.6 项目数据库支持：项目支持MySQL,SqlServer数据库，Oracle我这里没试，有兴趣的朋友可以自己做下，其实就是sql脚本不一样，具体的sql脚本可以下载quartz官方文档查看，里面有 支持各种数据库的sql脚本 项目部署步骤：MySQL版本部署步骤：1.首先根据jdbc.properties文件里面的配置新建对应的数据库 2.执行db文件夹下的sql文件，先执行mysql_db.sql文件，再执行init_db.sql文件 3.部署到tomcat即可查看定时任务的调度情况 SqlServer版本部署步骤：1.首先根据jdbc.properties文件里面的配置新建对应的数据库 2.执行db文件夹下的sql文件，先执行sqlserver_db.sql文件，再执行init_db.sql文件 3.部署到tomcat即可查看定时任务的调度情况 下载地址：https://gitee.com/micai-code/quartzService.git]]></content>
+      <categories>
+        <category>Spring</category>
+        <category>Quartz</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>Quartz</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring Boot，Dubbo，Zookeeper、MySql，Swagger2组成搭建的分布式基础框架]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-Boot%EF%BC%8CDubbo%EF%BC%8CZookeeper%E3%80%81MySql%EF%BC%8CSwagger2%E7%BB%84%E6%88%90%E6%90%AD%E5%BB%BA%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%2F</url>
+    <content type="text"><![CDATA[由Spring Boot，MyBatis，Dubbo，Zookeeper，MongoDB、RabbitMQ、Redis、MySql，Swagger2组成搭建的分布式基础框架！项目结构说明micai-boss —–micai-base —–&gt;基础模块 —–micai-doc —–&gt;数据库脚本和文档 —–micai-mongodb —–&gt;MongoDB服务插件 —–micai-order —–&gt;订单模块 —–micai-rabbitmq —–&gt;RabbitMQ服务插件 —–micai-redis —–&gt;Redis服务插件 —–micai-sms —–&gt;短信服务插件 —–micai-thrid —–&gt;Dubbo服务插件 —–micai-user —–&gt;用户服务 —–micai-utils —–&gt;工具类模块 —–micai-weixin —–&gt;微信API服务模块 项目启动前准备1.安装MySql服务 2.安装Zookeeper服务 3.安装Redis服务 4.安装RabbitMQ服务 5.安装MongoDB服务 项目启动步骤1.首先从git仓库下载项目到本地工程目录下 git clone https://gitee.com/micai/micai-boss.git 2.进入该项目的根目录下，通过命令的方式在本地编译项目 mvn clean compile -Dmaven.test.skip=true 3.编译成功后，导入IDEA工具中 4.分别启动对应的Dubbo服务即可，这里一共有如下几个服务: 4.1.micai-user-provider，micai-user-consumer，micai-weixin-impl，micai-sms-queue-impl，micai-sms-service-impl，micai-order-consumer 4.2.启动其中的两个服务，其他的都是类似的启动方法，打开micai-user-provider，找到UserProviderApplication类启动即可 4.3.当然启动Dubbo服务之前，一定记得先修改每个项目对应的配置文件，所有项目的配置文件都在resources目录下，读者可以根据自己实际情况修改即可 建议及改进 若您有任何建议，可以通过1）加入qq群715224124向群主提出，或2）发送邮件至827358369@qq.com向我反馈。本人承诺，任何建议都将会被认真考虑，优秀的建议将会被采用，但不保证一定会在当前版本中实现。 下载地址：https://gitee.com/micai-code/micai-boss.git]]></content>
+      <categories>
+        <category>Spring Boot</category>
+        <category>Dubbo</category>
+        <category>Zookeeper</category>
+        <category>MySql</category>
+        <category>Swagger</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>Dubbo</tag>
+        <tag>Zookeeper</tag>
+        <tag>MySql</tag>
+        <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[一个Nginx部署多个vue前端项目总结]]></title>
+    <url>%2F2020%2F10%2F23%2F%E4%B8%80%E4%B8%AANginx%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AAvue%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[摘要：近来接手了一个二次开发的前后端分离模式的项目，其中在前端项目的部署上需要让2个前端项目都部署到一个IP地址和端口下，那么我们这里就要用到Nginx了，接下来我们看看如何在一个Nginx下部署2个前端项目的 编译打包2个前端项目执行如下命令执行对前端工程的打包，以生成静态文件，如下：1npm run build 把打包生成的静态文件上传到Linux服务器的指定目录，我这里是：/usr/local/lawyer_wsla/frontend/dist 同上，把另一个前端工程也执行打包命令，以生成静态文件，如下：把打包生成的静态文件上传到Linux服务器的指定目录，我这里是：/usr/local/lawyer_wsla/frontend/zjwsla 配置Nginx.conf文件 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128#user nobody;user root;worker_processes 1;#error_log logs/error.log;#error_log logs/error.log notice;#error_log logs/error.log info;#pid logs/nginx.pid;events &#123; worker_connections 1024;&#125;http &#123; include mime.types; default_type application/octet-stream; #log_format main &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos; # &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos; # &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;; #access_log logs/access.log main; sendfile on; #tcp_nopush on; #keepalive_timeout 0; keepalive_timeout 65; #gzip on; server &#123; listen 80; server_name localhost; #charset koi8-r; #access_log logs/host.access.log main; location / &#123; root /usr/local/lawyer_wsla/frontend/dist; try_files $uri $uri/ @router; index index.html index.htm; &#125; location /zjwsla &#123; alias /usr/local/lawyer_wsla/frontend/zjwsla; try_files $uri $uri/ /zjwsla/index.html; index index.html index.htm; &#125; location @router &#123; rewrite ^.*$ /index.html last; &#125; #error_page 404 /404.html; # redirect server error pages to the static page /50x.html # error_page 500 502 503 504 /50x.html; location = /50x.html &#123; root html; &#125; # proxy the PHP scripts to Apache listening on 127.0.0.1:80 # #location ~ \.php$ &#123; # proxy_pass http://127.0.0.1; #&#125; # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000 # #location ~ \.php$ &#123; # root html; # fastcgi_pass 127.0.0.1:9000; # fastcgi_index index.php; # fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name; # include fastcgi_params; #&#125; # deny access to .htaccess files, if Apache&apos;s document root # concurs with nginx&apos;s one # #location ~ /\.ht &#123; # deny all; #&#125; &#125; # another virtual host using mix of IP-, name-, and port-based configuration # #server &#123; # listen 8000; # listen somename:8080; # server_name somename alias another.alias; # location / &#123; # root html; # index index.html index.htm; # &#125; #&#125; # HTTPS server # #server &#123; # listen 443 ssl; # server_name localhost; # ssl_certificate cert.pem; # ssl_certificate_key cert.key; # ssl_session_cache shared:SSL:1m; # ssl_session_timeout 5m; # ssl_ciphers HIGH:!aNULL:!MD5; # ssl_prefer_server_ciphers on; # location / &#123; # root html; # index index.html index.htm; # &#125; #&#125;&#125; 重启Nginx服务123cd /usr/local/nginx/sbin./nginx -s reload 访问项目 遇到的问题暂无]]></content>
+      <categories>
+        <category>Nginx</category>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring MVC 文件上传 源代码]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-MVC-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E6%BA%90%E4%BB%A3%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[摘要：Spring MVC实现文件上传： 代码截图如下： UploadController.java:12345678910111213141516171819202122232425262728package cn.csdn.controller; import java.io.File;import javax.servlet.http.HttpServletRequest;import org.springframework.stereotype.Controller;import org.springframework.ui.ModelMap;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RequestParam;import org.springframework.web.multipart.MultipartFile; @Controllerpublic class UploadController &#123; @RequestMapping(value="/upload.do") public String upload( @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap modelMap) throws Exception&#123; String path = request.getSession().getServletContext().getRealPath("upload"); String fileName = file.getOriginalFilename(); File targeFile = new File(path,fileName); if(!targeFile.exists())&#123; targeFile.mkdirs(); &#125; file.transferTo(targeFile); modelMap.addAttribute("fileUrl", request.getContextPath()+"/upload/"+fileName); return "result"; &#125;&#125; applicationContext.xml:1234567891011121314151617181920212223242526272829303132333435363738&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd" default-lazy-init="true"&gt; &lt;!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 --&gt; &lt;bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" lazy-init="false"/&gt; &lt;!-- 另外最好还要加入DefaultAnnotationHandlerMapping，不然会被 XML或其它的映射覆盖！ --&gt; &lt;bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/&gt; &lt;!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 --&gt; &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/&gt; &lt;!-- 支持上传文件 --&gt; &lt;bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"&gt; &lt;property name="maxUploadSize" value="1048576"/&gt;&lt;!-- 设置上传文件的最大尺寸为1MB --&gt; &lt;/bean&gt; &lt;!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException --&gt; &lt;bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"&gt; &lt;property name="exceptionMappings"&gt; &lt;props&gt; &lt;!-- 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 --&gt; &lt;prop key="org.springframework.web.multipart.MaxUploadSizeExceededException"&gt;error_fileupload&lt;/prop&gt; &lt;/props&gt; &lt;/property&gt; &lt;/bean&gt; &lt;/beans&gt; codeifAction.xml:123456789101112131415&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd" default-lazy-init="true"&gt; &lt;bean id="uploadController" class="cn.csdn.controller.UploadController" /&gt; &lt;/beans&gt; index.jsp:1234567891011121314151617181920212223242526&lt;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&gt;&lt;% String path = request.getContextPath(); String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";%&gt;&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;&lt;html&gt;&lt;head&gt;&lt;base href="&lt;%=basePath%&gt;"&gt;&lt;title&gt;上传图片&lt;/title&gt;&lt;meta http-equiv="pragma" content="no-cache"&gt;&lt;meta http-equiv="cache-control" content="no-cache"&gt;&lt;meta http-equiv="expires" content="0"&gt;&lt;meta http-equiv="keywords" content="keyword1,keyword2,keyword3"&gt;&lt;meta http-equiv="description" content="This is my page"&gt;&lt;/head&gt;&lt;body&gt;&lt;form action="upload.do" method="post" enctype="multipart/form-data"&gt; &lt;input type="file" name="file"/&gt; &lt;input type="submit" value="上传"/&gt;&lt;/form&gt;&lt;/body&gt;&lt;/html&gt; result.jsp:1234567891011121314151617181920212223&lt;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&gt;&lt;% String path = request.getContextPath(); String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";%&gt;&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;&lt;html&gt;&lt;head&gt;&lt;base href="&lt;%=basePath%&gt;"&gt;&lt;title&gt;上传结果&lt;/title&gt;&lt;meta http-equiv="pragma" content="no-cache"&gt;&lt;meta http-equiv="cache-control" content="no-cache"&gt;&lt;meta http-equiv="expires" content="0"&gt;&lt;meta http-equiv="keywords" content="keyword1,keyword2,keyword3"&gt;&lt;meta http-equiv="description" content="This is my page"&gt;&lt;/head&gt;&lt;body&gt; &lt;img alt="#" src="$&#123;fileUrl&#125;" style="width: 200px;height: 200px;"&gt;&lt;/body&gt;&lt;/html&gt; error_fileupload.jsp:12345678910111213141516171819202122232425262728&lt;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&gt;&lt;%String path = request.getContextPath();String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%&gt;&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;&lt;html&gt; &lt;head&gt; &lt;base href="&lt;%=basePath%&gt;"&gt; &lt;title&gt;My JSP 'error_fileupload.jsp' starting page&lt;/title&gt; &lt;meta http-equiv="pragma" content="no-cache"&gt; &lt;meta http-equiv="cache-control" content="no-cache"&gt; &lt;meta http-equiv="expires" content="0"&gt; &lt;meta http-equiv="keywords" content="keyword1,keyword2,keyword3"&gt; &lt;meta http-equiv="description" content="This is my page"&gt; &lt;!-- &lt;link rel="stylesheet" type="text/css" href="styles.css"&gt; --&gt; &lt;/head&gt; &lt;body&gt; 文件太大&lt;a href="history.go(-1)"&gt;返回&lt;/a&gt; &lt;/body&gt;&lt;/html&gt; 项目运行截图： 下载地址：http://pan.baidu.com/s/1qWNMxcS]]></content>
+      <categories>
+        <category>Spring MVC</category>
+        <category>文件上传</category>
+      </categories>
+      <tags>
+        <tag>Spring MVC</tag>
+        <tag>文件上传</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux 下安装 jdk-7u75-linux-x64.gz，jdk1.7.0_75，jdk1.7步骤]]></title>
+    <url>%2F2020%2F10%2F23%2FLinux-%E4%B8%8B%E5%AE%89%E8%A3%85-jdk-7u75-linux-x64-gz%EF%BC%8Cjdk1-7-0-75%EF%BC%8Cjdk1-7%E6%AD%A5%E9%AA%A4%2F</url>
+    <content type="text"><![CDATA[摘要近来又用到了Linux系统，所以就又新装了一个虚拟机和CentOS6.4来用，搞开发的程序猿们可能都知道，在现在的很多企业中，生产环境大多都是Linux服务器，并且用的比较多的大都是CentOS，Red hat系列的Linux系统环境，下面我就以我当前安装的CentOS 6.4来说明一下在该环境下安装Jdk 1.7.0_75版本的操作过程吧，如下所述： 下载JDK首先下载对应CentOS版本的jdk：这里我下载的是jdk-7u75-linux-x64.tar.gz，下载地址为：http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html 上传JDK下载该jdk到本地，并上传到你的CentOS 6.4系统的opt临时目录下。 检测JDK在安装自己下载的jdk之前，要先看看新安装的CentOS6.4系统自带的jdk版本，如果存在最好是卸载掉，然后再安装自己下载的jdk版本，如何卸载linux系统自带的jdk网上有很多例子，相信大家都会操作。 安装JDK新建一个jdk的安装目录，我这里是在/usr/local/下新建了java目录，命令:mkdir /usr/local/java ，再把 jdk-7u75-linux-x64.tar.gz压缩包从opt目录下复制到/usr/local/java目录下，命令如下： 1cp jdk-7u75-linux-x64.tar.gz /usr/local/java 解压缩JDK解压缩刚才下载的： jdk-7u75-linux-x64.tar.gz包，命令如下： 1tar xvf jdk-7u75-linux-x64.tar.gz 配置JDK环境变量解压完成后，进入到： 123[root@localhost~]# cd /etc[root@localhost etc]# vi profile 在profile文件的末尾加入如下命令： 1234export JAVA_HOME=/usr/local/java/jdk1.7.0_75export JRE_HOME=/usr/local/java/jdk1.7.0_75/jreexport PATH=$PATH:/usr/local/java/jdk1.7.0_75/binexport CLASSPATH=./:/usr/local/java/jdk1.7.0_75/lib:/usr/local/java/jdk1.7.0_75/jre/lib 输入:wq保存并退出，然后再重启CentOS 6.4系统。 验证JDK是否安装成功重新启动系统后，输入：java -version，如果看到如下截图说明你的jdk已经安装成功了。 常见问题就是修改profile文件，主要是权限不够。 可以先ls -l /etc/profile ，看一下权限，应该是644，然后执行chmod 666 profile，改了权限之后，可以把那些jdk的信息填到profile的最后面，执行:wq保存退出，重启就可以看到版本号了。]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>jdk</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>jdk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git 从入门到精通]]></title>
+    <url>%2F2020%2F10%2F23%2Fgit-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%2F</url>
+    <content type="text"><![CDATA[摘要：git 操作指南 安装git下载 git OSX版下载 git Windows版下载 git Linux版 创建新仓库创建新文件夹，打开，然后执行 1git int 以创建新的git仓库。 检出仓库执行如下命令以创建一个本地仓库的克隆版本： 1git clone /path/to/repository 如果是远端服务器上的仓库，你的命令会是这个样子： 1git clone username@host:/path/to/repository 工作流你的本地仓库由git维护的三棵“树”组成。第一个是你的工作目录，它持有实际文件；第二个是缓存区(Index)，它像个缓存区域，临时报错你的改动；最后是HEAD，指向你最近一次提交后的结果。 添加与提交你可以计划改动(把它们添加到缓存区)，使用如下名称： 12git add &lt;filename&gt;git add * 这是git基本工作流程的第一步；使用如下命令以实际提交改动： 1git commit -m &quot;代码提交信息&quot; 现在，你的改动已经提交到了HEAD，但是还没到你的远端仓库。 推送改动你的改动现在已经在本地仓库的HEAD中了。执行如下命令以将这些改动提交到远端仓库： 1git push origin master 可以把master换成你想要推送的任何分支。 如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加： 1git remote add origin &lt;server&gt; 如此你就能够将你的改动推送到所添加的服务器上去了。 分支分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master是“默认的”。在其他分支上进行开发，完成后再将它们合并到主分支上。 创建一个叫做“feature_x”的分支，并切换过去： 1git checkout -b feature_x 切换回主分支： 1git checkout master 再把新建的分支删掉： 1git branch -d feature_x 除非你将分支推送到远端仓库，不然该分支就是 不为他人所见的： 1git push origin &lt;branch&gt; 更新与合并要更新你的本地仓库至最新改动，执行： 1git pull 以在你的工作目录中 获取（fetch） 并 合并（merge） 远端的改动。要合并其他分支到你的当前分支（例如 master），执行： 1git merge &lt;branch&gt; 两种情况下，git 都会尝试去自动合并改动。不幸的是，自动合并并非次次都能成功，并可能导致 冲突（conflicts）。 这时候就需要你修改这些文件来人肉合并这些 冲突（conflicts） 了。改完之后，你需要执行如下命令以将它们标记为合并成功： 1git add &lt;filename&gt; 在合并改动之前，也可以使用如下命令查看： 1git diff &lt;source_branch&gt; &lt;target_branch&gt; 标签在软件发布时创建标签，是被推荐的。这是个旧有概念，在 SVN 中也有。可以执行如下命令以创建一个叫做 1.0.0 的标签： 1git tag 1.0.0 1b2e1d63ff 1b2e1d63ff 是你想要标记的提交 ID 的前 10 位字符。使用如下命令获取提交 ID： 1git log 你也可以用该提交 ID 的少一些的前几位，只要它是唯一的。 替换本地改动假如你做错事（自然，这是不可能的），你可以使用如下命令替换掉本地改动： 1git checkout -- &lt;filename&gt; 此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到缓存区的改动，以及新文件，都不受影响。 假如你想要丢弃你所有的本地改动与提交，可以到服务器上获取最新的版本并将你本地主分支指向到它： 123git fetch origingit reset --hard origin/master 有用的贴士内建的图形化 git： 1gitk 彩色的 git 输出： 1git config color.ui true 显示历史记录时，只显示一行注释信息： 1git config format.pretty oneline 交互地添加文件至缓存区： 1git add -i 链接与资源图形化界面GitX (L) (OSX, open source)Tower (OSX)Source Tree (OSX, free)GitHub for Mac (OSX, free)GitBox (OSX) 指南与手册Git 社区参考书专业 Git如 git 思考GitHub 帮助图形化的 Git 指南一则]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring Boot Mongodb Configuration Remove _class]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-Boot-Mongodb-Configuration-Remove-class%2F</url>
+    <content type="text"><![CDATA[摘要在使用Spring Boot整合Mongodb的过程中，在做insert对象的时候，在Collection中会出现一个_class字段属性，出现这个问题的原因是在调用mongoTemplate的insert方法时, spring-data-mongodb的TypeConverter会自动给document添加一个_class属性, 值是你保存的类名. 这种设计并没有什么坏处. spring-data-mongodb是为了在把document转换成Java对象时能够转换到具体的子类. 但有时候我们并不希望出现这个字段, 主要是看上去会比较”烦”. 可以通过设置MappingMongoConverter的MongoTypeMapper来解决这个问题。 解决方案在Spring Boot的启动类里面加入下面的代码即可 1234567891011121314151617181920212223242526272829303132333435package com.micai.springboot; import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.context.annotation.Bean;import org.springframework.data.mongodb.MongoDbFactory;import org.springframework.data.mongodb.core.MongoTemplate;import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;import org.springframework.data.mongodb.core.convert.MappingMongoConverter;import org.springframework.data.mongodb.core.mapping.MongoMappingContext; /** * Spring Boot应用启动类 * * @author 赵新国 on 2017/8/21. *///@EnableScheduling // 定时任务注解@SpringBootApplicationpublic class Application &#123; public static void main(String [] args)&#123; SpringApplication.run(Application.class,args); &#125; //mongodb entity remove _class @Bean public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory, MongoMappingContext context) &#123; MappingMongoConverter converter = new MappingMongoConverter(new DefaultDbRefResolver(mongoDbFactory), context); converter.setTypeMapper(new DefaultMongoTypeMapper(null)); MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory, converter); return mongoTemplate; &#125; &#125;]]></content>
+      <categories>
+        <category>Spring Boot</category>
+        <category>Mongodb</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>Mongodb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Spring Boot+Spring Security+JWT 实现 RESTful Api 认证（二）]]></title>
     <url>%2F2020%2F10%2F23%2FSpring-Boot-Spring-Security-JWT-%E5%AE%9E%E7%8E%B0-RESTful-Api-%E8%AE%A4%E8%AF%81%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
     <content type="text"><![CDATA[Spring Boot+Spring Security+JWT 实现 RESTful Api 认证（二）摘要上一篇https://javaymw.com/post/59我们已经实现了基本的登录和token认证接口，但是这里有个问题，对于那些活跃用户来说如果token的过期时间设置的太短，那么就会使用户频繁的登录，这样用户体验不好，所以我们需要根据一种机制来判断什么时候应该主动刷新token，并且对于活跃用户来说应该是无感知的才行，那么我这里提供一种思路，暂且叫它2倍时间机制，那么怎么理解呢，请看下图： 代码 效果 结束语以上就是对JWT的刷新方案的实现，欢迎各位客官交流。]]></content>
@@ -111,7 +273,7 @@
   <entry>
     <title><![CDATA[Spring Boot2 + Spring Security5 系列搭建教程开头篇(1)]]></title>
     <url>%2F2020%2F06%2F07%2FSpring-Boot2-Spring-Security5-%E7%B3%BB%E5%88%97%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E5%BC%80%E5%A4%B4%E7%AF%87-1%2F</url>
-    <content type="text"><![CDATA[随便说点因为公司项目重构的原因，博主需要搭建个Spring Boot全家桶框架，但是网上资料要不就是比较旧版本的，要不就是不完整的。所以博主在大量查阅官方各种英文文档，和一些相关教程，总结出一系列Spring Boot2 + Spring Security5的搭建以及简单入门 在这里，博主会写出搭建过程以及自己的一些理解，当然因为真正落地的程序是比较复杂的，所以博客上写下的都是简化版demo以便于理解。每一篇文章的链接如下： 1.Spring Boot2 + Spring Security5 系列搭建教程开头篇(1) 2.Spring Boot2 + Spring Security5 简单使用教程(2) 3.Spring Boot2 + Spring Security5 自定义登录验证(3) 4.Spring Boot2 + Spring Security5 记住我功能(4) 5.Spring Boot2 + Spring Security5 基于Redis的Spring Session管理(5) 6.Spring Boot2 + Spring Security5 用户角色资源管理的权限管理(6) 7.Spring Boot2 + Spring Security5 资源菜单按钮动态显示(7) 8.Spring Boot2 + Spring Security5 基于JWT实现的token认证方案(8) 9.Spring Boot2 + Spring Security5 基于JWT实现的token刷新方案(9) 当然，博主也会把这个demo源码放出来给大家借鉴下 源码获取方式加加入QQ交流群(715224124)，进群找群主要源码，如果有问题，可以提出疑问，群主会尽量帮助解决~ 希望能帮助到大家，如果有不好或者错误的地方希望能多多提出，谢谢大家~]]></content>
+    <content type="text"><![CDATA[随便说点因为公司项目重构的原因，博主需要搭建个Spring Boot全家桶框架，但是网上资料要不就是比较旧版本的，要不就是不完整的。所以博主在大量查阅官方各种英文文档，和一些相关教程，总结出一系列Spring Boot2 + Spring Security5的搭建以及简单入门 在这里，博主会写出搭建过程以及自己的一些理解，当然因为真正落地的程序是比较复杂的，所以博客上写下的都是简化版demo以便于理解。每一篇文章的链接如下： 1.Spring Boot2 + Spring Security5 系列搭建教程开头篇(1) 2.Spring Boot2 + Spring Security5 简单使用教程(2) 3.Spring Boot2 + Spring Security5 自定义登录验证(3) 4.Spring Boot2 + Spring Security5 记住我功能(4) 5.Spring Boot2 + Spring Security5 基于Redis的Spring Session管理(5) 6.Spring Boot2 + Spring Security5 用户角色资源管理的权限管理(6) 7.Spring Boot2 + Spring Security5 资源菜单按钮动态显示(7) 8.Spring Boot2 + Spring Security5 基于JWT实现的token认证方案(8) 9.Spring Boot2 + Spring Security5 基于JWT实现的token刷新方案(9) 当然，博主也会把这个demo源码放出来给大家借鉴下 源码获取方式加加入QQ交流群(715224124)，进群下载即可，如果有问题，可以提出疑问，群主会尽量帮助解决~ 希望能帮助到大家，如果有不好或者错误的地方希望能多多提出，谢谢大家~]]></content>
       <categories>
         <category>Spring Boot</category>
         <category>Spring Security</category>
@@ -147,9 +309,9 @@
         <category>Spring</category>
       </categories>
       <tags>
+        <tag>Spring</tag>
         <tag>Activiti</tag>
         <tag>工作流</tag>
-        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
