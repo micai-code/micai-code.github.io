@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Spring Boot+Spring Security+JWT 实现 RESTful Api 认证（二）]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-Boot-Spring-Security-JWT-%E5%AE%9E%E7%8E%B0-RESTful-Api-%E8%AE%A4%E8%AF%81%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[Spring Boot+Spring Security+JWT 实现 RESTful Api 认证（二）摘要上一篇https://javaymw.com/post/59我们已经实现了基本的登录和token认证接口，但是这里有个问题，对于那些活跃用户来说如果token的过期时间设置的太短，那么就会使用户频繁的登录，这样用户体验不好，所以我们需要根据一种机制来判断什么时候应该主动刷新token，并且对于活跃用户来说应该是无感知的才行，那么我这里提供一种思路，暂且叫它2倍时间机制，那么怎么理解呢，请看下图： 代码 效果 结束语以上就是对JWT的刷新方案的实现，欢迎各位客官交流。]]></content>
+      <categories>
+        <category>Spring Boot</category>
+        <category>Spring Security</category>
+        <category>JWT</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>Spring Security</tag>
+        <tag>JWT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Spring Boot+Spring Security+JWT 实现 RESTful Api 认证（一）]]></title>
+    <url>%2F2020%2F10%2F23%2FSpring-Boot-Spring-Security-JWT-%E5%AE%9E%E7%8E%B0-RESTful-Api-%E8%AE%A4%E8%AF%81%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[标题 Spring Boot+Spring Security+JWT 实现 RESTful Api 认证（一） 技术Spring Boot 2、Spring Security 5、JWT 运行环境IDEA+JDK8.0+MySQL5.0+ 简述Spring Boot 2 + Spring Security 5 + JWT 实现给RestApi增加认证控制 测试流程下面对我们的程序进行简单的验证1.请求获取用户列表接口:http://localhost:8080/users/userList接口，会收到401错误{ “timestamp”: 1567564486909, “status”: 401, “error”: “Unauthorized”, “message”: “Full authentication is required to access this resource”, “path”: “/users/userList”}curl http://localhost:8080/users/userList原因就是因为这个url没有授权,所以返回401 2.注册一个新用户curl -H “Content-Type: application/json” -X POST -d ‘{ “username”: “admin”, “password”: “password”}’ http://localhost:8080/users/signup 3.登录，会返回token，在http header中，Authorization: Bearer 后面的部分就是tokencurl -i -H “Content-Type: application/json” -X POST -d ‘{ “username”: “admin”, “password”: “password”}’ http://localhost:8080/login温馨提醒:这里的login方法是spring specurity框架提供的默认登录url 4.用登录成功后拿到的token再次请求/users/userList接口 4.1将请求中的XXXXXX替换成拿到的token 4.2这次可以成功调用接口了curl -H “Content-Type: application/json”-H “Authorization: Bearer XXXXXX”“http://localhost:8080/users/userList&quot; 5.设置了1分钟后Token过期，如果1分钟后再次请求/users/userList接口返回Token过期的异常提示如下图: 6.集成Swagger-ui，方便前后端分离开发，默认访问地址：http://localhost:8080/swagger-ui.html 温馨提示：这里的登录接口还是使用的默认地址，如果你的token过期了，需要你重新登录生成新的token. 下载地址https://gitee.com/micai-code/springboot-springsecurity-jwt-demo.git 结束语在使用的过程中，如有问题，可以添加真正讨论技术的QQ交流群，QQ群号为：715224124]]></content>
+      <categories>
+        <category>Spring Boot</category>
+        <category>Spring Security</category>
+        <category>JWT</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>Spring Security</tag>
+        <tag>JWT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Spring Boot2 + Spring Security5 资源菜单按钮动态显示(7)]]></title>
     <url>%2F2020%2F06%2F07%2FSpring-Boot2-Spring-Security5-%E8%B5%84%E6%BA%90%E8%8F%9C%E5%8D%95%E6%8C%89%E9%92%AE%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA-7%2F</url>
     <content type="text"><![CDATA[前言上篇文章介绍了动态用户角色资源的权限管理，在结尾，也提到了个比较实际的问题 一般系统是不会让用户去点击了菜单才发现没有权限访问，而是针对不同的用户，动态显示不同的菜单 简单介绍那么怎么实现呢，通过Spring Securiyt的标签和后台动态标签验证就可以解决 那么，要想引用Spring Security标签，那么就要引入相应的标签库，因为小编这里用的前端模板是Thymeleaf，所以引入标签库如下： 1234&lt;dependency&gt; &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-extras-springsecurity5&lt;/artifactId&gt;&lt;/dependency&gt; 注意，因为我这里使用的是 Spring Security5 的版本，所以对应也是 thymeleaf-extras-springsecurity5 如果是 Spring Security4 的话对应就是 thymeleaf-extras-springsecurit4 然后每个页面只需要在html头部引入 xmlns:sec=“http://www.thymeleaf.org/extras/spring-security” 即可使用 Spring Security 标签库 实现这里基本介绍就介绍完了，下面开始说下怎么实现的动态显示菜单的问题 在需要动态显示的菜单上，加上 &lt;标签 sec:authorize=“hasAuthority(‘key’)”&gt; key则为资源表中的资源标识字段 那我们看看接上篇文章的代码，现在我想给我的菜单1、菜单2、菜单3动态显示，那么实现代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940&lt;!DOCTYPE html&gt;&lt;html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;index页&lt;/title&gt;&lt;/head&gt;&lt;body&gt;index页&lt;br/&gt;&lt;br/&gt;&lt;span sec:authorize="hasAuthority('menu1')"&gt; &lt;button id="menu1Btn" type="button" onclick="sendAjax('/menu1')"&gt;菜单1&lt;/button&gt;&lt;/span&gt;&lt;span sec:authorize="hasAuthority('menu2')"&gt; &lt;button id="menu2Btn" type="button" onclick="sendAjax('/menu2')"&gt;菜单2&lt;/button&gt;&lt;/span&gt;&lt;span sec:authorize="hasAuthority('menu3')"&gt; &lt;button id="menu3Btn" type="button" onclick="sendAjax('/menu3')"&gt;菜单3&lt;/button&gt;&lt;/span&gt;&lt;script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"&gt;&lt;/script&gt;&lt;script type="text/javascript"&gt; function sendAjax(url) &#123; $.ajax(&#123; type: "GET", url: url, dataType: "text", success: function (data) &#123; console.log(data); &#125; &#125;); &#125;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt; 那么到这里我们就算完成了，我们看看效果 这里我们先用admin管理员角色登录，首页如下： 然后，再用teacher教师角色登录，首页如下： 最后，再用student学生角色登录，首页如下： 可以看到，对应不同的权限，显示不同的资源按钮 结束语那么基本代码和效果也演示完毕了 源码获取方式加加入QQ交流群(715224124)，进群找群主要源码，如果有问题，可以提出疑问，群主会尽量帮助解决~ 希望能帮助到大家，如果有不好或者错误的地方希望能多多提出，谢谢大家~]]></content>
