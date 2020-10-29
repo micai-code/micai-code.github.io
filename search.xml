@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java之HttpClient调用WebService接口发送短信实战源码]]></title>
+    <url>%2F2020%2F10%2F29%2FJava%E4%B9%8BHttpClient%E8%B0%83%E7%94%A8WebService%E6%8E%A5%E5%8F%A3%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1%E5%AE%9E%E6%88%98%E6%BA%90%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[摘要Java之HttpClient调用WebService接口实战 一：接口文档 二：WSDL 三：HttpClient方法HttpClient方法一 HttpClient方法二 HttpClient方法三 HttpClient方法四 四：封装soapXml方法(核心方法) 五：调用WebService接口 六：调用结果 七：短信结果 完结以上就是Java之通过HttpClient方式调用WebService接口的完成流程]]></content>
+      <categories>
+        <category>WebService</category>
+      </categories>
+      <tags>
+        <tag>WebService</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Spring Boot 2 + MyBatis 实现动态传递表名称, 字段名称 查询数据]]></title>
     <url>%2F2020%2F10%2F23%2FSpring-Boot-2-MyBatis-%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E4%BC%A0%E9%80%92%E8%A1%A8%E5%90%8D%E7%A7%B0-%E5%AD%97%E6%AE%B5%E5%90%8D%E7%A7%B0-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%2F</url>
     <content type="text"><![CDATA[Spring Boot 2 + MyBatis 实现动态传递表名称, 字段名称 查询数据摘要：之前有个需求,需要动态查询某一个表的某些字段,看了下MyBatis的文档,它可以支持的,具体做法如下: 一:Controller层1234567891011121314151617181920212223242526272829303132333435363738package boss.portal.web.controller; import boss.base.web.controller.BaseController;import boss.base.web.support.ResponseModel;import boss.portal.web.service.CommonService;import io.swagger.annotations.Api;import io.swagger.annotations.ApiOperation;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RequestMethod;import org.springframework.web.bind.annotation.RequestParam;import org.springframework.web.bind.annotation.RestController;import java.util.List;import java.util.Map;/** * 描述： * &lt;p&gt; * Author: 赵新国 * Date: 2018/1/31 17:48 */@RestController@Api(value = "公共接口管理", description = "公共接口管理")@RequestMapping(value = "/common")public class CommonController extends BaseController &#123; @Autowired private CommonService commonService; @ApiOperation(value = "根据ID获取指定实体,字段对应的返回值", notes = "根据ID获取指定实体,字段对应的返回值") @RequestMapping(value = "/get", method = RequestMethod.GET) public ResponseModel get(@RequestParam(required = false) String ids, @RequestParam(required = false) String tableName, @RequestParam(required = false) String fields) &#123; List&lt;Map&lt;String, Object&gt;&gt; maps = commonService.get(ids, tableName, fields); return renderSuccess(maps); &#125; &#125; 二:Service层123456789101112131415161718192021222324package boss.portal.web.service; import boss.auth.user.provider.IUserProvider;import com.alibaba.boot.dubbo.annotation.DubboConsumer;import org.springframework.stereotype.Component;import java.util.List;import java.util.Map;/** * 描述： * &lt;p&gt; * Author: 赵新国 * Date: 2018/1/31 17:48 */@Componentpublic class CommonService &#123; @DubboConsumer(lazy = true) private IUserProvider userProvider; public List&lt;Map&lt;String,Object&gt;&gt; get(String ids, String tableName, String fields) &#123; List&lt;Map&lt;String, Object&gt;&gt; maps = userProvider.get(ids, tableName, fields); return maps; &#125;&#125; 三:Provider层12345678@Overridepublic List&lt;Map&lt;String, Object&gt;&gt; get(String ids, String tableName, String fields) &#123; List&lt;Map&lt;String, Object&gt;&gt; maps = userMapper.get(ids, tableName, fields); if (maps != null &amp;&amp; !maps.isEmpty()) &#123; return maps; &#125; return null;&#125; 四:Mapper层1List&lt;Map&lt;String,Object&gt;&gt; get(@Param("ids") String ids, @Param("tableName") String tableName, @Param("fields") String fields); 五:Mapper.xml1234&lt;!-- 根据指定ID获取指定数据表的指定字段的数据集 --&gt;&lt;select id="get" resultType="java.util.Map" statementType="STATEMENT" &gt; select $&#123;fields&#125; from $&#123;tableName&#125; where id in ( $&#123;ids&#125; )&lt;/select&gt; 六：附录最后说明一下,fields代表你要查询的字段,tableName代表你要查询的表名称,ids代表你要查询的id集合, 这样你就可以随意查询任何你想要的表和字段了,再也不用担心其他人让你加接口了! 七：结束语以上就是Spring Boot, MyBatis 实现动态传递表名称, 字段名称 查询数据的全部代码了，如有问题，请加群讨论：715224124]]></content>
@@ -14,9 +25,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Maven之自定义archetype生成多模块结构的基础项目骨架（二）]]></title>
-    <url>%2F2020%2F10%2F23%2FMaven%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89archetype%E7%94%9F%E6%88%90%E5%A4%9A%E6%A8%A1%E5%9D%97%E7%BB%93%E6%9E%84%E7%9A%84%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE%E9%AA%A8%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[一：项目骨架介绍该项目骨架集成了Spring，SpringMVC，MyBatis，jsp，jquery，bootstrap等 二：项目骨架使用介绍1.首先下载该项目到你的本地工程 2.通过dos窗口进入到该工程的pom.xml所在目录 3.搭建nexus私服 4.配置发布到私服的用户，主要是maven的settings.xml，如下 releases admin admin123 snapshots admin admin123 5.执行mvn clean install命令 6.执行mvn deploy命令 7.登录nexus可以查看到你刚才发布的archetype包 三：在eclipse或者sts里面配置你刚才发布到私服的自定义archetype1.打开你的开发工具，eclipse或者sts，我这里是sts 2.选择Window-&gt;Preferences-&gt;Maven-&gt;Archetypes 3.点击Add Remote Catalog，输入你的nexus私服中archetype的地址，我这里是 http://127.0.0.1:8081/nexus/content/groups/public/archetype-catalog.xml 输入Description，随便输入都可以，我这里是micaicms-web-modules-archetype 4.点击Ok，点击Apply 5.重新启动你的开发工具eclipse或者sts 四：使用自定义的archetype生成自定义的项目骨架1.选择New-&gt;Maven Project-&gt;Next 2.选择你刚才配置好的那个archetype 3.输入对应的groupId，artifactId，package，点击Finish就会生成四个工程，一个父工程，三个子工程，这样通过自定义的archetype生成多模块基础框架就完成了 ，接下来你可以很好的在此基础上写自己的代码了 五：下载地址https://github.com/sxdtzhaoxinguo/micaicms-web-modules-archetype]]></content>
+    <title><![CDATA[Maven之自定义archetype创建自定义模板项目骨架（一）]]></title>
+    <url>%2F2020%2F10%2F23%2FMaven%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89archetype%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E9%A1%B9%E7%9B%AE%E9%AA%A8%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[描述：通过maven的自定义archetype创建自定义的项目模板骨架1.下载项目到你的本地workspace2.进入到你该项目的根目录(也就是pom.xml所在的目录)3.执行命令把该项目安装到你的本地仓库 mvn clean install4.执行命令更新你的本地仓库的索引 mvn archetype:update-local-catalog5.再次回到你的workspace工程目录，执行命令选择本地仓库的archetype创建项目 mvn archetype:generate -DarchetypeCatalog=local6.选择你的archetype的编号，然后根据提示输入你自己的groupId，artifactId，packaging，version等等7.导入创建成功的项目到eclipse，就可以使用该项目了8.下载地址https://github.com/sxdtzhaoxinguo/micaicms-web-archetype 9.博客地址https://blog.csdn.net/sxdtzhaoxinguo/article/details/46895013]]></content>
       <categories>
         <category>Maven</category>
       </categories>
@@ -25,9 +36,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Maven之自定义archetype创建自定义模板项目骨架（一）]]></title>
-    <url>%2F2020%2F10%2F23%2FMaven%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89archetype%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E9%A1%B9%E7%9B%AE%E9%AA%A8%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[描述：通过maven的自定义archetype创建自定义的项目模板骨架1.下载项目到你的本地workspace2.进入到你该项目的根目录(也就是pom.xml所在的目录)3.执行命令把该项目安装到你的本地仓库 mvn clean install4.执行命令更新你的本地仓库的索引 mvn archetype:update-local-catalog5.再次回到你的workspace工程目录，执行命令选择本地仓库的archetype创建项目 mvn archetype:generate -DarchetypeCatalog=local6.选择你的archetype的编号，然后根据提示输入你自己的groupId，artifactId，packaging，version等等7.导入创建成功的项目到eclipse，就可以使用该项目了8.下载地址https://github.com/sxdtzhaoxinguo/micaicms-web-archetype 9.博客地址https://blog.csdn.net/sxdtzhaoxinguo/article/details/46895013]]></content>
+    <title><![CDATA[Maven之自定义archetype生成多模块结构的基础项目骨架（二）]]></title>
+    <url>%2F2020%2F10%2F23%2FMaven%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89archetype%E7%94%9F%E6%88%90%E5%A4%9A%E6%A8%A1%E5%9D%97%E7%BB%93%E6%9E%84%E7%9A%84%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE%E9%AA%A8%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[一：项目骨架介绍该项目骨架集成了Spring，SpringMVC，MyBatis，jsp，jquery，bootstrap等 二：项目骨架使用介绍1.首先下载该项目到你的本地工程 2.通过dos窗口进入到该工程的pom.xml所在目录 3.搭建nexus私服 4.配置发布到私服的用户，主要是maven的settings.xml，如下 releases admin admin123 snapshots admin admin123 5.执行mvn clean install命令 6.执行mvn deploy命令 7.登录nexus可以查看到你刚才发布的archetype包 三：在eclipse或者sts里面配置你刚才发布到私服的自定义archetype1.打开你的开发工具，eclipse或者sts，我这里是sts 2.选择Window-&gt;Preferences-&gt;Maven-&gt;Archetypes 3.点击Add Remote Catalog，输入你的nexus私服中archetype的地址，我这里是 http://127.0.0.1:8081/nexus/content/groups/public/archetype-catalog.xml 输入Description，随便输入都可以，我这里是micaicms-web-modules-archetype 4.点击Ok，点击Apply 5.重新启动你的开发工具eclipse或者sts 四：使用自定义的archetype生成自定义的项目骨架1.选择New-&gt;Maven Project-&gt;Next 2.选择你刚才配置好的那个archetype 3.输入对应的groupId，artifactId，package，点击Finish就会生成四个工程，一个父工程，三个子工程，这样通过自定义的archetype生成多模块基础框架就完成了 ，接下来你可以很好的在此基础上写自己的代码了 五：下载地址https://github.com/sxdtzhaoxinguo/micaicms-web-modules-archetype]]></content>
       <categories>
         <category>Maven</category>
       </categories>
