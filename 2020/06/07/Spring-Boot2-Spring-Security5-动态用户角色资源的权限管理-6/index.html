@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring Boot,Spring Security,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言上篇文章介绍了Spring Boot Security基于Redis的Spring Session管理 本篇文章，可以说比较核心、实用的功能，动态用户角色资源管理(RBAC)，可能篇幅会比较长，废话不多说，马上进入正题 简单介绍相信每个正规的系统，都会对系统安全和访问权限有严格的控制。简单的一句话总结，就是对的人访问对的资源，这里可能会比较抽象，博主给大家举个例子就懂了： 现在假设有个系统，里">
+<meta name="keywords" content="Spring Boot,Spring Security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot2 + Spring Security5 动态用户角色资源的权限管理(6)">
+<meta property="og:url" content="https://micai-code.github.io/2020/06/07/Spring-Boot2-Spring-Security5-动态用户角色资源的权限管理-6/index.html">
+<meta property="og:site_name" content="MiCai`s Blog">
+<meta property="og:description" content="前言上篇文章介绍了Spring Boot Security基于Redis的Spring Session管理 本篇文章，可以说比较核心、实用的功能，动态用户角色资源管理(RBAC)，可能篇幅会比较长，废话不多说，马上进入正题 简单介绍相信每个正规的系统，都会对系统安全和访问权限有严格的控制。简单的一句话总结，就是对的人访问对的资源，这里可能会比较抽象，博主给大家举个例子就懂了： 现在假设有个系统，里">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/kzylAvTBSxnFhbO.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/tkuBymHaN4pQrn2.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/jIrg1WBdNqpeRiH.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/iQuUja7kcyER3Ww.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/2JMl9poz7PmiDC1.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/wYo9tPah1Jx4QSy.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/Dz9q2RIr1CBEpkT.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/07/UjnAYoHpL7OdFNu.png">
+<meta property="og:updated_time" content="2020-06-07T13:59:44.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot2 + Spring Security5 动态用户角色资源的权限管理(6)">
+<meta name="twitter:description" content="前言上篇文章介绍了Spring Boot Security基于Redis的Spring Session管理 本篇文章，可以说比较核心、实用的功能，动态用户角色资源管理(RBAC)，可能篇幅会比较长，废话不多说，马上进入正题 简单介绍相信每个正规的系统，都会对系统安全和访问权限有严格的控制。简单的一句话总结，就是对的人访问对的资源，这里可能会比较抽象，博主给大家举个例子就懂了： 现在假设有个系统，里">
+<meta name="twitter:image" content="https://i.loli.net/2020/06/07/kzylAvTBSxnFhbO.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://micai-code.github.io/2020/06/07/Spring-Boot2-Spring-Security5-动态用户角色资源的权限管理-6/">
+
+
+
+
+
+  <title>Spring Boot2 + Spring Security5 动态用户角色资源的权限管理(6) | MiCai`s Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MiCai`s Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://micai-code.github.io/2020/06/07/Spring-Boot2-Spring-Security5-动态用户角色资源的权限管理-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MiCai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/micai_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MiCai`s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring Boot2 + Spring Security5 动态用户角色资源的权限管理(6)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-07T21:59:00+08:00">
+                2020-06-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-06-07T21:59:44+08:00">
+                2020-06-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Boot/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Boot</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Boot/Spring-Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Security</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/06/07/Spring-Boot2-Spring-Security5-动态用户角色资源的权限管理-6/" class="leancloud_visitors" data-flag-title="Spring Boot2 + Spring Security5 动态用户角色资源的权限管理(6)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> View
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上篇文章介绍了Spring Boot Security基于Redis的Spring Session管理</p>
+<p>本篇文章，可以说比较核心、实用的功能，<strong>动态用户角色资源管理(RBAC)</strong>，可能篇幅会比较长，废话不多说，马上进入正题</p>
+<h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>相信每个正规的系统，都会对<strong>系统安全</strong>和<strong>访问权限</strong>有严格的控制。简单的一句话总结，就是<strong>对的人访问对的资源</strong>，这里可能会比较抽象，博主给大家举个例子就懂了：</p>
+<p>现在假设有个系统，里面有菜单A、菜单B和菜单C<br>客户有这么个需求，就是对于管理员来说，可以访问所有资源菜单，对于普通用户来说，只能访问菜单A和菜单B，如图：</p>
+<p><img src="https://i.loli.net/2020/06/07/kzylAvTBSxnFhbO.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -01.png"></p>
+<p>相信这个也是广大系统都有的最基础的需求，那么在系统中的表现，就是<strong>用户登录了系统</strong>后，如果是<strong>普通用户</strong>的话，前端<strong>只显示菜单A和菜单B</strong>，其他途径访问(直接输入URL)菜单C会被提示无权限，而<strong>管理员则显示所有菜单</strong></p>
+<p>那么怎么实现呢，小编这里就是基于<strong>RBAC模型</strong>去实现的，简单来说就是：</p>
+<p><img src="https://i.loli.net/2020/06/07/tkuBymHaN4pQrn2.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -02.png"></p>
+<p>举个例子：</p>
+<ul>
+<li>用户就是登录系统的用户，像张三、李四、小王这样的具体登陆用户</li>
+<li>角色就是假如张三是教师、李四是学生，那么教师和学生角色，也可能可以分得更细，这个根据需求来定义</li>
+<li>资源就是访问系统的资源，如查询学生信息、编辑学生信息等等之类</li>
+</ul>
+<p>用户和资源是没有直接关联的，<strong>用户是通过关联角色，角色再关联资源这种间接的方式去判断自己的资源权限</strong>。这样做的好处就是可以更简单直观的去管理用户资源间的关联，不需要说每创建一个用户，就去再重新分配资源这么繁琐，减少数据库冗余设计</p>
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p>数据库表的设计如图：</p>
+<p><img src="https://i.loli.net/2020/06/07/jIrg1WBdNqpeRiH.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -03.png"></p>
+<p>这里有几点要说明下：</p>
+<ul>
+<li>一般 用户 与 角色 是一对一或者一对多的关系，我这里为了方便所以<strong>选择一对一的关系</strong></li>
+<li>角色 与 资源 是<strong>多对多的关系</strong>，所以需要中间表 sys_role_resource 存储中间的联系</li>
+</ul>
+<p>实体代码如下：</p>
+<h2 id="Role-java"><a href="#Role-java" class="headerlink" title="Role.java"></a>Role.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Copyright 2020. javaymw.com Studio All Right Reserved</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Create on 2020-06-07 11:38</span></span><br><span class="line"><span class="comment"> * Created by zhaoxinguo</span></span><br><span class="line"><span class="comment"> * Version 2.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.javaymw.demo.sys.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 角色实体类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhaoxinguo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/7 11:38</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"sys_role"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> <span class="keyword">implements</span> <span class="title">GrantedAuthority</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//id</span></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="meta">@Column</span></span><br><span class="line">    <span class="keyword">protected</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//角色标识</span></span><br><span class="line">    <span class="meta">@Column</span></span><br><span class="line">    <span class="keyword">private</span> String roleKey;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//角色名称</span></span><br><span class="line">    <span class="meta">@Column</span></span><br><span class="line">    <span class="keyword">private</span> String roleName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//角色拥有的资源(多对多)</span></span><br><span class="line">    <span class="meta">@ManyToMany</span>(targetEntity = Resource.class, fetch = FetchType.EAGER)</span><br><span class="line">    <span class="meta">@JoinTable</span>(</span><br><span class="line">            name = <span class="string">"sys_role_resource"</span>,</span><br><span class="line">            joinColumns = &#123;</span><br><span class="line">                    <span class="meta">@JoinColumn</span>(name = <span class="string">"role_id"</span>, referencedColumnName = <span class="string">"id"</span>, nullable = <span class="keyword">false</span>)</span><br><span class="line">            &#125;,</span><br><span class="line">            inverseJoinColumns = &#123;</span><br><span class="line">                    <span class="meta">@JoinColumn</span>(name = <span class="string">"resource_id"</span>, referencedColumnName = <span class="string">"id"</span>, nullable = <span class="keyword">false</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">    <span class="keyword">private</span> Set&lt;Resource&gt; resources;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAuthority</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> roleKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRoleKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> roleKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoleKey</span><span class="params">(String roleKey)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.roleKey = roleKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRoleName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> roleName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoleName</span><span class="params">(String roleName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.roleName = roleName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;Resource&gt; <span class="title">getResources</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> resources;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setResources</span><span class="params">(Set&lt;Resource&gt; resources)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.resources = resources;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要说明下，GrantedAuthority 接口中的getAuthorities()方法返回的<strong>当前用户对象拥有的权限</strong>，简单的说就是该用户的角色信息，所以这里我<strong>角色标识roleKey</strong>表示</p>
+<h2 id="Resource-java"><a href="#Resource-java" class="headerlink" title="Resource.java"></a>Resource.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Copyright 2020. javaymw.com Studio All Right Reserved</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Create on 2020-06-07 11:42</span></span><br><span class="line"><span class="comment"> * Created by zhaoxinguo</span></span><br><span class="line"><span class="comment"> * Version 2.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.javaymw.demo.sys.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 资源实体类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhaoxinguo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/7 11:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"sys_resource"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Resource</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//id</span></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="meta">@Column</span></span><br><span class="line">    <span class="keyword">protected</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//资源名称</span></span><br><span class="line">    <span class="meta">@Column</span>(nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="keyword">private</span> String resourceName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//资源标识</span></span><br><span class="line">    <span class="meta">@Column</span>(nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="keyword">private</span> String resourceKey;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//资源url</span></span><br><span class="line">    <span class="meta">@Column</span>(nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 资源类型</span></span><br><span class="line"><span class="comment">     * 0:菜单</span></span><br><span class="line"><span class="comment">     * 1:按钮</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Column</span>(nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="keyword">private</span> Integer type;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResourceName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> resourceName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setResourceName</span><span class="params">(String resourceName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.resourceName = resourceName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResourceKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> resourceKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setResourceKey</span><span class="params">(String resourceKey)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.resourceKey = resourceKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUrl</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.url = url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">(Integer type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.type = type;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相信这些代码大家都看得明白，下面开始进入核心部分</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>在这里，博主介绍下怎么在Spring Security中实现资源管理功能，也就是针对不同的用户角色，动态的判断是否能访问相应的资源菜单</p>
+<p>先看看项目结构图：</p>
+<p><img src="https://i.loli.net/2020/06/07/iQuUja7kcyER3Ww.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -04.png"></p>
+<p>首先，我们需要在自定义登录认证那里，设置权限信息：</p>
+<h2 id="LoginValidateAuthenticationProvider-java"><a href="#LoginValidateAuthenticationProvider-java" class="headerlink" title="LoginValidateAuthenticationProvider.java"></a>LoginValidateAuthenticationProvider.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Copyright 2020. javaymw.com Studio All Right Reserved</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Create on 2020-06-05 21:59</span></span><br><span class="line"><span class="comment"> * Created by zhaoxinguo</span></span><br><span class="line"><span class="comment"> * Version 2.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.javaymw.demo.core;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.javaymw.demo.sys.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.javaymw.demo.sys.service.UserService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.AuthenticationException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.SimpleGrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 自定义认证核心类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhaoxinguo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/5 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginValidateAuthenticationProvider</span> <span class="keyword">implements</span> <span class="title">AuthenticationProvider</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解密用的</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PasswordEncoder passwordEncoder;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 进行身份验证</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> authentication</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> AuthenticationException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Authentication <span class="title">authenticate</span><span class="params">(Authentication authentication)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line">        <span class="comment">//获取输入的用户名</span></span><br><span class="line">        String username = authentication.getName();</span><br><span class="line">        <span class="comment">//获取输入的明文</span></span><br><span class="line">        String rawPassword = (String) authentication.getCredentials();</span><br><span class="line">        <span class="comment">//查询用户是否存在</span></span><br><span class="line">        User user = (User) userService.loadUserByUsername(username);</span><br><span class="line">        <span class="keyword">if</span> (!user.isEnabled()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> DisabledException(<span class="string">"该账户已被禁用，请联系管理员"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!user.isAccountNonLocked()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> LockedException(<span class="string">"该账号已被锁定"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!user.isAccountNonExpired()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AccountExpiredException(<span class="string">"该账号已过期，请联系管理员"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!user.isCredentialsNonExpired()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> CredentialsExpiredException(<span class="string">"该账户的登录凭证已过期，请重新登录"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//验证密码</span></span><br><span class="line">        <span class="keyword">if</span> (!passwordEncoder.matches(rawPassword, user.getPassword())) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BadCredentialsException(<span class="string">"输入密码错误!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// TODO Spring Boot2 + Spring Security5 动态用户角色资源的权限管理(6) 添加代码</span></span><br><span class="line">        <span class="comment">// 设置权限信息</span></span><br><span class="line">        Set&lt;GrantedAuthority&gt; grantedAuthorities  = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (com.javaymw.demo.sys.entity.Resource resource : user.getRole().getResources()) &#123;</span><br><span class="line">            <span class="comment">//资源key作为权限标识</span></span><br><span class="line">            grantedAuthorities.add(<span class="keyword">new</span> SimpleGrantedAuthority(resource.getResourceKey()));</span><br><span class="line">            user.setAuthorities(grantedAuthorities);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> UsernamePasswordAuthenticationToken(user, rawPassword, user.getAuthorities());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(Class&lt;?&gt; authentication)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//确保authentication能转成该类</span></span><br><span class="line">        <span class="keyword">return</span> authentication.equals(UsernamePasswordAuthenticationToken.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意的是，我们把resource实体的<strong>resourceKey作为资源的权限标识</strong>，设置进<strong>grantedAuthorities集合</strong>里面，以便spring security<strong>根据注解@PreAuthorize自动权限判断</strong></p>
+<p>由于我们设计的<strong>用户与角色是一对一关联</strong>，所以我们这里GrantedAuthority集合就只有一条角色信息数据</p>
+<p>然后就是自定义权限不足handler</p>
+<h2 id="PerAccessDeniedHandler-java"><a href="#PerAccessDeniedHandler-java" class="headerlink" title="PerAccessDeniedHandler.java"></a>PerAccessDeniedHandler.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Copyright 2020. javaymw.com Studio All Right Reserved</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Create on 2020-06-07 11:50</span></span><br><span class="line"><span class="comment"> * Created by zhaoxinguo</span></span><br><span class="line"><span class="comment"> * Version 2.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.javaymw.demo.core.handler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.access.AccessDeniedException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.access.AccessDeniedHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 自定义权限不足handler</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhaoxinguo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/7 11:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PerAccessDeniedHandler</span> <span class="keyword">implements</span> <span class="title">AccessDeniedHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        <span class="comment">//登录成功返回</span></span><br><span class="line">        Map&lt;String, Object&gt; paramMap = <span class="keyword">new</span> HashMap&lt;&gt;(<span class="number">2</span>);</span><br><span class="line">        paramMap.put(<span class="string">"code"</span>, <span class="string">"503"</span>);</span><br><span class="line">        paramMap.put(<span class="string">"message"</span>, accessDeniedException.getMessage());</span><br><span class="line">        <span class="comment">//设置返回请求头</span></span><br><span class="line">        response.setContentType(<span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">        <span class="comment">//写出流</span></span><br><span class="line">        PrintWriter out = response.getWriter();</span><br><span class="line">        out.write(JSONObject.toJSONString(paramMap));</span><br><span class="line">        out.flush();</span><br><span class="line">        out.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们看看Spring Security配置类的变化：</p>
+<h2 id="SecurityConfig-java"><a href="#SecurityConfig-java" class="headerlink" title="SecurityConfig.java"></a>SecurityConfig.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Copyright 2020. javaymw.com Studio All Right Reserved</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Create on 2020-06-05 21:58</span></span><br><span class="line"><span class="comment"> * Created by zhaoxinguo</span></span><br><span class="line"><span class="comment"> * Version 2.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.javaymw.demo.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.javaymw.demo.core.LoginValidateAuthenticationProvider;</span><br><span class="line"><span class="keyword">import</span> com.javaymw.demo.core.handler.LoginFailureHandler;</span><br><span class="line"><span class="keyword">import</span> com.javaymw.demo.core.handler.LoginSuccessHandler;</span><br><span class="line"><span class="keyword">import</span> com.javaymw.demo.core.handler.PerAccessDeniedHandler;</span><br><span class="line"><span class="keyword">import</span> com.javaymw.demo.sys.service.UserService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: Spring Security 核心配置类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhaoxinguo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/5 21:57</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="meta">@EnableGlobalMethodSecurity</span>(securedEnabled = <span class="keyword">true</span>, prePostEnabled = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//数据源</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//用户业务层</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//自定义认证</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> LoginValidateAuthenticationProvider loginValidateAuthenticationProvider;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//登录成功handler</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> LoginSuccessHandler loginSuccessHandler;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//登录失败handler</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> LoginFailureHandler loginFailureHandler;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//权限不足handler</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PerAccessDeniedHandler perAccessDeniedHandler;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 权限核心配置</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> http</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//基础设置</span></span><br><span class="line">        http.httpBasic()<span class="comment">//配置HTTP基本身份验证</span></span><br><span class="line">                .and()</span><br><span class="line">                    .authorizeRequests()</span><br><span class="line">                    .anyRequest().authenticated()<span class="comment">//所有请求都需要认证</span></span><br><span class="line">                .and()</span><br><span class="line">                    .formLogin() <span class="comment">//登录表单</span></span><br><span class="line">                    .loginPage(<span class="string">"/login"</span>)<span class="comment">//登录页面url</span></span><br><span class="line">                    .loginProcessingUrl(<span class="string">"/login"</span>)<span class="comment">//登录验证url</span></span><br><span class="line">                    .defaultSuccessUrl(<span class="string">"/index"</span>)<span class="comment">//成功登录跳转</span></span><br><span class="line">                    .successHandler(loginSuccessHandler)<span class="comment">//成功登录处理器</span></span><br><span class="line">                    .failureHandler(loginFailureHandler)<span class="comment">//失败登录处理器</span></span><br><span class="line">                    .permitAll()<span class="comment">//登录成功后有权限访问所有页面</span></span><br><span class="line">                .and()</span><br><span class="line">                    .exceptionHandling().accessDeniedHandler(perAccessDeniedHandler)<span class="comment">//设置权限不足handler</span></span><br><span class="line">                .and()</span><br><span class="line">                    .rememberMe()<span class="comment">//记住我功能</span></span><br><span class="line">                    .userDetailsService(userService)<span class="comment">//设置用户业务</span></span><br><span class="line">                    .tokenRepository(persistentTokenRepository())<span class="comment">//设置持久化token</span></span><br><span class="line">                    .tokenValiditySeconds(<span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>);<span class="comment">//记住登录1天(24小时 *60分钟 * 60秒)</span></span><br><span class="line">        <span class="comment">//关闭csrf跨域攻击防御</span></span><br><span class="line">        http.csrf().disable();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//这里要设置自定义认证</span></span><br><span class="line">        auth.authenticationProvider(loginValidateAuthenticationProvider);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * BCrypt加密</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PasswordEncoder <span class="title">passwordEncoder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BCryptPasswordEncoder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 记住我功能，持久化的token服务</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PersistentTokenRepository <span class="title">persistentTokenRepository</span><span class="params">()</span></span>&#123;</span><br><span class="line">        JdbcTokenRepositoryImpl tokenRepository = <span class="keyword">new</span> JdbcTokenRepositoryImpl();</span><br><span class="line">        <span class="comment">//数据源设置</span></span><br><span class="line">        tokenRepository.setDataSource(dataSource);</span><br><span class="line">        <span class="comment">//启动的时候创建表，这里只执行一次，第二次就注释掉，否则每次启动都重新创建表</span></span><br><span class="line">        <span class="comment">/*tokenRepository.setCreateTableOnStartup(true);*/</span></span><br><span class="line">        <span class="keyword">return</span> tokenRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Spring Security配置文件中，我们只需要设置<strong>PerAccessDeniedHandler</strong>就可以了，还要记得在头部添加<strong>@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled=true)注解，以启动spring security注解生效</strong></p>
+<p>接下来就是前端页面和控制层：</p>
+<h2 id="UserContorller-java"><a href="#UserContorller-java" class="headerlink" title="UserContorller.java"></a>UserContorller.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Copyright 2020. javaymw.com Studio All Right Reserved</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Create on 2020-06-05 22:01</span></span><br><span class="line"><span class="comment"> * Created by zhaoxinguo</span></span><br><span class="line"><span class="comment"> * Version 2.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.javaymw.demo.sys.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.security.access.prepost.PreAuthorize;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhaoxinguo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/5 22:01</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 登录页面跳转</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/login"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"login.html"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * index页跳转</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"index"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index.html"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * menu1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PreAuthorize</span>(<span class="string">"hasAuthority('menu1')"</span>)</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"menu1"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">menu1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"menu1"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * menu2</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PreAuthorize</span>(<span class="string">"hasAuthority('menu2')"</span>)</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"menu2"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">menu2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"menu2"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * menu3</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PreAuthorize</span>(<span class="string">"hasAuthority('menu3')"</span>)</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"menu3"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">menu3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"menu3"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意的是，<strong>每个需要权限判断的方法中，都需要增加@PreAuthorize(“hasAuthority(‘key’)”)注解，否则权限判断不生效</strong>，key对应数据库资源表中的资源标识字段</p>
+<h2 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>index页<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">index页<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"menu1Btn"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"sendAjax('/menu1')"</span>&gt;</span>菜单1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"menu2Btn"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"sendAjax('/menu2')"</span>&gt;</span>菜单2<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"menu3Btn"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"sendAjax('/menu3')"</span>&gt;</span>菜单3<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://libs.baidu.com/jquery/2.1.4/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    function sendAjax(url) &#123;</span><br><span class="line"></span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: "GET",</span><br><span class="line">            url: url,</span><br><span class="line">            dataType: "text",</span><br><span class="line">            success: function (data) &#123;</span><br><span class="line">                console.log(data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里简单的说说数据库的数据</p>
+<blockquote>
+<p>用户表：admin、teacher和student <br><br>角色表：管理员、教师和学生 <br><br>资源表：menu1、menu2、menu3 </p>
+</blockquote>
+<blockquote>
+<p>对应权限：<br>管理员：menu1、menu2、menu3 <br><br>教师：menu1、menu2 <br><br>学生：meun1</p>
+</blockquote>
+<p>下面我们看看效果，<strong>登录页：</strong></p>
+<p><img src="https://i.loli.net/2020/06/07/2JMl9poz7PmiDC1.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -05.png"></p>
+<p>index页：</p>
+<p><img src="https://i.loli.net/2020/06/07/wYo9tPah1Jx4QSy.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -06.png"></p>
+<p>这里我们先用<strong>admin管理员角色</strong>登录，然后<strong>点击所有菜单</strong>：</p>
+<p>可以看到数据正常，并且已经访问到了所有资源菜单</p>
+<p>然后我们用 <strong>teacher教师角色</strong> 登录，也是<strong>点击所有菜单</strong>：</p>
+<p>会发现，在点击第三个菜单的时候，会返回没有权限访问</p>
+<p><img src="https://i.loli.net/2020/06/07/Dz9q2RIr1CBEpkT.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -07.png"></p>
+<p>我们再用 <strong>student学生角色</strong> 登录，也是<strong>点击所有菜单</strong>：</p>
+<p><img src="https://i.loli.net/2020/06/07/UjnAYoHpL7OdFNu.png" alt="Spring Boot2 _ Spring Security5 动态用户角色资源的权限管理_6_ -08.png"></p>
+<p>这里说明我们的动态权限资源管理都生效了</p>
+<p>那么文章就介绍到这里，在这里留了个坑，一般系统是不会让用户去点击了菜单才发现没有权限访问，<strong>而是针对不同的用户，动态显示不同的菜单，这个内容小编下篇文章就会讲解</strong></p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>那么基本代码和效果也演示完毕了</p>
+<p>源码获取方式加加入<strong>QQ交流群</strong>(<strong>715224124</strong>)，进群找群主要源码，如果有问题，可以提出疑问，群主会尽量帮助解决~</p>
+<p>希望能帮助到大家，如果有不好或者错误的地方希望能多多提出，谢谢大家~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="MiCai wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信订阅号</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="MiCai WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="MiCai Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    MiCai
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://micai-code.github.io/2020/06/07/Spring-Boot2-Spring-Security5-动态用户角色资源的权限管理-6/" title="Spring Boot2 + Spring Security5 动态用户角色资源的权限管理(6)">https://micai-code.github.io/2020/06/07/Spring-Boot2-Spring-Security5-动态用户角色资源的权限管理-6/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+          
+            <a href="/tags/Spring-Security/" rel="tag"># Spring Security</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/07/Spring-Boot2-Spring-Security5-基于Redis的Spring-Session管理-5-1/" rel="next" title="Spring Boot2 + Spring Security5 基于Redis的Spring Session管理(5)">
+                <i class="fa fa-chevron-left"></i> Spring Boot2 + Spring Security5 基于Redis的Spring Session管理(5)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/07/Spring-Boot2-Spring-Security5-资源菜单按钮动态显示-7/" rel="prev" title="Spring Boot2 + Spring Security5 资源菜单按钮动态显示(7)">
+                Spring Boot2 + Spring Security5 资源菜单按钮动态显示(7) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+      <div id="gitalk-container"></div>
+      
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/micai_logo.jpg" alt="MiCai">
+            
+              <p class="site-author-name" itemprop="name">MiCai</p>
+              <p class="site-description motion-element" itemprop="description">MiCai is a Java developer</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+			  
+			  
+			  <div class="site-state-item site-state-categories">
+			    
+				  <a href="/categories/index.html">
+				
+			      <span class="site-state-item-count">42</span>
+			      <span class="site-state-item-name">categories</span>
+			    </a>
+			  </div>
+			
+
+			
+			  
+			  
+			  <div class="site-state-item site-state-tags">
+			    
+				  <a href="/tags/index.html">
+				
+			      <span class="site-state-item-count">41</span>
+			      <span class="site-state-item-name">tags</span>
+			    </a>
+			  </div>
+			
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sxdtzhaoxinguo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhaoxinguo@yahoo.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/micai-code" target="_blank" title="Gitee">
+                      
+                        <i class="fa fa-fw fa-gitee"></i>Gitee</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" title="MiCai`s CSDN Blog" target="_blank">MiCai`s CSDN Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单介绍"><span class="nav-number">2.</span> <span class="nav-text">简单介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库设计"><span class="nav-number">3.</span> <span class="nav-text">数据库设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Role-java"><span class="nav-number">4.</span> <span class="nav-text">Role.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resource-java"><span class="nav-number">5.</span> <span class="nav-text">Resource.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LoginValidateAuthenticationProvider-java"><span class="nav-number">7.</span> <span class="nav-text">LoginValidateAuthenticationProvider.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PerAccessDeniedHandler-java"><span class="nav-number">8.</span> <span class="nav-text">PerAccessDeniedHandler.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SecurityConfig-java"><span class="nav-number">9.</span> <span class="nav-text">SecurityConfig.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UserContorller-java"><span class="nav-number">10.</span> <span class="nav-text">UserContorller.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#index-html"><span class="nav-number">11.</span> <span class="nav-text">index.html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">12.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MiCai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Visitor
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Total Visit
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  
+  <script type="text/javascript">
+    var title = location.pathname.substr(0, 50);
+    var gitalk = new Gitalk({
+      clientID: '1a75ca5322c01ec87aa2',
+      clientSecret: 'd7ceb1c394b5dcc1b1625df137efdd52d1aa9db7',
+      repo: 'gitalk',
+      owner: 'micai-code',
+      admin: ['micai-code'],
+      id: title,
+      labels: ['Gitalk'],
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: true,
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

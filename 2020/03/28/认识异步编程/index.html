@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="异步编程,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="认识异步编程本章主要介绍异步编程的概念和作用，Java中异步编程的场景以及不同异步编程场景应使用什么技术实现。 1.1 异步编程概念与作用通常Java开发人员喜欢使用同步代码编写程序，因为这种请求(request)/响应(response)的方式比较简单，并且比较符合编程人员的的思维习惯；这种做法很好，直到系统出现性能瓶颈。在使用同步编程方式时，由于每个线程同时只能发起一个请求并同步等待返回，所以">
+<meta name="keywords" content="异步编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="认识异步编程">
+<meta property="og:url" content="https://micai-code.github.io/2020/03/28/认识异步编程/index.html">
+<meta property="og:site_name" content="MiCai`s Blog">
+<meta property="og:description" content="认识异步编程本章主要介绍异步编程的概念和作用，Java中异步编程的场景以及不同异步编程场景应使用什么技术实现。 1.1 异步编程概念与作用通常Java开发人员喜欢使用同步代码编写程序，因为这种请求(request)/响应(response)的方式比较简单，并且比较符合编程人员的的思维习惯；这种做法很好，直到系统出现性能瓶颈。在使用同步编程方式时，由于每个线程同时只能发起一个请求并同步等待返回，所以">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/2b4c55d6d380c91ba188277ee3788837.png">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/f1d64668710b7cb52acee62697eb9c52.png">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/41bc61d2207d8db61cce7e2b888cd6fa.png">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/99d755876975c77a409dbd30720d8dea.png">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/b73a72541d65013a8b19f3bef688ca09.png">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/51336aab44b5cf56209227e545566ac7.png">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/508a04433edd8e644dd95e9233664f53.png">
+<meta property="og:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/4fde013f07814fe49930f18e38d60554.png">
+<meta property="og:updated_time" content="2020-03-28T10:57:01.558Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="认识异步编程">
+<meta name="twitter:description" content="认识异步编程本章主要介绍异步编程的概念和作用，Java中异步编程的场景以及不同异步编程场景应使用什么技术实现。 1.1 异步编程概念与作用通常Java开发人员喜欢使用同步代码编写程序，因为这种请求(request)/响应(response)的方式比较简单，并且比较符合编程人员的的思维习惯；这种做法很好，直到系统出现性能瓶颈。在使用同步编程方式时，由于每个线程同时只能发起一个请求并同步等待返回，所以">
+<meta name="twitter:image" content="https://javaymw.oss-cn-beijing.aliyuncs.com/static/images/2b4c55d6d380c91ba188277ee3788837.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://micai-code.github.io/2020/03/28/认识异步编程/">
+
+
+
+
+
+  <title>认识异步编程 | MiCai`s Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MiCai`s Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://micai-code.github.io/2020/03/28/认识异步编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MiCai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/micai_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MiCai`s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">认识异步编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-28T18:56:00+08:00">
+                2020-03-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-28T18:57:01+08:00">
+                2020-03-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/异步编程/" itemprop="url" rel="index">
+                    <span itemprop="name">异步编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/03/28/认识异步编程/" class="leancloud_visitors" data-flag-title="认识异步编程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> View
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="认识异步编程"><a href="#认识异步编程" class="headerlink" title="认识异步编程"></a>认识异步编程</h2><p>本章主要介绍异步编程的概念和作用，Java中异步编程的场景以及不同异步编程场景应使用什么技术实现。</p>
+<h3 id="1-1-异步编程概念与作用"><a href="#1-1-异步编程概念与作用" class="headerlink" title="1.1 异步编程概念与作用"></a>1.1 异步编程概念与作用</h3><p>通常Java开发人员喜欢使用同步代码编写程序，因为这种请求(request)/响应<br>(response)的方式比较简单，并且比较符合编程人员的的思维习惯；这种做法很好，直到<br>系统出现性能瓶颈。在使用同步编程方式时，由于每个线程同时只能发起一个请求并同步等<br>待返回，所以为了提高系统性能，此时我们就需要引入更多的线程来实现并行化处理。但是<br>多线程下对共享资源进行访问时，不可避免会引入资源争用和并发问题；另外，操作系统层<br>面对线程的个数是有限制的，不可能通过无限制的增加线程来提供系统性能；而且，使用同<br>步阻塞的编程方式还会浪费资源，比如发起网络IO请求时，调用线程就会处于同步阻塞等待<br>响应结果的状态，而这时候调用线程明明可以去做其他事情，等网络IO响应结构返回后再对<br>结构进行处理。</p>
+<p>可见通过增加单机系统线程个数的并行编程方式并不是“灵丹妙药”。通过编写异步、非<br>阻塞的代码，则可以使用相同的底层资源将执行切换到另一个活动任务，然后在异步处理完<br>成后再返回到当前线程继续处理，从而提高系统性能。</p>
+<p>异步编程是可以让程序并行运行的一种手段，其可以让程序中的一个工作单元与主应用<br>程序线程分开独立运行，并且在工作单元运行结束后，会通知主应用程序线程它的运行结果<br>或者失败原因。使用异步编程可以提高应用程序的性能和响应能力等。</p>
+<p>比如当调用线程使用异步方式发起网络IO请求后，调用线程就不会同步阻塞等待响应结<br>果，而是在内存保存请求上下文后，马上返回去做其他事情，等网络IO响应结果返回后再使用<br>IO线程通知业务线程响应结果已经返回，由业务线程对结果进行处理。可见，异步调用方式提高<br>了线程的利用率，让系统有更多的线程资源来处理更多的请求。</p>
+<p>比如在移动应用程序中，在用户操作移动设备屏幕发起请求后，如果是同步等待后台服务器<br>返回结果，则当后台服务操作非常耗时时，就会造成用户看到移动设备屏幕冻结(一直处于请求处<br>理中)，在结果返回前，用户不能操作移动设备的其他功能，这对用户体验非常不好。而使用异步<br>编程时，当发起请求后，调用线程会发生返回，具体返回结果会通过UI线程异步进行渲染，且在这<br>期间用户可以使用移动设备的其他功能。</p>
+<h3 id="1-2-异步编程场景"><a href="#1-2-异步编程场景" class="headerlink" title="1.2 异步编程场景"></a>1.2 异步编程场景</h3><p>在日常开发中我们经常会遇到这样的情况，即需要异步处理一些事情，而不需要<br>知道异步任务的结果。比如在调用线程里面异步打日志，为了不让日志打印阻塞调用线程<br>，会把日志设置为异步方式。如图1-1所示的日志异步化打印，使用一个内存队列把日志<br>打印异步化，然后使用单一消费线程异步处理内存队列中的日志事件，执行具体的日志<br>落盘操作(本质是一个多生产单消费模型)，在这种情况下，调用线程把日志任务放入队<br>列后会继续执行其他操作，而不再关心日志任务具体是什么时候入盘的。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/2b4c55d6d380c91ba188277ee3788837.png" alt="图 1-1 日志异步打印.png"><br>图 1-1 日志异步打印</p>
+<p>在Java中，每当我们需要执行异步任务时，可以直接开启一个线程来实现，也可以<br>把异步任务封装为任务对象投递到线程池中来执行。在Spring框架中提供了@Async注解<br>把一个任务异步化来进行处理，具体会在后面的章节详细讲解。</p>
+<p>有时候我们还需要在主线程等待异步任务的执行结果，这时候Future就派上用场了。<br>比如调用线程要等任务A执行完毕后再顺序执行任务B，并且把两者的任务结果拼接起来供<br>前端展示使用，如果调用线程是同步调用两次任务(如图 1-2所示)，则整个过程耗时为执<br>行任务A的耗时加上执行任务B的耗时。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/f1d64668710b7cb52acee62697eb9c52.png" alt="图 1-2 同步调用.png"><br>图 1-2 同步调用</p>
+<p>如果使用异步编程(如图 1-3所示)，则可以在调用线程内开启一个异步运行单元来执<br>行任务A，开启异步运行单元后调用线程会马上返回一个Future对象(futureB)，然后调用<br>线程本身来执行任务B，等任务B执行完毕后，调用线程可以调用futureB的get()方法获取<br>任务A的执行结果，最好再拼接两者的结果。这时由于任务A和任务B是并行运行的，所以整个<br>过程耗时为max(调用线程执行任务B的耗时，异步运行单元执行任务A的耗时)。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/41bc61d2207d8db61cce7e2b888cd6fa.png" alt="图 1-3 异步调用.png"><br>图 1-3 异步调用</p>
+<p>可见整个过程耗时显著缩短，对于用户来说，页面响应时间缩短，用户体验会更好，其<br>中异步单元的执行一般是由线程池中的线程执行。</p>
+<p>使用Future确实可以获取异步任务的执行结果，但是获取其结果还是会阻塞调用线程的，<br>并没有实现完全的异步化处理，所以在JDK8中提供了CompletableFuture来弥补其缺点。CompletableFuture<br>类允许非阻塞方式和基于通知的方式处理结果，其通过设置回调函数方式，让主线程彻底解放出来，实现了实际意义上的异步处理。</p>
+<p>如图 1-4 所示，使用CompletableFuture时，当异步单元返回futureB后，调用线程可以在其上调用whenComplete方法设置一个回调函数action，<br>然后调用线程就会马上返回，等异步任务执行完毕后会使用异步线程来执行回调函数action，而无须调用线程干预。如果你对CompletableFuture不了解<br>，没关系，后面章节我们会详细讲解，这里你只需要知道其解决了传统Future的缺陷就可以了。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/99d755876975c77a409dbd30720d8dea.png" alt="图 1-4 CompletableFuture异步执行.png"><br>图 1-4 CompletableFuture异步执行</p>
+<p>JDK8还引入了Stream，旨在有效地处理数据流(包括原始类型)，其使用声明式编程让我们可以写出可读性、可维护性很强的代码，并且结合CompletableFuture<br>完美地实现异步编程。但是它产生的流只能使用一次，并且缺少与实际相关的操作(例如RxJava中基于时间窗口的缓存元素)，虽然可以执行并行计算，但无法指定要<br>使用的线程池。同时，它也没有设计用于处理延迟的操作(例如RxJava中的defer操作)，所以Reactor、RxJava等Reactive API就是为了解决这些问题而生的。</p>
+<p>Reactor、RxJava等反应式API也提供Java 8 Stream 的运算符，但它们更适用于流序列(不仅仅是集合)，并且允许定义一个转换操作的管道，该管道将应用于通过它的数据(这要归功于方便的流畅API和Lambda表达式的使用)。Reactive旨在处理同步或异步操作，<br>并允许你对元素进行缓存(buffer)、合并(merge)、连接(join)等各种转换。</p>
+<p>上面我们讲解了但JVM内的异步编程，那么对于跨网络的交互是否也存在异步编程范畴呢？对于网络请求来说，同步调用是比较直截了当的。比如我们在一个线程A<br>中通过RPC请求获取服务B和服务C的数据，然后基于两者的结果做一些事情。在同步调用情况下，线程A需要调用服务B，然后同步等待服务B结果返回后，才可以对<br>服务C发起调用，等服务C结果返回后才可以结合服务B和C的结果执行其他操作。</p>
+<p>如图 1-5所示，线程A同步获取服务B的结果后，再同步调用服务C获取结果，可见在同步调用情况下业务执行语义比较清晰，线程A顺序地对多个服务请求进行调用；但是同步调用意味着当前发起请求的调用线程在远端机器返回结果前必须阻塞等待，这明细很浪费资源。好的做法应该是在发起请求的调用线程发起请求后，注册一个回调函数，然后马上返回去执行其他操作，当远端把结果返回后再使用IO线程或者框架线程池中的线程执行回调函数。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/b73a72541d65013a8b19f3bef688ca09.png" alt="图 1-5 同步RPC调用.png"><br>图 1-5 同步RPC调用</p>
+<p>那么如何实现异步调用？在Java中NIO的出现让实现上面的功能变得简单，而高性能异步、基于事件驱动的网络编程框架Netty的出现让我们从编写繁杂的Java NIO<br>程序中解放出来，现在的RPC框架，比如Dubbo底层网络通信，就是基于Netty实现的。Netty框架将网络编程逻辑与业务逻辑处理分离开来，在内部帮我们自动处理<br>好网络与异步处理逻辑，让我们专心写自己的业务处理逻辑，而Netty的异步非阻塞能力与CompletableFuture结合则可以轻松地实现网络请求的异步调用。</p>
+<p>在执行RPC(远程过程调用)调用时，使用异步编程可以提高系统的性能。如图 1-6所示，在异步调用情况下，当线程A调用服务B后，会马上返回一个异步的futureB<br>对象，然后线程A可以在futureB上设置一个回调函数；接着线程A可以继续访问服务C，也会马上返回一个futureC对象，然后线程A可以在futureC上设置一个回调函数。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/51336aab44b5cf56209227e545566ac7.png" alt="图 1-6 RPC异步调用.png"><br>图 1-6 RPC异步调用</p>
+<p>如图 1-6 可知，在异步调用情况下，线程A可以并发地调用服务B和服务C，而不再是顺序的。由于服务B和服务C是并发运行，所以相比同步调用，线程A获取到<br>服务B和服务C结果的时间会缩短很多(同步调用情况下的耗时为服务B和服务C返回结果耗时的，异步调用情况下函数为max(服务B耗时，服务C耗时))。另外，<br>这里可以借助CompletableFuture的能力等两次RPC调用都异步返回结果后再执行其他操作，这时候调用流程如图 1-7所示。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/508a04433edd8e644dd95e9233664f53.png" alt="图 1-7 合并RPC调用结果.png"><br>图 1-7 合并RPC调用结果</p>
+<p>如图 1-7 所示，调用线程A首先发起服务B的远程调用，会马上返回一个futureB对象，然后发起服务C的远程调用，也会马上返回一个futureC对象，最好调用<br>线程A使用代码futureB.thenCombine(futureC,action)等futureB和futureC结果可用时执行回调函数action。这里我们只是简单概述下基于Netty的异步<br>非阻塞能力以及CompletableFuture的可编排能力，基于这些能力，我们可以实现功能很强大的异步编程能力。在后面章节，我们会以Dubbo框架为例讲解其<br>借助Netty的非阻塞异步API实现服务消费端的异步调用。</p>
+<p>其实，有了CompletableFuture实现异步编程，我们可以很自然地使用适配器来实现Reactive风格的编程。当我们使用RxJava API时，只需要使用Flowable的<br>一些函数转转CompletableFuture为Flowable对象即可，这个我们在后面章节也会讲述。</p>
+<p>上节讲解了网络请求中RPC框架的异步请求，其实还有一类，也就是Web请求，在Web应用中Servlet占有一席之地。在Servlet3.0规范前，Servlet容器对Servlet<br>的处理都是每个请求对应一个线程这种1:1的模式进行处理的(如果 1-8 所示)，每当收到一个请求，都会开启一个Servlet容器内的线程来进行处理，如果<br>Servlet内处理比较耗时，则会把Servlet容器内线程使用耗尽，然后容器就不能再处理新的请求了。</p>
+<p><img src="//javaymw.oss-cn-beijing.aliyuncs.com/static/images/4fde013f07814fe49930f18e38d60554.png" alt="图 1-8 Servlet的阻塞处理模型.png"><br>图 1-8 Servlet的阻塞处理模型</p>
+<p>Servlet 3.0 规范中则提供了异步处理的能力，让Servlet容器中的线程可以及时释放，具体Servlet业务处理逻辑是在业务自己的线程池内来处理；虽然<br>Servlet 3.0 规范让Servlet的执行变为异步，但是其IO还是阻塞式的。IO阻塞是说在Servlet处理请求时，从ServletInputStream中读取请求体时是阻塞的，<br>而我们想要的是当书记就绪时直接通知我们去读取就可以了，因为这可以避免占用我们自己的线程来进行阻塞读取，好在Servlet 3.1 规范提供了非阻塞IO来解决<br>这个问题。</p>
+<p>虽然Servlet技术栈的不断发展实现了异步处理与非阻塞IO，但是其异步是不彻底的，因为受制于Servlet规范本身，比如其规范是同步的(Filter，Servlet)或<br>阻塞的(getParameter，getPart)。所以新的使用少量线程和较少的硬件资源来处理并发的非阻塞Web技术栈应运而生-WebFlux，其是与Servlet技术栈并行存在<br>的一种新技术，基于JDK8函数式编程与Netty实现天然的异步、非阻塞处理，这些我们在后面的章节会具体介绍。</p>
+<p>为了更好的实现异步编程，降低异步编程的成本，一些框架也应运而生，比如高性能线程间消息传递库Disruptor，其通过为事件(event)预先分配内存、无锁CAS<br>算法、缓存行填充、两阶段协议提交来实现多线程并发地处理不同的元素，从而实现高性能的异步处理。比如Akka基于Actor模式实现了天然支持分布式的使用消息进行异步处理的服务；比如高性能分布式消息中间件Apache RocketMetaQ实现了应用间的异步解耦、流量肖锋。</p>
+<p>一些新兴的语言对异步处理的支持能力让我们忍不住称赞，Go语言就是其中之一，其通过语言层面内置的goroutine与channel可以轻松实现复杂的异步处理能力。</p>
+<p>以上就是本书要讨论的内容。</p>
+<h3 id="1-3-总结"><a href="#1-3-总结" class="headerlink" title="1.3 总结"></a>1.3 总结</h3><p>本章我们首先概要介绍了异步编程的概念与作用，让大家对异步编程有一个大致的了解；然后讲解了Java中异步编程的场景，让大家通过实际场景案例进一步了解<br>异步编程是什么，以及不同异步编程场景应使用什么技术来实现。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="MiCai wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信订阅号</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="MiCai WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="MiCai Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    MiCai
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://micai-code.github.io/2020/03/28/认识异步编程/" title="认识异步编程">https://micai-code.github.io/2020/03/28/认识异步编程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/异步编程/" rel="tag"># 异步编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/27/02-日志系统：一条SQL更新语句是如何执行的？/" rel="next" title="02 日志系统：一条SQL更新语句是如何执行的？">
+                <i class="fa fa-chevron-left"></i> 02 日志系统：一条SQL更新语句是如何执行的？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/28/显式使用线程实现异步编程/" rel="prev" title="显式使用线程实现异步编程">
+                显式使用线程实现异步编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+      <div id="gitalk-container"></div>
+      
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/micai_logo.jpg" alt="MiCai">
+            
+              <p class="site-author-name" itemprop="name">MiCai</p>
+              <p class="site-description motion-element" itemprop="description">MiCai is a Java developer</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+			  
+			  
+			  <div class="site-state-item site-state-categories">
+			    
+				  <a href="/categories/index.html">
+				
+			      <span class="site-state-item-count">42</span>
+			      <span class="site-state-item-name">categories</span>
+			    </a>
+			  </div>
+			
+
+			
+			  
+			  
+			  <div class="site-state-item site-state-tags">
+			    
+				  <a href="/tags/index.html">
+				
+			      <span class="site-state-item-count">41</span>
+			      <span class="site-state-item-name">tags</span>
+			    </a>
+			  </div>
+			
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sxdtzhaoxinguo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhaoxinguo@yahoo.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/micai-code" target="_blank" title="Gitee">
+                      
+                        <i class="fa fa-fw fa-gitee"></i>Gitee</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" title="MiCai`s CSDN Blog" target="_blank">MiCai`s CSDN Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#认识异步编程"><span class="nav-number">1.</span> <span class="nav-text">认识异步编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-异步编程概念与作用"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 异步编程概念与作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-异步编程场景"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 异步编程场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-总结"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MiCai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Visitor
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Total Visit
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  
+  <script type="text/javascript">
+    var title = location.pathname.substr(0, 50);
+    var gitalk = new Gitalk({
+      clientID: '1a75ca5322c01ec87aa2',
+      clientSecret: 'd7ceb1c394b5dcc1b1625df137efdd52d1aa9db7',
+      repo: 'gitalk',
+      owner: 'micai-code',
+      admin: ['micai-code'],
+      id: title,
+      labels: ['Gitalk'],
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: true,
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

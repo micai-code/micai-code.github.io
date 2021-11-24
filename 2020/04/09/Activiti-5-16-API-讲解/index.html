@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Activiti,工作流,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Chapter 4. Activiti APITable of Contents 流程引擎的API和服务异常策略使用Activiti的服务  发布流程 启动一个流程实例 完成任务 挂起，激活一个流程 更多知识  查询API表达式单元测试调试单元测试web应用中的流程引擎 流程引擎的API和服务引擎API是与Activiti打交道的最常用方式。 我们从ProcessEngine开始， 创建它的很多种">
+<meta name="keywords" content="Activiti,工作流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activiti 5.16 API 讲解">
+<meta property="og:url" content="https://micai-code.github.io/2020/04/09/Activiti-5-16-API-讲解/index.html">
+<meta property="og:site_name" content="MiCai`s Blog">
+<meta property="og:description" content="Chapter 4. Activiti APITable of Contents 流程引擎的API和服务异常策略使用Activiti的服务  发布流程 启动一个流程实例 完成任务 挂起，激活一个流程 更多知识  查询API表达式单元测试调试单元测试web应用中的流程引擎 流程引擎的API和服务引擎API是与Activiti打交道的最常用方式。 我们从ProcessEngine开始， 创建它的很多种">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/OUAIfEYZo7WzcHl.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/FHx1SMR4LayUQIP.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/4fWDXNdpjvsQGEw.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/igW8Q1BfMvp2mc7.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/XxfvrlAFSB3RcVd.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/WtzSQ4NTIYkEBpm.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/MmClknVo8wp7WRv.png">
+<meta property="og:image" content="https://i.loli.net/2020/04/09/GVuLrCdk1ZwFaQO.png">
+<meta property="og:updated_time" content="2020-04-09T05:07:06.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activiti 5.16 API 讲解">
+<meta name="twitter:description" content="Chapter 4. Activiti APITable of Contents 流程引擎的API和服务异常策略使用Activiti的服务  发布流程 启动一个流程实例 完成任务 挂起，激活一个流程 更多知识  查询API表达式单元测试调试单元测试web应用中的流程引擎 流程引擎的API和服务引擎API是与Activiti打交道的最常用方式。 我们从ProcessEngine开始， 创建它的很多种">
+<meta name="twitter:image" content="https://i.loli.net/2020/04/09/OUAIfEYZo7WzcHl.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://micai-code.github.io/2020/04/09/Activiti-5-16-API-讲解/">
+
+
+
+
+
+  <title>Activiti 5.16 API 讲解 | MiCai`s Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MiCai`s Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://micai-code.github.io/2020/04/09/Activiti-5-16-API-讲解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MiCai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/micai_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MiCai`s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Activiti 5.16 API 讲解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-09T13:06:00+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-09T13:07:06+08:00">
+                2020-04-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activiti/" itemprop="url" rel="index">
+                    <span itemprop="name">Activiti</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activiti/工作流/" itemprop="url" rel="index">
+                    <span itemprop="name">工作流</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/04/09/Activiti-5-16-API-讲解/" class="leancloud_visitors" data-flag-title="Activiti 5.16 API 讲解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> View
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Chapter-4-Activiti-API"><a href="#Chapter-4-Activiti-API" class="headerlink" title="Chapter 4. Activiti API"></a>Chapter 4. Activiti API</h3><p>Table of Contents</p>
+<p>流程引擎的API和服务<br>异常策略<br>使用Activiti的服务</p>
+<ul>
+<li>发布流程</li>
+<li>启动一个流程实例</li>
+<li>完成任务</li>
+<li>挂起，激活一个流程</li>
+<li>更多知识</li>
+</ul>
+<p>查询API<br>表达式<br>单元测试<br>调试单元测试<br>web应用中的流程引擎</p>
+<h3 id="流程引擎的API和服务"><a href="#流程引擎的API和服务" class="headerlink" title="流程引擎的API和服务"></a>流程引擎的API和服务</h3><p>引擎API是与Activiti打交道的最常用方式。 我们从ProcessEngine开始， 创建它的很多种方法都已经在 配置章节中有所涉及。 从ProcessEngine中，你可以获得很多囊括工作流/BPM方法的服务。 ProcessEngine和服务类都是线程安全的。 你可以在整个服务器中仅保持它们的一个引用就可以了。</p>
+<p><img src="https://i.loli.net/2020/04/09/OUAIfEYZo7WzcHl.png" alt="activiti 5.16 Chapter 4 api.services.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br><span class="line"></span><br><span class="line">RuntimeService runtimeService = processEngine.getRuntimeService();</span><br><span class="line">RepositoryService repositoryService = processEngine.getRepositoryService();</span><br><span class="line">TaskService taskService = processEngine.getTaskService();</span><br><span class="line">ManagementService managementService = processEngine.getManagementService();</span><br><span class="line">IdentityService identityService = processEngine.getIdentityService();</span><br><span class="line">HistoryService historyService = processEngine.getHistoryService();</span><br><span class="line">FormService formService = processEngine.getFormService();</span><br></pre></td></tr></table></figure>
+
+<p>ProcessEngines.getDefaultProcessEngine()会在第一次调用时 初始化并创建一个流程引擎，以后再调用就会返回相同的流程引擎。 使用对应的方法可以创建和关闭所有流程引擎：ProcessEngines.init() 和 ProcessEngines.destroy()。</p>
+<p>ProcessEngines会扫描所有activiti.cfg.xml 和 activiti-context.xml 文件。 对于activiti.cfg.xml文件，流程引擎会使用Activiti的经典方式构建： ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(inputStream).buildProcessEngine(). 对于activiti-context.xml文件，流程引擎会使用Spring方法构建：先创建一个Spring的环境， 然后通过环境获得流程引擎。</p>
+<p>所有服务都是无状态的。这意味着可以在多节点集群环境下运行Activiti，每个节点都指向同一个数据库， 不用担心哪个机器实际执行前端的调用。 无论在哪里执行服务都没有问题。</p>
+<p><strong>RepositoryService</strong>可能是使用Activiti引擎时最先接触的服务。 它提供了管理和控制发布包和流程定义的操作。 这里不涉及太多细节，流程定义是BPMN 2.0流程的java实现。 它包含了一个流程每个环节的结构和行为。 发布包是Activiti引擎的打包单位。一个发布包可以包含多个BPMN 2.0 xml文件和其他资源。 开发者可以自由选择把任意资源包含到发布包中。 既可以把一个单独的BPMN 2.0 xml文件放到发布包里，也可以把整个流程和相关资源都放在一起。 （比如，’hr-processes’实例可以包含hr流程相关的任何资源）。 可以通过RepositoryService来部署这种发布包。 发布一个发布包，意味着把它上传到引擎中，所有流程都会在保存进数据库之前分析解析好。 从这点来说，系统知道这个发布包的存在，发布包中包含的流程就已经可以启动了。</p>
+<p>除此之外，服务可以</p>
+<ul>
+<li>查询引擎中的发布包和流程定义。</li>
+<li>暂停或激活发布包，对应全部和特定流程定义。 暂停意味着它们不能再执行任何操作了，激活是对应的反向操作。</li>
+<li>获得多种资源，像是包含在发布包里的文件， 或引擎自动生成的流程图。</li>
+<li>获得流程定义的pojo版本， 可以用来通过java解析流程，而不必通过xml。</li>
+</ul>
+<p>正如<strong>RepositoryService</strong>负责静态信息（比如，不会改变的数据，至少是不怎么改变的）， <strong>RuntimeService</strong>正好是完全相反的。它负责启动一个流程定义的新实例。 如上所述，流程定义定义了流程各个节点的结构和行为。 流程实例就是这样一个流程定义的实例。对每个流程定义来说，同一时间会有很多实例在执行。 <strong>RuntimeService</strong>也可以用来获取和保存流程变量。 这些数据是特定于某个流程实例的，并会被很多流程中的节点使用 （比如，一个排他网关常常使用流程变量来决定选择哪条路径继续流程）。 <strong>Runtimeservice</strong>也能查询流程实例和执行。 执行对应BPMN 2.0中的’token’。基本上执行指向流程实例当前在哪里。 最后，RuntimeService可以在流程实例等待外部触发时使用，这时可以用来继续流程实例。 流程实例可以有很多暂停状态，而服务提供了多种方法来’触发’实例， 接受外部触发后，流程实例就会继续向下执行。</p>
+<p>任务是由系统中真实人员执行的，它是Activiti这类BPMN引擎的核心功能之一。 所有与任务有关的功能都包含在<strong>TaskService</strong>中：</p>
+<ul>
+<li>查询分配给用户或组的任务</li>
+<li>创建独立运行任务。这些任务与流程实例无关。</li>
+<li>手工设置任务的执行者，或者这些用户通过何种方式与任务关联。</li>
+<li>认领并完成一个任务。认领意味着一个人期望成为任务的执行者， 即这个用户会完成这个任务。完成意味着“做这个任务要求的事情”。 通常来说会有很多种处理形式。</li>
+</ul>
+<p><strong>IdentityService</strong>非常简单。它可以管理（创建，更新，删除，查询…）群组和用户。 请注意， Activiti执行时并没有对用户进行检查。 例如，任务可以分配给任何人，但是引擎不会校验系统中是否存在这个用户。 这是Activiti引擎也可以使用外部服务，比如ldap，活动目录，等等。</p>
+<p><strong>FormService</strong>是一个可选服务。即使不使用它，Activiti也可以完美运行， 不会损失任何功能。这个服务提供了启动表单和任务表单两个概念。 启动表单会在流程实例启动之前展示给用户， 任务表单会在用户完成任务时展示。Activiti支持在BPMN 2.0流程定义中设置这些表单。 这个服务以一种简单的方式将数据暴露出来。再次重申，它是可选的， 表单也不一定要嵌入到流程定义中。</p>
+<p><strong>HistoryService</strong>提供了Activiti引擎手机的所有历史数据。 在执行流程时，引擎会保存很多数据（根据配置），比如流程实例启动时间，任务的参与者， 完成任务的时间，每个流程实例的执行路径，等等。 这个服务主要通过查询功能来获得这些数据。</p>
+<p><strong>ManagementService</strong>在使用Activiti的定制环境中基本上不会用到。 它可以查询数据库的表和表的元数据。另外，它提供了查询和管理异步操作的功能。 Activiti的异步操作用途很多，比如定时器，异步操作， 延迟暂停、激活，等等。后续，会讨论这些功能的更多细节。</p>
+<h3 id="异常策略"><a href="#异常策略" class="headerlink" title="异常策略"></a>异常策略</h3><p>Activiti中的基础异常为org.activiti.engine.ActivitiException，一个非检查异常。 这个异常可以在任何时候被API抛出，不过特定方法抛出的“特定”的异常都记录在 javadocs中。 例如，下面的TaskService：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Called when the task is successfully executed.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> taskId the id of the task to complete, cannot be null.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> ActivitiObjectNotFoundException when no task exists with the given id.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">complete</span><span class="params">(String taskId)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，当传入一个不存在的任务的id时，就会抛出异常。 同时，javadoc<strong>明确指出taskId不能为null，如果传入null， 就会抛出ActivitiIllegalArgumentException。</strong></p>
+<p>我们希望避免过多的异常继承，下面的子类用于特定的场合。 流程引擎和API调用的其他场合不会使用下面的异常， 它们会抛出一个普通的ActivitiExceptions。</p>
+<ul>
+<li>ActivitiWrongDbException：当Activiti引擎发现数据库版本号和引擎版本号不一致时抛出。</li>
+<li>ActivitiOptimisticLockingException：对同一数据进行并发方法并出现乐观锁时抛出。</li>
+<li>ActivitiClassLoadingException：当无法找到需要加载的类或在加载类时出现了错误（比如，JavaDelegate，TaskListener等。</li>
+<li>ActivitiObjectNotFoundException：当请求或操作的对应不存在时抛出。</li>
+<li>ActivitiIllegalArgumentException：这个异常表示调用Activiti API时传入了一个非法的参数，可能是引擎配置中的非法值，或提供了一个非法值，或流程定义中使用的非法值。</li>
+<li>ActivitiTaskAlreadyClaimedException：当任务已经被认领了，再调用taskService.claim(…)就会抛出。</li>
+</ul>
+<h3 id="使用Activiti的服务"><a href="#使用Activiti的服务" class="headerlink" title="使用Activiti的服务"></a>使用Activiti的服务</h3><p>像上面介绍的那样，要想操作Activiti引擎，需要通过 org.activiti.engine.ProcessEngine实例暴露的服务。 下面的代码假设你已经拥有了一个可以运行的Activiti环境。 你就可以操作一个org.activiti.engine.ProcessEngine。 如果只想简单尝试一下代码， 可以下载或者clone<a href="https://github.com/Activiti/activiti-unit-test-template" title="Activiti单元测试模板" target="_blank" rel="noopener">Activiti单元测试模板</a>， 导入到IDE中，把testUserguideCode()方法添加到 org.activiti.MyUnitTest中。</p>
+<p>这个小例子的最终目标是做一个工作业务流程， 演示公司中简单的请假申请：</p>
+<p><img src="https://i.loli.net/2020/04/09/FHx1SMR4LayUQIP.png" alt="activiti 5.16 Chapter 4 api.vacationRequest.png"></p>
+<h4 id="发布流程"><a href="#发布流程" class="headerlink" title="发布流程"></a>发布流程</h4><p>任何与“静态”资源有关的数据（比如流程定义）都可以通过 <strong>RepositoryService</strong>访问。 从概念上讲，所以静态数据都是Activiti的资源内容。</p>
+<p>在src/test/resources/org/activiti/test目录下创建一个新的xml文件 VacationRequest.bpmn20.xml（如果不使用单元测试模板，你也可以在任何地方创建）， 内容如下。注意这一章不会解释例子中使用的xml结构。 如果有需要可以先阅读bpmn 2.0章来了解这些。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">definitions</span> <span class="attr">id</span>=<span class="string">"definitions"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">targetNamespace</span>=<span class="string">"http://activiti.org/bpmn20"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xmlns</span>=<span class="string">"http://www.omg.org/spec/BPMN/20100524/MODEL"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xmlns:activiti</span>=<span class="string">"http://activiti.org/bpmn"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">"vacationRequest"</span> <span class="attr">name</span>=<span class="string">"Vacation request"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">startEvent</span> <span class="attr">id</span>=<span class="string">"request"</span> <span class="attr">activiti:initiator</span>=<span class="string">"employeeName"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"numberOfDays"</span> <span class="attr">name</span>=<span class="string">"Number of days"</span> <span class="attr">type</span>=<span class="string">"long"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">required</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"startDate"</span> <span class="attr">name</span>=<span class="string">"First day of holiday (dd-MM-yyy)"</span> <span class="attr">datePattern</span>=<span class="string">"dd-MM-yyyy hh:mm"</span> <span class="attr">type</span>=<span class="string">"date"</span> <span class="attr">required</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"vacationMotivation"</span> <span class="attr">name</span>=<span class="string">"Motivation"</span> <span class="attr">type</span>=<span class="string">"string"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">startEvent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow1"</span> <span class="attr">sourceRef</span>=<span class="string">"request"</span> <span class="attr">targetRef</span>=<span class="string">"handleRequest"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">userTask</span> <span class="attr">id</span>=<span class="string">"handleRequest"</span> <span class="attr">name</span>=<span class="string">"Handle vacation request"</span> &gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">documentation</span>&gt;</span></span><br><span class="line">        $&#123;employeeName&#125; would like to take $&#123;numberOfDays&#125; day(s) of vacation (Motivation: $&#123;vacationMotivation&#125;).</span><br><span class="line">      <span class="tag">&lt;/<span class="name">documentation</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"vacationApproved"</span> <span class="attr">name</span>=<span class="string">"Do you approve this vacation"</span> <span class="attr">type</span>=<span class="string">"enum"</span> <span class="attr">required</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">activiti:value</span> <span class="attr">id</span>=<span class="string">"true"</span> <span class="attr">name</span>=<span class="string">"Approve"</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">activiti:value</span> <span class="attr">id</span>=<span class="string">"false"</span> <span class="attr">name</span>=<span class="string">"Reject"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activiti:formProperty</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"managerMotivation"</span> <span class="attr">name</span>=<span class="string">"Motivation"</span> <span class="attr">type</span>=<span class="string">"string"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">potentialOwner</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resourceAssignmentExpression</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">formalExpression</span>&gt;</span>management<span class="tag">&lt;/<span class="name">formalExpression</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resourceAssignmentExpression</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">potentialOwner</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">userTask</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow2"</span> <span class="attr">sourceRef</span>=<span class="string">"handleRequest"</span> <span class="attr">targetRef</span>=<span class="string">"requestApprovedDecision"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusiveGateway</span> <span class="attr">id</span>=<span class="string">"requestApprovedDecision"</span> <span class="attr">name</span>=<span class="string">"Request approved?"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow3"</span> <span class="attr">sourceRef</span>=<span class="string">"requestApprovedDecision"</span> <span class="attr">targetRef</span>=<span class="string">"sendApprovalMail"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">conditionExpression</span> <span class="attr">xsi:type</span>=<span class="string">"tFormalExpression"</span>&gt;</span>$&#123;vacationApproved == 'true'&#125;<span class="tag">&lt;/<span class="name">conditionExpression</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sequenceFlow</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">task</span> <span class="attr">id</span>=<span class="string">"sendApprovalMail"</span> <span class="attr">name</span>=<span class="string">"Send confirmation e-mail"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow4"</span> <span class="attr">sourceRef</span>=<span class="string">"sendApprovalMail"</span> <span class="attr">targetRef</span>=<span class="string">"theEnd1"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">endEvent</span> <span class="attr">id</span>=<span class="string">"theEnd1"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow5"</span> <span class="attr">sourceRef</span>=<span class="string">"requestApprovedDecision"</span> <span class="attr">targetRef</span>=<span class="string">"adjustVacationRequestTask"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">conditionExpression</span> <span class="attr">xsi:type</span>=<span class="string">"tFormalExpression"</span>&gt;</span>$&#123;vacationApproved == 'false'&#125;<span class="tag">&lt;/<span class="name">conditionExpression</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sequenceFlow</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">userTask</span> <span class="attr">id</span>=<span class="string">"adjustVacationRequestTask"</span> <span class="attr">name</span>=<span class="string">"Adjust vacation request"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">documentation</span>&gt;</span></span><br><span class="line">        Your manager has disapproved your vacation request for $&#123;numberOfDays&#125; days.</span><br><span class="line">        Reason: $&#123;managerMotivation&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">documentation</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"numberOfDays"</span> <span class="attr">name</span>=<span class="string">"Number of days"</span> <span class="attr">value</span>=<span class="string">"$&#123;numberOfDays&#125;"</span> <span class="attr">type</span>=<span class="string">"long"</span> <span class="attr">required</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"startDate"</span> <span class="attr">name</span>=<span class="string">"First day of holiday (dd-MM-yyy)"</span> <span class="attr">value</span>=<span class="string">"$&#123;startDate&#125;"</span> <span class="attr">datePattern</span>=<span class="string">"dd-MM-yyyy hh:mm"</span> <span class="attr">type</span>=<span class="string">"date"</span> <span class="attr">required</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"vacationMotivation"</span> <span class="attr">name</span>=<span class="string">"Motivation"</span> <span class="attr">value</span>=<span class="string">"$&#123;vacationMotivation&#125;"</span> <span class="attr">type</span>=<span class="string">"string"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activiti:formProperty</span> <span class="attr">id</span>=<span class="string">"resendRequest"</span> <span class="attr">name</span>=<span class="string">"Resend vacation request to manager?"</span> <span class="attr">type</span>=<span class="string">"enum"</span> <span class="attr">required</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">activiti:value</span> <span class="attr">id</span>=<span class="string">"true"</span> <span class="attr">name</span>=<span class="string">"Yes"</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">activiti:value</span> <span class="attr">id</span>=<span class="string">"false"</span> <span class="attr">name</span>=<span class="string">"No"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activiti:formProperty</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">humanPerformer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resourceAssignmentExpression</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">formalExpression</span>&gt;</span>$&#123;employeeName&#125;<span class="tag">&lt;/<span class="name">formalExpression</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resourceAssignmentExpression</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">humanPerformer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">userTask</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow6"</span> <span class="attr">sourceRef</span>=<span class="string">"adjustVacationRequestTask"</span> <span class="attr">targetRef</span>=<span class="string">"resendRequestDecision"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusiveGateway</span> <span class="attr">id</span>=<span class="string">"resendRequestDecision"</span> <span class="attr">name</span>=<span class="string">"Resend request?"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow7"</span> <span class="attr">sourceRef</span>=<span class="string">"resendRequestDecision"</span> <span class="attr">targetRef</span>=<span class="string">"handleRequest"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">conditionExpression</span> <span class="attr">xsi:type</span>=<span class="string">"tFormalExpression"</span>&gt;</span>$&#123;resendRequest == 'true'&#125;<span class="tag">&lt;/<span class="name">conditionExpression</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sequenceFlow</span>&gt;</span></span><br><span class="line"></span><br><span class="line">     <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">"flow8"</span> <span class="attr">sourceRef</span>=<span class="string">"resendRequestDecision"</span> <span class="attr">targetRef</span>=<span class="string">"theEnd2"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">conditionExpression</span> <span class="attr">xsi:type</span>=<span class="string">"tFormalExpression"</span>&gt;</span>$&#123;resendRequest == 'false'&#125;<span class="tag">&lt;/<span class="name">conditionExpression</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sequenceFlow</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">endEvent</span> <span class="attr">id</span>=<span class="string">"theEnd2"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">definitions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了让Activiti引擎知道这个流程，我们必须先进行“发布”。 发布意味着引擎会把BPMN 2.0 xml解析成可以执行的东西， “发布包”中的所有流程定义都会添加到数据库中。 这样，当引擎重启时，它依然可以获得“已发布”的流程：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br><span class="line">RepositoryService repositoryService = processEngine.getRepositoryService();</span><br><span class="line">repositoryService.createDeployment().addClasspathResource(<span class="string">"org/activiti/test/VacationRequest.bpmn20.xml"</span>).deploy();</span><br><span class="line">Log.info(<span class="string">"Number of process definitions: "</span> + repositoryService.createProcessDefinitionQuery().count());</span><br></pre></td></tr></table></figure>
+
+<p>可以阅读发布章来了解更多关于发布的信息。</p>
+<h4 id="启动一个流程实例"><a href="#启动一个流程实例" class="headerlink" title="启动一个流程实例"></a>启动一个流程实例</h4><p>把流程定义发布到Activiti引擎后，我们可以基于它发起新流程实例。 对每个流程定义，都可以有很多流程实例。 流程定义是“蓝图”，流程实例是它的一个运行的执行。</p>
+<p>所有与流程运行状态相关的东西都可以通过RuntimeService获得。 有很多方法可以启动一个新流程实例。在下面的代码中，我们使用定义在流程定义xml 中的key来启动流程实例。 我们也可以在流程实例启动时添加一些流程变量，因为第一个用户任务的表达式需要这些变量。 流程变量经常会被用到，因为它们赋予来自同一个流程定义的不同流程实例的特别含义。 简单来说，流程变量是区分流程实例的关键。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; variables = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">variables.put(<span class="string">"employeeName"</span>, <span class="string">"Kermit"</span>);</span><br><span class="line">variables.put(<span class="string">"numberOfDays"</span>, <span class="keyword">new</span> Integer(<span class="number">4</span>));</span><br><span class="line">variables.put(<span class="string">"vacationMotivation"</span>, <span class="string">"I'm really tired!"</span>);</span><br><span class="line"></span><br><span class="line">RuntimeService runtimeService = processEngine.getRuntimeService();</span><br><span class="line">ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(<span class="string">"vacationRequest"</span>, variables);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Verify that we started a new process instance</span></span><br><span class="line">Log.info(<span class="string">"Number of process instances: "</span> + runtimeService.createProcessInstanceQuery().count());</span><br></pre></td></tr></table></figure>
+
+<h4 id="完成任务"><a href="#完成任务" class="headerlink" title="完成任务"></a>完成任务</h4><p>流程启动后，第一步就是用户任务。这是必须由系统用户处理的一个环节。 通常，用户会有一个“任务列表”，展示了所有必须由这个用户处理的任务。 下面的代码展示了对应的查询可能是怎样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fetch all tasks for the management group</span></span><br><span class="line">TaskService taskService = processEngine.getTaskService();</span><br><span class="line">List&lt;Task&gt; tasks = taskService.createTaskQuery().taskCandidateGroup(<span class="string">"management"</span>).list();</span><br><span class="line"><span class="keyword">for</span> (Task task : tasks) &#123;</span><br><span class="line">  Log.info(<span class="string">"Task available: "</span> + task.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了让流程实例继续运行，我们需要完成整个任务。对Activiti来说，就是需要complete任务。 下面的代码展示了如何做这件事：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Task task = tasks.get(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">Map&lt;String, Object&gt; taskVariables = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">taskVariables.put(<span class="string">"vacationApproved"</span>, <span class="string">"false"</span>);</span><br><span class="line">taskVariables.put(<span class="string">"managerMotivation"</span>, <span class="string">"We have a tight deadline!"</span>);</span><br><span class="line">taskService.complete(task.getId(), taskVariables);</span><br></pre></td></tr></table></figure>
+
+<p>流程实例会进入到下一个环节。在这里例子中， 下一环节允许员工通过表单调整原始的请假申请。员工可以重新提交请假申请， 这会使流程重新进入到第一个任务。</p>
+<h4 id="挂起，激活一个流程"><a href="#挂起，激活一个流程" class="headerlink" title="挂起，激活一个流程"></a>挂起，激活一个流程</h4><p>我们可以挂起一个流程定义。当挂起流程定时时， 就不能创建新流程了（会抛出一个异常）。 可以通过RepositoryService挂起一个流程：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</span><br><span class="line">RepositoryService repositoryService = processEngine.getRepositoryService();</span><br><span class="line">repositoryService.suspendProcessDefinitionByKey(<span class="string">"vacationRequest"</span>);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  runtimeService.startProcessInstanceByKey(<span class="string">"vacationRequest"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (ActivitiException e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要想重新激活一个流程定义，可以调用repositoryService.activateProcessDefinitionXXX方法。</p>
+<p>也可以挂起一个流程实例。挂起时，流程不能继续执行（比如，完成任务会抛出异常）， 异步操作（比如定时器）也不会执行。 挂起流程实例可以调用 runtimeService.suspendProcessInstance方法。 激活流程实例可以调用runtimeService.activateProcessInstanceXXX方法。</p>
+<h4 id="更多知识"><a href="#更多知识" class="headerlink" title="更多知识"></a>更多知识</h4><p>上面章节中我们仅仅覆盖了Activiti功能的表层。 未来我们会继续扩展这些章节，以覆盖更多Activiti API。 当然，像其他开源项目一样，学习的最好方式 是研究代码，阅读javadoc。</p>
+<h3 id="查询API"><a href="#查询API" class="headerlink" title="查询API"></a>查询API</h3><p>有两种方法可以从引擎中查询数据：查询API和原生查询。查询API提供了完全类型安全的API。 你可以为自己的查询条件添加很多条件 （所有条件都以AND组合）和精确的排序条件。下面的代码展示了一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Task&gt; tasks = taskService.createTaskQuery()</span><br><span class="line">         .taskAssignee(<span class="string">"kermit"</span>)</span><br><span class="line">         .processVariableValueEquals(<span class="string">"orderId"</span>, <span class="string">"0815"</span>)</span><br><span class="line">         .orderByDueDate().asc()</span><br><span class="line">         .list();</span><br></pre></td></tr></table></figure>
+
+<p>有时，你需要更强大的查询，比如使用OR条件或不能使用查询API实现的条件。 这时，我们推荐原生查询，它让你可以编写自己的SQL查询。 返回类型由你使用的查询对象决定，数据会映射到正确的对象上。比如，任务，流程实例，，执行，等等。 因为查询会作用在数据库上，你必须使用数据库中定义的表名和列名；这要求了解内部数据结构， 因此使用原生查询时一定要注意。表名可以通过API获得，可以尽量减少对数据库的依赖。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Task&gt; tasks = taskService.createNativeTaskQuery()</span><br><span class="line">	.sql(<span class="string">"SELECT count(*) FROM "</span> + managementService.getTableName(Task.class) + <span class="string">" T WHERE T.NAME_ = #&#123;taskName&#125;"</span>)</span><br><span class="line">	.parameter(<span class="string">"taskName"</span>, <span class="string">"gonzoTask"</span>)</span><br><span class="line">	.list();</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> count = taskService.createNativeTaskQuery()</span><br><span class="line">	.sql(<span class="string">"SELECT count(*) FROM "</span> + managementService.getTableName(Task.class) + <span class="string">" T1, "</span></span><br><span class="line">       + managementService.getTableName(VariableInstanceEntity.class) + <span class="string">" V1 WHERE V1.TASK_ID_ = T1.ID_"</span>)</span><br><span class="line">	.count();</span><br></pre></td></tr></table></figure>
+
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p>Activiti使用UEL处理表达式。UEL即统一表达式语言，它时EE6规范的一部分（参考 <a href="https://docs.oracle.com/javaee/6/tutorial/doc/gjddd.html" title="EE6规范" target="_blank" rel="noopener">EE6规范</a>）。为了在所有运行环境都支持最新UEL的所有功能，我们使用了一个JUEL的修改版本。</p>
+<p>表达式可以用在很多场景下，比如Java服务任务，执行监听器，任务监听器和条件流。虽然有两重表达式，值表达式和方法表达式，Activiti进行了抽象，所以两者可以同样使用在需要表达式的场景中。</p>
+<ul>
+<li><p>Value expression：解析为值。默认，所有流程变量都可以使用。所有spring bean（spring环境中）也可以使用在表达式中。 一些实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;myVar&#125;</span><br><span class="line">$&#123;myBean.myProperty&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Method expression：调用一个方法，使用或不使用参数。当调用一个无参数的方法时，记得在方法名后添加空的括号（以区分值表达式）。传递的参数可以是字符串也可以是表达式，它们会被自动解析。例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;printer.print()&#125;</span><br><span class="line">$&#123;myBean.addNewOrder(<span class="string">'orderName'</span>)&#125;</span><br><span class="line">$&#123;myBean.doSomething(myVar, execution)&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>注意这些表达式支持解析原始类型（包括比较），bean，list，数组和map。</p>
+<p>在所有流程实例中，表达式中还可以使用一些默认对象：</p>
+<ul>
+<li>execution：DelegateExecution提供外出执行的额外信息。</li>
+<li>task：DelegateTask提供当前任务的额外信息。注意，只对任务监听器的表达式有效。</li>
+<li>authenticatedUserId：当前登录的用户id。如果没有用户登录，这个变量就不可用。</li>
+</ul>
+<p>想要更多具体的使用方式和例子，参考spring中的表达式，Java服务任务，执行监听器，任务监听器或条件流。</p>
+<h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>业务流程是软件项目的一部分，它也应该和普通的业务流程一样进行测试： 使用单元测试。 因为Activiti是一个嵌入式的java引擎， 为业务流程编写单元测试和写普通单元测试完全一样。</p>
+<p>Activiti支持JUnit 3和4进行单元测试。使用JUnit 3时， 必须集成org.activiti.engine.test.ActivitiTestCase。 它通过保护的成员变量提供ProcessEngine和服务， 在测试的setup()中， 默认会使用classpath下的activiti.cfg.xml初始化流程引擎。 想使用不同的配置文件，可以重写getConfigurationResource()方法。 如果配置文件相同的话，对应的流程引擎会被静态缓存， 就可以用于多个单元测试。</p>
+<p>继承了ActivitiTestCase你，可以在测试方法上使用 org.activiti.engine.test.Deployment注解。 测试执行前，与测试类在同一个包下的， 格式为testClassName.testMethod.bpmn20.xml的资源文件，会被部署。 测试结束后，发布包也会被删除，包括所有相关的流程实例，任务，等等。 Deployment注解也可以直接设置资源的位置。 参考Javadocs获得更多信息。</p>
+<p>把这些放在一起，JUnit 3测试看起来像这样。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBusinessProcessTest</span> <span class="keyword">extends</span> <span class="title">ActivitiTestCase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Deployment</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSimpleProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		runtimeService.startProcessInstanceByKey(<span class="string">"simpleProcess"</span>);</span><br><span class="line"></span><br><span class="line">		Task task = taskService.createTaskQuery().singleResult();</span><br><span class="line">		assertEquals(<span class="string">"My Task"</span>, task.getName());</span><br><span class="line"></span><br><span class="line">		taskService.complete(task.getId());</span><br><span class="line">		assertEquals(<span class="number">0</span>, runtimeService.createProcessInstanceQuery().count());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要想在使用JUnit 4编写单元测试时获得同样的功能， 可以使用org.activiti.engine.test.ActivitiRule。 通过它，可以通过getter方法获得流程引擎和各种服务。 和 ActivitiTestCase一样（参考上面章节），使用这个Rule 也会启用org.activiti.engine.test.Deployment注解（参考上面章节使用和配置的介绍）， 它会在classpath下查找默认的配置文件。 如果配置文件相同的话，对应的流程引擎会被静态缓存， 就可以用于多个单元测试。</p>
+<p>下面的代码演示了JUnit 4单元测试并使用了ActivitiRule的例子。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBusinessProcessTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Rule</span></span><br><span class="line">	<span class="keyword">public</span> ActivitiRule activitiRule = <span class="keyword">new</span> ActivitiRule();</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="meta">@Deployment</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ruleUsageExample</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		RuntimeService runtimeService = activitiRule.getRuntimeService();</span><br><span class="line">		runtimeService.startProcessInstanceByKey(<span class="string">"ruleUsage"</span>);</span><br><span class="line"></span><br><span class="line">		TaskService taskService = activitiRule.getTaskService();</span><br><span class="line">		Task task = taskService.createTaskQuery().singleResult();</span><br><span class="line">		assertEquals(<span class="string">"My Task"</span>, task.getName());</span><br><span class="line"></span><br><span class="line">		taskService.complete(task.getId());</span><br><span class="line">		assertEquals(<span class="number">0</span>, runtimeService.createProcessInstanceQuery().count());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="调试单元测试"><a href="#调试单元测试" class="headerlink" title="调试单元测试"></a>调试单元测试</h3><p>当使用内存数据库H2进行单元测试时，下面的教程会告诉我们 如何在调试环境下更容易的监视Activiti的数据库。 这里的截图都是基于eclipse，这种机制很容易复用到其他IDE下。 </p>
+<p>假设我们已经在单元测试里设置了一个断点。 Ecilpse里，在代码左侧双击：</p>
+<p><img src="https://i.loli.net/2020/04/09/4fWDXNdpjvsQGEw.png" alt="activiti 5.16 Chapter 4 api.test.debug.breakpoint.png"></p>
+<p>现在用调试模式运行单元测试（右击单元测试， 选择“运行为”和“单元测试”），测试会停在我们的断点上， 然后我们就可以监视测试的变量，它们显示在右侧面板里。</p>
+<p><img src="https://i.loli.net/2020/04/09/igW8Q1BfMvp2mc7.png" alt="activiti 5.16 Chapter 4 api.test.debug.view.png"></p>
+<p>要监视Activiti的数据，打开“显示”窗口 （如果找不到，打开“窗口”-&gt;“显示视图”-&gt;“其他”，选择显示。） 并点击（代码已完成）org.h2.tools.Server.createWebServer(“-web”).start()</p>
+<p><img src="https://i.loli.net/2020/04/09/XxfvrlAFSB3RcVd.png" alt="activiti 5.16 Chapter 4 api.test.debug.start.h2.server.png"></p>
+<p>选择你点击的行，右击。然后选择“显示”（或者直接快捷方式就不用右击了）</p>
+<p><img src="https://i.loli.net/2020/04/09/WtzSQ4NTIYkEBpm.png" alt="activiti 5.16 Chapter 4 api.test.debug.start.h2.server.2.png"></p>
+<p>现在打开一个浏览器，打开<a href="http://localhost:8082，" target="_blank" rel="noopener">http://localhost:8082，</a> 输入内存数据库的JDBC URL（默认为jdbc:h2:mem:activiti）， 点击连接按钮。</p>
+<p><img src="https://i.loli.net/2020/04/09/MmClknVo8wp7WRv.png" alt="activiti 5.16 Chapter 4 api.test.debug.h2.login.png"></p>
+<p>你也可以看到Activiti的数据，通过它们可以了解单元测试时如何以及为什么这样运行的。</p>
+<p><img src="https://i.loli.net/2020/04/09/GVuLrCdk1ZwFaQO.png" alt="activiti 5.16 Chapter 4 api.test.debug.h2.tables.png"></p>
+<h3 id="web应用中的流程引擎"><a href="#web应用中的流程引擎" class="headerlink" title="web应用中的流程引擎"></a>web应用中的流程引擎</h3><p>ProcessEngine是线程安全的， 可以在多线程下共享。在web应用中， 意味着可以在容器启动时创建流程引擎， 在容器关闭时关闭流程引擎。</p>
+<p>下面代码演示了如何编写一个ServletContextListener 在普通的Servlet环境下初始化和销毁流程引擎：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProcessEnginesServletContextListener</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent servletContextEvent)</span> </span>&#123;</span><br><span class="line">		ProcessEngines.init();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent servletContextEvent)</span> </span>&#123;</span><br><span class="line">		ProcessEngines.destroy();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>contextInitialized方法会执行ProcessEngines.init()。 这会查找classpath下的activiti.cfg.xml文件， 根据配置文件创建一个ProcessEngine（比如，多个jar中都包含配置文件）。 如果classpath中包含多个配置文件，确认它们有不同的名字。 当需要使用流程引擎时，可以通过</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngines.getDefaultProcessEngine()</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngines.getProcessEngine(<span class="string">"myName"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当然，也可以使用其他方式创建流程引擎， 可以参考配置章节中的描述。</p>
+<p>ContextListener中的contextDestroyed方法会执行ProcessEngines.destroy(). 这会关闭所有初始化的流程引擎。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="MiCai wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信订阅号</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="MiCai WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="MiCai Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    MiCai
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://micai-code.github.io/2020/04/09/Activiti-5-16-API-讲解/" title="Activiti 5.16 API 讲解">https://micai-code.github.io/2020/04/09/Activiti-5-16-API-讲解/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Activiti/" rel="tag"># Activiti</a>
+          
+            <a href="/tags/工作流/" rel="tag"># 工作流</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/09/Activiti-5-16-简介-学习-配置/" rel="next" title="Activiti 5.16 简介 学习 配置">
+                <i class="fa fa-chevron-left"></i> Activiti 5.16 简介 学习 配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/09/Activiti-5-16-Spring-集成/" rel="prev" title="Activiti 5.16 Spring 集成">
+                Activiti 5.16 Spring 集成 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+      <div id="gitalk-container"></div>
+      
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/micai_logo.jpg" alt="MiCai">
+            
+              <p class="site-author-name" itemprop="name">MiCai</p>
+              <p class="site-description motion-element" itemprop="description">MiCai is a Java developer</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+			  
+			  
+			  <div class="site-state-item site-state-categories">
+			    
+				  <a href="/categories/index.html">
+				
+			      <span class="site-state-item-count">42</span>
+			      <span class="site-state-item-name">categories</span>
+			    </a>
+			  </div>
+			
+
+			
+			  
+			  
+			  <div class="site-state-item site-state-tags">
+			    
+				  <a href="/tags/index.html">
+				
+			      <span class="site-state-item-count">41</span>
+			      <span class="site-state-item-name">tags</span>
+			    </a>
+			  </div>
+			
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sxdtzhaoxinguo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhaoxinguo@yahoo.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/micai-code" target="_blank" title="Gitee">
+                      
+                        <i class="fa fa-fw fa-gitee"></i>Gitee</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" title="MiCai`s CSDN Blog" target="_blank">MiCai`s CSDN Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-4-Activiti-API"><span class="nav-number">1.</span> <span class="nav-text">Chapter 4. Activiti API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程引擎的API和服务"><span class="nav-number">2.</span> <span class="nav-text">流程引擎的API和服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常策略"><span class="nav-number">3.</span> <span class="nav-text">异常策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Activiti的服务"><span class="nav-number">4.</span> <span class="nav-text">使用Activiti的服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发布流程"><span class="nav-number">4.1.</span> <span class="nav-text">发布流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动一个流程实例"><span class="nav-number">4.2.</span> <span class="nav-text">启动一个流程实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完成任务"><span class="nav-number">4.3.</span> <span class="nav-text">完成任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂起，激活一个流程"><span class="nav-number">4.4.</span> <span class="nav-text">挂起，激活一个流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多知识"><span class="nav-number">4.5.</span> <span class="nav-text">更多知识</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询API"><span class="nav-number">5.</span> <span class="nav-text">查询API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表达式"><span class="nav-number">6.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试"><span class="nav-number">7.</span> <span class="nav-text">单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试单元测试"><span class="nav-number">8.</span> <span class="nav-text">调试单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web应用中的流程引擎"><span class="nav-number">9.</span> <span class="nav-text">web应用中的流程引擎</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MiCai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Visitor
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Total Visit
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  
+  <script type="text/javascript">
+    var title = location.pathname.substr(0, 50);
+    var gitalk = new Gitalk({
+      clientID: '1a75ca5322c01ec87aa2',
+      clientSecret: 'd7ceb1c394b5dcc1b1625df137efdd52d1aa9db7',
+      repo: 'gitalk',
+      owner: 'micai-code',
+      admin: ['micai-code'],
+      id: title,
+      labels: ['Gitalk'],
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: true,
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Activiti,工作流,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Activiti 5.16 用户手册Chapter 1-2-3 简介 学习 配置Table of Contents 协议下载源码必要的软件JDK 6+Eclipse Indigo 和 Juno报告问题试验性功能内部实现类 协议Activiti是基于Apache V2协议发布的。 下载http://activiti.org/download.html 源码发布包里包含大部分的已经打好jar包的源码。">
+<meta name="keywords" content="Activiti,工作流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activiti 5.16 简介 学习 配置">
+<meta property="og:url" content="https://micai-code.github.io/2020/04/09/Activiti-5-16-简介-学习-配置/index.html">
+<meta property="og:site_name" content="MiCai`s Blog">
+<meta property="og:description" content="Activiti 5.16 用户手册Chapter 1-2-3 简介 学习 配置Table of Contents 协议下载源码必要的软件JDK 6+Eclipse Indigo 和 Juno报告问题试验性功能内部实现类 协议Activiti是基于Apache V2协议发布的。 下载http://activiti.org/download.html 源码发布包里包含大部分的已经打好jar包的源码。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-04-09T05:07:28.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activiti 5.16 简介 学习 配置">
+<meta name="twitter:description" content="Activiti 5.16 用户手册Chapter 1-2-3 简介 学习 配置Table of Contents 协议下载源码必要的软件JDK 6+Eclipse Indigo 和 Juno报告问题试验性功能内部实现类 协议Activiti是基于Apache V2协议发布的。 下载http://activiti.org/download.html 源码发布包里包含大部分的已经打好jar包的源码。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://micai-code.github.io/2020/04/09/Activiti-5-16-简介-学习-配置/">
+
+
+
+
+
+  <title>Activiti 5.16 简介 学习 配置 | MiCai`s Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MiCai`s Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://micai-code.github.io/2020/04/09/Activiti-5-16-简介-学习-配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MiCai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/micai_logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MiCai`s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Activiti 5.16 简介 学习 配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-09T13:05:00+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-09T13:07:28+08:00">
+                2020-04-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activiti/" itemprop="url" rel="index">
+                    <span itemprop="name">Activiti</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activiti/工作流/" itemprop="url" rel="index">
+                    <span itemprop="name">工作流</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/04/09/Activiti-5-16-简介-学习-配置/" class="leancloud_visitors" data-flag-title="Activiti 5.16 简介 学习 配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> View
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Activiti-5-16-用户手册"><a href="#Activiti-5-16-用户手册" class="headerlink" title="Activiti 5.16 用户手册"></a>Activiti 5.16 用户手册</h3><h3 id="Chapter-1-2-3-简介-学习-配置"><a href="#Chapter-1-2-3-简介-学习-配置" class="headerlink" title="Chapter 1-2-3 简介 学习 配置"></a>Chapter 1-2-3 简介 学习 配置</h3><p>Table of Contents</p>
+<p>协议<br>下载<br>源码<br>必要的软件<br>JDK 6+<br>Eclipse Indigo 和 Juno<br>报告问题<br>试验性功能<br>内部实现类</p>
+<h4 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h4><p>Activiti是基于Apache V2协议发布的。</p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><a href="http://activiti.org/download.html" target="_blank" rel="noopener">http://activiti.org/download.html</a></p>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><p>发布包里包含大部分的已经打好jar包的源码。 如果想找到并构建完整的源码库，请参考 wiki “构建发布包”。</p>
+<h4 id="必要的软件"><a href="#必要的软件" class="headerlink" title="必要的软件"></a>必要的软件</h4><h5 id="JDK-6"><a href="#JDK-6" class="headerlink" title="JDK 6+"></a>JDK 6+</h5><p>Activiti需要运行在JDK 6或以上版本上。 进入 Oracle Java SE 下载页面 点击 “下载 JDK”按钮。页面上也提供了安装的方法。 为了验证是否安装成功，可以在命令行中执行 java -version。 它将会打印出安装的JDK的版本。</p>
+<h5 id="Eclipse-Indigo-和-Juno"><a href="#Eclipse-Indigo-和-Juno" class="headerlink" title="Eclipse Indigo 和 Juno"></a>Eclipse Indigo 和 Juno</h5><p>（译者注：Eclipse 3.7 版本代号 Indigo 靛青， Eclipse 4.2 版本代号 Juno 朱诺）。 在Eclipse下载页面下载你选择的eclipse发布包。 解压下载文件，你就可以通过eclipse目录下的eclipse文件启动它。 此外，在该用户指南后面，专门有一章介绍安装eclipse设计器插件。</p>
+<h3 id="Chapter-2-开始学习"><a href="#Chapter-2-开始学习" class="headerlink" title="Chapter 2. 开始学习"></a>Chapter 2. 开始学习</h3><h4 id="一分钟入门"><a href="#一分钟入门" class="headerlink" title="一分钟入门"></a>一分钟入门</h4><p>从Activiti网站下载Activiti Explorer的WAR文件后， 可以按照下列步骤以默认配置运行样例。 你需要一个Java 运行环境和 Apache Tomcat （其实，任何提供了servlet功能的web容器都可以正常运行。但是我们主要是使用tomcat进行的测试）。</p>
+<p>把下载的activiti-explorer.war复制到Tomcat的webapps目录下。</p>
+<p>执行Tomcat的bin目录下的startup.bat或startup.sh启动服务器。</p>
+<p>Tomcat启动后，打开浏览器访问<a href="http://localhost:8080/activiti-explorer。" target="_blank" rel="noopener">http://localhost:8080/activiti-explorer。</a> 使用kermit/kermit登录。</p>
+<p>这样就好了！Activiti Explorer默认使用H2内存数据库，如果你想使用其他数据库 请参考这里。</p>
+<h4 id="安装Activiti"><a href="#安装Activiti" class="headerlink" title="安装Activiti"></a>安装Activiti</h4><p>要安装Activiti你需要一个 Java运行环境 和 Apache Tomcat。 还要确认设置好JAVA_HOME系统变量。 不同的操作系统下的设置方法是不同的。</p>
+<p>要运行Activiti Explorer和REST web应用，你要从Activiti的下载页下载WAR文件， 复制到Tomcat安装目录下webapps目录下。 默认Explorer应用使用的内存数据库已经包含了示例流程，用户和群组信息。</p>
+<p>下面是示例中可以使用的用户：</p>
+<p>Table 2.1. 示例用户</p>
+<p>账号    密码    角色<br>kermit  kermit  admin<br>gonzo gonzo manager<br>fozzie  fozzie  user</p>
+<p>现在，你可以访问下列web应用：</p>
+<p>Table 2.2. webapp工具</p>
+<p>Webapp名称      URL                   描述<br>Activiti Explorer <a href="http://localhost:8080/activiti-explorer" target="_blank" rel="noopener">http://localhost:8080/activiti-explorer</a> 流程引擎的用户控制台。使用它来启动新流程，分配任务， 查看并认领任务，等等。这个工具也可以用来管理Activiti引擎。</p>
+<p>注意Activiti Explorer演示实例只是一种简单快速展示Activiti的功能的方式。 但是并不是说只能使用这种方式使用Activiti。 Activiti只是一个jar， 可以内嵌到任何Java环境中：swing或者Tomcat, JBoss, WebSphere等等。 也可以把Activiti作为一个典型的单独运行的BPM服务器运行。 只要java可以做的，Activiti也可以。</p>
+<h4 id="安装Activiti数据库"><a href="#安装Activiti数据库" class="headerlink" title="安装Activiti数据库"></a>安装Activiti数据库</h4><p>就像在一分钟入门里说过的，Activiti Explorer默认使用H2内存数据库。 要让Activiti使用独立运行的H2数据库或者其他数据库， 可以修改Activiti Explorer web应用WEB-INF/classes目录下的db.properties。</p>
+<p>另外，注意Activiti Explorer自动生成了演示用的默认用户和群组，流程定义，数据模型。 要想禁用这个功能，要修改WEB-INF目录下的activiti-standalone-context.xml。 可以使用下面的demoDataGenerator bean定义代码完全禁用安装默认数据。从代码中也可以看出，我们可以单独启用或禁用每一项功能。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"demoDataGenerator"</span> <span class="attr">class</span>=<span class="string">"org.activiti.explorer.demo.DemoDataGenerator"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"processEngine"</span> <span class="attr">ref</span>=<span class="string">"processEngine"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"createDemoUsersAndGroups"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"createDemoProcessDefinitions"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"createDemoModels"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="引入Activiti-jar和依赖"><a href="#引入Activiti-jar和依赖" class="headerlink" title="引入Activiti jar和依赖"></a>引入Activiti jar和依赖</h4><p>为了引用Activiti jar和依赖，我们推荐使用 Maven（或Ivy）， 它简化了我们之间的依赖管理。 参考<a href="http://www.activiti.org/community.html#maven.repository" target="_blank" rel="noopener">http://www.activiti.org/community.html#maven.repository</a> 来为你的项目引入必须的jar包。</p>
+<p>如果不想用Maven，你也可以自己把这些jar引入到你的项目中。 Activiti下载zip包包含了一个libs目录， 包含了所有Activiti的jar包（和源代码jar包）。依赖没有用这种方式发布。 Activiti引擎必须的依赖如下所示（通过mvn dependency:tree生成）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">org.activiti:activiti-engine:jar:5.12.1</span><br><span class="line">+- org.apache.commons:commons-email:jar:1.2:compile</span><br><span class="line">|  +- javax.mail:mail:jar:1.4.1:compile</span><br><span class="line">|  \- javax.activation:activation:jar:1.1:compile</span><br><span class="line">+- org.apache.commons:commons-lang3:jar:3.1:compile</span><br><span class="line">+- org.mybatis:mybatis:jar:3.1.1:compile</span><br><span class="line">+- org.springframework:spring-beans:jar:3.1.2.RELEASE:compile</span><br><span class="line">|  \- org.springframework:spring-core:jar:3.1.2.RELEASE:compile</span><br><span class="line">|     +- org.springframework:spring-asm:jar:3.1.2.RELEASE:compile</span><br><span class="line">|     \- commons-logging:commons-logging:jar:1.1.1:compile</span><br><span class="line">\- joda-time:joda-time:jar:2.1:compile</span><br></pre></td></tr></table></figure>
+
+<p>注意：只有使用了mail service task才必须引入mail依赖jar。</p>
+<p>所有依赖可以在Activiti 源码的模块中， 通过mvn dependency:copy-dependencies下载。</p>
+<h4 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h4><p>使用Activiti Explorer web应用 是一个熟悉Activiti概念和功能的好办法。但是， Activiti的主要目标是为你自己的应用添加强大的BPM和工作流功能。 下面的章节会帮助你熟悉 如何在你的环境中使用Activiti进行编程：</p>
+<ul>
+<li><p>配置章节 会教你如何设置Activiti， 如何获得ProcessEngine类的实例， 它是所有Activiti引擎功能的中心入口。</p>
+</li>
+<li><p>API章节会带领你了解建立Activiti API的服务。 这些服务用简便的方法提供了Activiti引擎的强大功能， 它们可以使用在任何Java环境下。</p>
+</li>
+<li><p>对深入了解BPMN 2.0，Activiti引擎中流程的编写结构感兴趣吗？ 请继续浏览BPMN 2.0 章节。</p>
+</li>
+</ul>
+<h3 id="Chapter-3-配置"><a href="#Chapter-3-配置" class="headerlink" title="Chapter 3. 配置"></a>Chapter 3. 配置</h3><h4 id="创建ProcessEngine"><a href="#创建ProcessEngine" class="headerlink" title="创建ProcessEngine"></a>创建ProcessEngine</h4><p>Activiti流程引擎的配置文件是名为activiti.cfg.xml的XML文件。 注意这与使用Spring方式创建流程引擎 是不一样的。</p>
+<p>获得ProcessEngine最简单的办法是 使用org.activiti.engine.ProcessEngines类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine()</span><br></pre></td></tr></table></figure>
+
+<p>它会在classpath下搜索activiti.cfg.xml， 并基于这个文件中的配置构建引擎。 下面代码展示了实例配置。 后面的章节会给出配置参数的详细介绍。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcDriver"</span> <span class="attr">value</span>=<span class="string">"org.h2.Driver"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUsername"</span> <span class="attr">value</span>=<span class="string">"sa"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcPassword"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"databaseSchemaUpdate"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jobExecutorActivate"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mailServerHost"</span> <span class="attr">value</span>=<span class="string">"mail.my-corp.com"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mailServerPort"</span> <span class="attr">value</span>=<span class="string">"5025"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意配置XML文件其实是一个spring的配置文件。 <strong>但不是说Activiti只能用在Spring环境中！</strong> 我们只是利用了Spring的解析和依赖注入功能 来构建引擎。</p>
+<p>配置文件中使用的ProcessEngineConfiguration可以通过编程方式创建。 可以配置不同的bean id（比如，第三行）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResourceDefault();</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromResource(String resource, String beanName);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream);</span><br><span class="line">ProcessEngineConfiguration.createProcessEngineConfigurationFromInputStream(InputStream inputStream, String beanName);</span><br></pre></td></tr></table></figure>
+
+<p>也可以不使用配置文件，基于默认创建配置 （参考各种支持类）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();</span><br><span class="line">ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration();</span><br></pre></td></tr></table></figure>
+
+<p>所有这些ProcessEngineConfiguration.createXXX()方法都返回 ProcessEngineConfiguration，后续可以调整成所需的对象。 在调用buildProcessEngine()后， 就会创建一个ProcessEngine：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ProcessEngine processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()</span><br><span class="line">  .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE)</span><br><span class="line">  .setJdbcUrl(<span class="string">"jdbc:h2:mem:my-own-db;DB_CLOSE_DELAY=1000"</span>)</span><br><span class="line">  .setJobExecutorActivate(<span class="keyword">true</span>)</span><br><span class="line">  .buildProcessEngine();</span><br></pre></td></tr></table></figure>
+
+<h4 id="ProcessEngineConfiguration-bean"><a href="#ProcessEngineConfiguration-bean" class="headerlink" title="ProcessEngineConfiguration bean"></a>ProcessEngineConfiguration bean</h4><p>activiti.cfg.xml必须包含一个id为’processEngineConfiguration’的bean。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个bean会用来构建ProcessEngine。 有多个类可以用来定义processEngineConfiguration。 这些类对应不同的环境，并设置了对应的默认值。 最好选择（最）适用于你的环境的类， 这样可以少配置几个引擎的参数。 下面是目前可以使用的类（以后会包含更多）：</p>
+<ul>
+<li>org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration: 单独运行的流程引擎。Activiti会自己处理事务。 默认，数据库只在引擎启动时检测 （如果没有Activiti的表或者表结构不正确就会抛出异常）。</li>
+<li>org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration: 单元测试时的辅助类。Activiti会自己控制事务。 默认使用H2内存数据库。数据库表会在引擎启动时创建，关闭时删除。 使用它时，不需要其他配置（除非使用job执行器或邮件功能）。</li>
+<li>org.activiti.spring.SpringProcessEngineConfiguration: 在Spring环境下使用流程引擎。 参考Spring集成章节。</li>
+<li>org.activiti.engine.impl.cfg.JtaProcessEngineConfiguration: 单独运行流程引擎，并使用JTA事务。</li>
+</ul>
+<h4 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h4><p>Activiti可能使用两种方式配置数据库。 第一种方式是定义数据库配置参数：</p>
+<ul>
+<li>jdbcUrl: 数据库的JDBC URL。</li>
+<li>jdbcDriver: 对应不同数据库类型的驱动。</li>
+<li>jdbcUsername: 连接数据库的用户名。</li>
+<li>jdbcPassword: 连接数据库的密码。</li>
+</ul>
+<p>基于JDBC参数配置的数据库连接 会使用默认的MyBatis连接池。 下面的参数可以用来配置连接池（来自MyBatis参数）：</p>
+<ul>
+<li>jdbcMaxActiveConnections: 连接池中处于被使用状态的连接的最大值。默认为10。</li>
+<li>jdbcMaxIdleConnections: 连接池中处于空闲状态的连接的最大值。</li>
+<li>jdbcMaxCheckoutTime: 连接被取出使用的最长时间，超过时间会被强制回收。 默认为20000（20秒）。</li>
+<li>jdbcMaxWaitTime: 这是一个底层配置，让连接池可以在长时间无法获得连接时， 打印一条日志，并重新尝试获取一个连接。（避免因为错误配置导致沉默的操作失败）。 默认为20000（20秒）。</li>
+</ul>
+<p>示例数据库配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcDriver"</span> <span class="attr">value</span>=<span class="string">"org.h2.Driver"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUsername"</span> <span class="attr">value</span>=<span class="string">"sa"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcPassword"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以使用javax.sql.DataSource。 （比如，Apache Commons的DBCP）：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/activiti"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"activiti"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"activiti"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"defaultAutoCommit"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>注意，Activiti的发布包中没有这些类。 你要自己把对应的类（比如，从DBCP里）放到你的classpath下。</p>
+<p>无论你使用JDBC还是DataSource的方式，都可以设置下面的配置：</p>
+<ul>
+<li><strong>databaseType</strong>: 一般不用设置，因为可以自动通过数据库连接的元数据获取。 只有自动检测失败时才需要设置。 可能的值有：{h2, mysql, oracle, postgres, mssql, db2}。 <strong>如果没使用默认的H2数据库就必须设置这项</strong>。 这个配置会决定使用哪些创建/删除脚本和查询语句。 参考支持数据库章节 了解支持哪些类型。</li>
+<li><strong>databaseSchemaUpdate</strong>: 设置流程引擎启动和关闭时如何处理数据库表。<ul>
+<li>false（默认）：检查数据库表的版本和依赖库的版本， 如果版本不匹配就抛出异常。</li>
+<li>true: 构建流程引擎时，执行检查，如果需要就执行更新。 如果表不存在，就创建。</li>
+<li>create-drop: 构建流程引擎时创建数据库表， 关闭流程引擎时删除这些表。</li>
+</ul>
+</li>
+</ul>
+<h4 id="JNDI数据库配置"><a href="#JNDI数据库配置" class="headerlink" title="JNDI数据库配置"></a>JNDI数据库配置</h4><p>默认，Activiti的数据库配置会放在web应用的WEB-INF/classes目录下的db.properties文件中。 这样做比较繁琐， 因为要用户在每次发布时，都修改Activiti源码中的db.properties并重新编译war文件， 或者解压缩war文件，修改其中的db.properties。</p>
+<p>使用JNDI（Java命名和目录接口）来获取数据库连接， 连接是由servlet容器管理的，可以在war部署外边管理配置。 与db.properties相比， 它也允许对连接进行更多的配置。</p>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>要想把Activiti Explorer和Activiti Rest应用从db.properties转换为使用 JNDI数据库配置，需要打开原始的Spring配置文件 （activiti-webapp-explorer2/src/main/webapp/WEB-INF/activiti-standalone-context.xml 和activiti-webapp-rest2/src/main/resources/activiti-context.xml）， 删除”dbProperties”和”dataSource”两个bean，然后添加如下bean：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jndi.JndiObjectFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jndiName"</span> <span class="attr">value</span>=<span class="string">"java:comp/env/jdbc/activitiDB"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们需要添加包含了默认的H2配置的context.xml文件。 如果已经有了JNDI配置，会覆盖这些配置。 对Activiti Explorer来说，对应的配置文件activiti-webapp-explorer2/src/main/webapp/META-INF/context.xml 如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">antiJARLocking</span>=<span class="string">"true"</span> <span class="attr">path</span>=<span class="string">"/activiti-explorer2"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">auth</span>=<span class="string">"Container"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">name</span>=<span class="string">"jdbc/activitiDB"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">scope</span>=<span class="string">"Shareable"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">description</span>=<span class="string">"JDBC DataSource"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">url</span>=<span class="string">"jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">driverClassName</span>=<span class="string">"org.h2.Driver"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">username</span>=<span class="string">"sa"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">password</span>=<span class="string">""</span></span></span><br><span class="line"><span class="tag">              <span class="attr">defaultAutoCommit</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">initialSize</span>=<span class="string">"5"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">maxWait</span>=<span class="string">"5000"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">maxActive</span>=<span class="string">"120"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">maxIdle</span>=<span class="string">"5"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对于Activiti REST应用，添加的activiti-webapp-rest2/src/main/webapp/META-INF/context.xml 如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">antiJARLocking</span>=<span class="string">"true"</span> <span class="attr">path</span>=<span class="string">"/activiti-rest2"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">auth</span>=<span class="string">"Container"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">name</span>=<span class="string">"jdbc/activitiDB"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">scope</span>=<span class="string">"Shareable"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">description</span>=<span class="string">"JDBC DataSource"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">url</span>=<span class="string">"jdbc:h2:mem:activiti;DB_CLOSE_DELAY=-1"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">driverClassName</span>=<span class="string">"org.h2.Driver"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">username</span>=<span class="string">"sa"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">password</span>=<span class="string">""</span></span></span><br><span class="line"><span class="tag">              <span class="attr">defaultAutoCommit</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">initialSize</span>=<span class="string">"5"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">maxWait</span>=<span class="string">"5000"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">maxActive</span>=<span class="string">"120"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">maxIdle</span>=<span class="string">"5"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可选的一步，现在可以删除Activiti Explorer和Activiti Rest两个应用中 不再使用的db.properties文件了。</p>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><p>JNDI数据库配置会因为你使用的Servlet container不同而不同。 下面的配置可以在tomcat中使用，但是对其他容器， 请引用你使用的容器的文档。</p>
+<p>如果使用tomcat，JNDI资源配置在 $CATALINA_BASE/conf/[enginename]/[hostname]/[warname].xml （对于Activiti Explorer来说，通常是在$CATALINA_BASE/conf/Catalina/localhost/activiti-explorer.war）。 当应用第一次发布时，会把这个文件从war中复制出来。 所以如果这个文件已经存在了，你需要替换它。要想修改JNDI资源让应用连接mysql而不是H2， 可以像下面这样修改：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Context</span> <span class="attr">antiJARLocking</span>=<span class="string">"true"</span> <span class="attr">path</span>=<span class="string">"/activiti-explorer2"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">auth</span>=<span class="string">"Container"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">name</span>=<span class="string">"jdbc/activitiDB"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">description</span>=<span class="string">"JDBC DataSource"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">url</span>=<span class="string">"jdbc:mysql://localhost:3306/activiti"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">driverClassName</span>=<span class="string">"com.mysql.jdbc.Driver"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">username</span>=<span class="string">"sa"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">password</span>=<span class="string">""</span></span></span><br><span class="line"><span class="tag">          <span class="attr">defaultAutoCommit</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">initialSize</span>=<span class="string">"5"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">maxWait</span>=<span class="string">"5000"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">maxActive</span>=<span class="string">"120"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">maxIdle</span>=<span class="string">"5"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="支持的数据库"><a href="#支持的数据库" class="headerlink" title="支持的数据库"></a>支持的数据库</h4><p>下面列出Activiti使用的数据库类型（大小写敏感）。</p>
+<p>Table 3.1. 支持的数据库</p>
+<p>Activiti数据库类型 JDBC URL实例 备注<br>h2  jdbc:h2:tcp://localhost/activiti 默认配置的数据库<br>mysql jdbc:mysql://localhost:3306/activiti?autoReconnect=true 使用mysql-connector-java驱动测试<br>oracle jdbc:oracle:thin:@localhost:1521:xe<br>postgres jdbc:postgresql://localhost:5432/activiti<br>db2 dbc:db2://localhost:50000/activiti<br>mssql jdbc:sqlserver://localhost:1433/activiti</p>
+<h4 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h4><p>下面是创建数据库表最简单的办法：</p>
+<ul>
+<li>把activiti-engine的jar放到classpath下</li>
+<li>添加对应的数据库驱动</li>
+<li>把Activiti配置文件 (activiti.cfg.xml) 放到 classpath下， 指向你的数据库（参考数据库配置章节）</li>
+<li>执行 DbSchemaCreate 类的main方法</li>
+</ul>
+<p>不过，一般情况只有数据库管理员才能执行DDL语句。 在生产环境，这也是最明智的选择。 SQL DDL语句可以从Activiti下载页或Activiti发布目录里找到，在database子目录下。 脚本也包含在引擎的jar中(activiti-engine-x.jar)， 在org/activiti/db/create包下（drop目录里是删除语句）。 SQL文件的命名方式如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activiti.&#123;db&#125;.&#123;create|drop&#125;.&#123;type&#125;.sql</span><br></pre></td></tr></table></figure>
+
+<p>其中 db 是 支持的数据库， type 是</p>
+<ul>
+<li>engine: 引擎执行的表。必须。</li>
+<li>identity: 包含用户，群组，用户与组之间的关系的表。 这些表是可选的，只有使用引擎自带的默认身份管理时才需要。</li>
+<li>history: 包含历史和审计信息的表。可选的：历史级别设为none时不会使用。 注意这也会引用一些需要把数据保存到历史表中的功能（比如任务的评论）。</li>
+</ul>
+<p><strong>MySQL用户需要注意</strong>： 版本低于5.6.4的MySQL不支持毫秒精度的timstamp或date类型。 更严重的是，有些版本会在尝试创建这样一列时抛出异常，而有些版本则不会。 在执行自动创建/更新时，引擎会在执行过程中修改DDL。 当使用DDL时，可以选择通用版本和名为mysql55的文件。 （它适合所有版本低于5.6.4的情况）。 后一个文件会将列的类型设置为没有毫秒的情况。</p>
+<p>总结一下，对于MySQL版本会执行如下操作</p>
+<ul>
+<li>&lt;5.6: 不支持毫秒精度。可以使用DDL文件（包含mysql55的文件）。可以实现自动创建/更新。</li>
+<li>5.6.0 - 5.6.3: 不支持毫秒精度。无法自动创建/更新。建议更新到新的数据库版本。如果真的需要的话，也可以使用mysql 5.5。</li>
+<li>5.6.4+:支持毫秒精度。可以使用DDL文件（默认包含mysql的文件）。可以实现自动创建、更新。</li>
+</ul>
+<p>注意对于已经更新了MySQL数据库，而且Activiti表已经创建/更新的情况， 必须手工修改列的类型。</p>
+<h4 id="理解数据库表的命名"><a href="#理解数据库表的命名" class="headerlink" title="理解数据库表的命名"></a>理解数据库表的命名</h4><p>Activiti的表都以ACT_开头。 第二部分是表示表的用途的两个字母标识。 用途也和服务的API对应。</p>
+<ul>
+<li>ACT_RE_*: ‘RE’表示repository。 这个前缀的表包含了流程定义和流程静态资源 （图片，规则，等等）。</li>
+<li>ACT_RU_*: ‘RU’表示runtime。 这些运行时的表，包含流程实例，任务，变量，异步任务，等运行中的数据。 Activiti只在流程实例执行过程中保存这些数据， 在流程结束时就会删除这些记录。 这样运行时表可以一直很小速度很快。</li>
+<li>ACT_ID_*: ‘ID’表示identity。 这些表包含身份信息，比如用户，组等等。</li>
+<li>ACT_HI_*: ‘HI’表示history。 这些表包含历史数据，比如历史流程实例， 变量，任务等等。</li>
+<li>ACT_GE_*: 通用数据， 用于不同场景下。</li>
+</ul>
+<h4 id="数据库升级"><a href="#数据库升级" class="headerlink" title="数据库升级"></a>数据库升级</h4><p>在执行更新之前要先备份数据库 （使用数据库的备份功能）</p>
+<p>默认，每次构建流程引擎时都会进行版本检测。 这一切都在应用启动或Activiti webapp启动时发生。 如果Activiti发现数据库表的版本与依赖库的版本不同， 就会抛出异常。</p>
+<p>要升级，你要把下面的配置 放到activiti.cfg.xml配置文件里：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">...</span> &gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"databaseSchemaUpdate"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，把对应的数据库驱动放到classpath里。 升级应用的Activiti依赖。启动一个新版本的Activiti 指向包含旧版本的数据库。将databaseSchemaUpdate设置为true， Activiti会自动将数据库表升级到新版本， 当发现依赖和数据库表版本不通过时。</p>
+<p>也可以执行更新升级DDL语句。 也可以执行数据库脚本，可以在Activiti下载页找到。</p>
+<h4 id="启用Job执行器"><a href="#启用Job执行器" class="headerlink" title="启用Job执行器"></a>启用Job执行器</h4><p>JobExecutor是管理一系列线程的组件，可以触发定时器（也包含后续的异步消息）。 在单元测试场景下，很难使用多线程。因此API允许查询(ManagementService.createJobQuery)和执行job (ManagementService.executeJob)，所以job可以在单元测试中控制。 要避免与job执行器冲突，可以关闭它。</p>
+<p>默认，JobExecutor在流程引擎启动时就会激活。 如果不想在流程引擎启动后自动激活JobExecutor，可以设置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jobExecutorActivate"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置邮件服务器"><a href="#配置邮件服务器" class="headerlink" title="配置邮件服务器"></a>配置邮件服务器</h4><p>可以选择配置邮件服务器。Activiti支持在业务流程中发送邮件。 想真正的发送一个email，必须配置一个真实的SMTP邮件服务器。 参考e-mail任务。</p>
+<h4 id="配置历史"><a href="#配置历史" class="headerlink" title="配置历史"></a>配置历史</h4><p>可以选择定制历史存储的配置。你可以通过配置影响引擎的历史功能。 参考历史配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"history"</span> <span class="attr">value</span>=<span class="string">"audit"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="为表达式和脚本暴露配置"><a href="#为表达式和脚本暴露配置" class="headerlink" title="为表达式和脚本暴露配置"></a>为表达式和脚本暴露配置</h4><p>默认，activiti.cfg.xml和你自己的Spring配置文件中所有bean 都可以在表达式和脚本中使用。 如果你想限制配置文件中的bean的可见性， 可以配置流程引擎配置的beans配置。 ProcessEngineConfiguration的beans是一个map。当你指定了这个参数， 只有包含这个map中的bean可以在表达式和脚本中使用。 通过在map中指定的名称来决定暴露的bean。</p>
+<h4 id="配置部署缓存"><a href="#配置部署缓存" class="headerlink" title="配置部署缓存"></a>配置部署缓存</h4><p>所有流程定义都被缓存了（解析之后）避免每次使用前都要访问数据库， 因为流程定义数据是不会改变的。 默认，不会限制这个缓存。如果想限制流程定义缓存，可以添加如下配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"processDefinitionCacheLimit"</span> <span class="attr">value</span>=<span class="string">"10"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个配置会把默认的hashmap缓存替换成LRU缓存，来提供限制。 当然，这个配置的最佳值跟流程定义的总数有关， 实际使用中会具体使用多少流程定义也有关。</p>
+<p>你也可以注入自己的缓存实现。这个bean必须实现 org.activiti.engine.impl.persistence.deploy.DeploymentCache接口：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"processDefinitionCache"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.activiti.MyCache"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有一个类似的配置叫knowledgeBaseCacheLimit和knowledgeBaseCache， 它们是配置规则缓存的。只有流程中使用规则任务时才会用到。</p>
+<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>从Activiti 5.12开始，SLF4J被用作日志框架，替换了之前使用java.util.logging。 所有日志（activiti, spring, mybatis等等）都转发给SLF4J 允许使用你选择的日志实现。</p>
+<p><strong>默认activiti-engine依赖中没有提供SLF4J绑定的jar， 需要根据你的实际需要使用日志框架。</strong>如果没有添加任何实现jar，SLF4J会使用NOP-logger，不使用任何日志，不会发出警告，而且什么日志都不会记录。 可以通过<a href="http://www.slf4j.org/codes.html#StaticLoggerBinder了解这些实现。" target="_blank" rel="noopener">http://www.slf4j.org/codes.html#StaticLoggerBinder了解这些实现。</a></p>
+<p>使用Maven，比如使用一个依赖（这里使用log4j），注意你还需要添加一个version：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>activiti-explorer和activiti-rest应用都使用了Log4j绑定。执行所有activiti-*模块的单元测试页使用了Log4j。</p>
+<p>特别提醒如果容器classpath中存在commons-logging： 为了把spring日志转发给SLF4J，需要使用桥接（参考<a href="http://www.slf4j.org/legacy.html#jclOverSLF4J）。" target="_blank" rel="noopener">http://www.slf4j.org/legacy.html#jclOverSLF4J）。</a> 如果你的容器提供了commons-logging实现，请参考下面网页：<a href="http://www.slf4j.org/codes.html#release来确保稳定性。" target="_blank" rel="noopener">http://www.slf4j.org/codes.html#release来确保稳定性。</a></p>
+<p>使用Maven的实例（忽略版本）：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jcl-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="映射诊断上下文"><a href="#映射诊断上下文" class="headerlink" title="映射诊断上下文"></a>映射诊断上下文</h4><p>在5.13中，activiti支持slf4j的MDC功能。 如下的基础信息会传递到日志中记录：</p>
+<ul>
+<li>流程定义Id标记为mdcProcessDefinitionID</li>
+<li>流程实例Id标记为mdcProcessInstanceID</li>
+<li>分支Id标记为mdcexecutionId</li>
+</ul>
+<p>默认不会记录这些信息。可以配置日志使用期望的格式来显示它们，扩展通常的日志信息。 比如，下面的log4j配置定义会让日志显示上面提及的信息：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log4j.appender.consoleAppender.layout.ConversionPattern =ProcessDefinitionId=%X&#123;mdcProcessDefinitionID&#125;</span><br><span class="line">executionId=%X&#123;mdcExecutionId&#125; mdcProcessInstanceID=%X&#123;mdcProcessInstanceID&#125; mdcBusinessKey=%X&#123;mdcBusinessKey&#125; %m%n"</span><br></pre></td></tr></table></figure>
+
+<p>当系统进行高风险任务，日志必须严格检查时，这个功能就非常有用，比如要使用日志分析的情况。</p>
+<h4 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h4><p>Activiti 5.15中实现了一种事件机制。它允许在引擎触发事件时获得提醒。 参考所有支持的事件类型了解有效的事件。</p>
+<p>可以为对应的事件类型注册监听器，在这个类型的任何时间触发时都会收到提醒。 你可以添加引擎范围的事件监听器通过配置， 添加引擎范围的事件监听器在运行阶段使用API， 或添加event-listener到特定流程定义的BPMN XML中。</p>
+<p>所有分发的事件，都是org.activiti.engine.delegate.event.ActivitiEvent的子类。事件包含（如果有效）type，executionId，processInstanceId和processDefinitionId。 对应的事件会包含事件发生时对应上下文的额外信息， 这些额外的载荷可以在支持的所有事件类型中找到。</p>
+<h5 id="事件监听器实现"><a href="#事件监听器实现" class="headerlink" title="事件监听器实现"></a>事件监听器实现</h5><p>实现事件监听器的唯一要求是实现org.activiti.engine.delegate.event.ActivitiEventListener。下面是一个实现监听器的例子，它会把所有监听到的事件打印到标准输出中，包括job执行的事件异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyEventListener</span> <span class="keyword">implements</span> <span class="title">ActivitiEventListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onEvent</span><span class="params">(ActivitiEvent event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (event.getType()) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> JOB_EXECUTION_SUCCESS:</span><br><span class="line">      System.out.println(<span class="string">"A job well done!"</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> JOB_EXECUTION_FAILURE:</span><br><span class="line">      System.out.println(<span class="string">"A job has failed..."</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">      System.out.println(<span class="string">"Event received: "</span> + event.getType());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFailOnException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// The logic in the onEvent method of this listener is not critical, exceptions</span></span><br><span class="line">    <span class="comment">// can be ignored if logging fails...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>isFailOnException()方法决定了当事件分发时，onEvent(..)方法抛出异常时的行为。 这里返回的是false，会忽略异常。 当返回true时，异常不会忽略，继续向上传播，迅速导致当前命令失败。 当事件是一个API调用的一部分时（或其他事务性操作，比如job执行）， 事务就会回滚。当事件监听器中的行为不是业务性时，建议返回false。</p>
+<p>activiti提供了一些基础的实现，实现了事件监听器的常用场景。可以用来作为基类或监听器实现的样例：</p>
+<ul>
+<li>org.activiti.engine.delegate.event.BaseEntityEventListener： 这个事件监听器的基类可以用来监听实体相关的事件，可以针对某一类型实体，也可以是全部实体。 它隐藏了类型检测，并提供了三个需要重写的方法：onCreate(..), onUpdate(..) 和 onDelete(..)，当实体创建，更新，或删除时调用。对于其他实体相关的事件，会调用 onEntityEvent(..)。</li>
+</ul>
+<h5 id="配置与安装"><a href="#配置与安装" class="headerlink" title="配置与安装"></a>配置与安装</h5><p>把事件监听器配置到流程引擎配置中时，会在流程引擎启动时激活，并在引擎启动启动中持续工作着。</p>
+<p>eventListeners属性需要org.activiti.engine.delegate.event.ActivitiEventListener的队列。 通常，我们可以声明一个内部的bean定义，或使用ref引用已定义的bean。 下面的代码，向配置添加了一个事件监听器，任何事件触发时都会提醒它，无论事件是什么类型：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"eventListeners"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.example.MyEventListener"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了监听特定类型的事件，可以使用typedEventListeners属性，它需要一个map参数。 map的key是逗号分隔的事件名（或单独的事件名）。 map的value是org.activiti.engine.delegate.event.ActivitiEventListener队列。 下面的代码演示了向配置中添加一个事件监听器，可以监听job执行成功或失败：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"typedEventListeners"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"JOB_EXECUTION_SUCCESS,JOB_EXECUTION_FAILURE"</span> &gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.example.MyJobEventListener"</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>分发事件的顺序是由监听器添加时的顺序决定的。首先，会调用所有普通的事件监听器（eventListeners属性），按照它们在list中的次序。然后，会调用所有对应类型的监听器（typedEventListeners属性），如果对应类型的事件被触发了。</p>
+<h5 id="在运行阶段添加监听器"><a href="#在运行阶段添加监听器" class="headerlink" title="在运行阶段添加监听器"></a>在运行阶段添加监听器</h5><p>可以通过API（RuntimeService）在运行阶段添加或删除额外的事件监听器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Adds an event-listener which will be notified of ALL events by the dispatcher.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> listenerToAdd the listener to add</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEventListener</span><span class="params">(ActivitiEventListener listenerToAdd)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Adds an event-listener which will only be notified when an event occurs, which type is in the given types.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> listenerToAdd the listener to add</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> types types of events the listener should be notified for</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEventListener</span><span class="params">(ActivitiEventListener listenerToAdd, ActivitiEventType... types)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Removes the given listener from this dispatcher. The listener will no longer be notified,</span></span><br><span class="line"><span class="comment"> * regardless of the type(s) it was registered for in the first place.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> listenerToRemove listener to remove</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">removeEventListener</span><span class="params">(ActivitiEventListener listenerToRemove)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意运行期添加的监听器引擎重启后就消失了。</p>
+<h5 id="为流程定义添加监听器"><a href="#为流程定义添加监听器" class="headerlink" title="为流程定义添加监听器"></a>为流程定义添加监听器</h5><p>可以为特定流程定义添加监听器。监听器只会监听与这个流程定义相关的事件，以及这个流程定义上发起的所有流程实例的事件。 监听器实现可以使用，全类名定义，引用实现了监听器接口的表达式，或配置为抛出一个message/signal/error的BPMN事件。</p>
+<h5 id="让监听器执行用户定义的逻辑"><a href="#让监听器执行用户定义的逻辑" class="headerlink" title="让监听器执行用户定义的逻辑"></a>让监听器执行用户定义的逻辑</h5><p>下面代码为一个流程定义添加了两个监听器。第一个监听器会接收所有类型的事件，它是通过全类名定义的。第二个监听器只接收作业成功或失败的事件，它使用了定义在流程引擎配置中的beans属性中的一个bean。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">"testEventListeners"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.test.MyEventListener"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">delegateExpression</span>=<span class="string">"$&#123;testEventListener&#125;"</span> <span class="attr">events</span>=<span class="string">"JOB_EXECUTION_SUCCESS,JOB_EXECUTION_FAILURE"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对于实体相关的事件，也可以设置为针对某个流程定义的监听器，实现只监听发生在某个流程定义上的某个类型实体事件。下面的代码演示了如何实现这种功能。可以用于所有实体事件（第一个例子），也可以只监听特定类型的事件（第二个例子）。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">"testEventListeners"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">class</span>=<span class="string">"org.activiti.engine.test.MyEventListener"</span> <span class="attr">entityType</span>=<span class="string">"task"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">delegateExpression</span>=<span class="string">"$&#123;testEventListener&#125;"</span> <span class="attr">events</span>=<span class="string">"ENTITY_CREATED"</span> <span class="attr">entityType</span>=<span class="string">"task"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>entityType支持的值有：attachment, comment, execution,identity-link, job, process-instance, process-definition, task。</p>
+<h5 id="监听抛出BPMN事件"><a href="#监听抛出BPMN事件" class="headerlink" title="监听抛出BPMN事件"></a>监听抛出BPMN事件</h5><p>另一种处理事件的方法是抛出一个BPMN事件。请注意它只针对与抛出一个activiti事件类型的BPMN事件。 比如，抛出一个BPMN事件，在流程实例删除时，会导致一个错误。 下面的代码演示了如何在流程实例中抛出一个signal，把signal抛出到外部流程（全局），在流程实例中抛出一个消息事件， 在流程实例中抛出一个错误事件。除了使用class或delegateExpression， 还使用了throwEvent属性，通过额外属性，指定了抛出事件的类型。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">"testEventListeners"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">throwEvent</span>=<span class="string">"signal"</span> <span class="attr">signalName</span>=<span class="string">"My signal"</span> <span class="attr">events</span>=<span class="string">"TASK_ASSIGNED"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">"testEventListeners"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">throwEvent</span>=<span class="string">"globalSignal"</span> <span class="attr">signalName</span>=<span class="string">"My signal"</span> <span class="attr">events</span>=<span class="string">"TASK_ASSIGNED"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">"testEventListeners"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">throwEvent</span>=<span class="string">"message"</span> <span class="attr">messageName</span>=<span class="string">"My message"</span> <span class="attr">events</span>=<span class="string">"TASK_ASSIGNED"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">"testEventListeners"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">extensionElements</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activiti:eventListener</span> <span class="attr">throwEvent</span>=<span class="string">"error"</span> <span class="attr">errorCode</span>=<span class="string">"123"</span> <span class="attr">events</span>=<span class="string">"TASK_ASSIGNED"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">extensionElements</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果需要声明额外的逻辑，是否抛出BPMN事件，可以扩展activiti提供的监听器类。在子类中重写isValidEvent(ActivitiEvent event)， 可以防止抛出BPMN事件。对应的类是org.activiti.engine.test.api.event.SignalThrowingEventListenerTest, org.activiti.engine.impl.bpmn.helper.MessageThrowingEventListener 和 org.activiti.engine.impl.bpmn.helper.ErrorThrowingEventListener.</p>
+<h5 id="流程定义中监听器的注意事项"><a href="#流程定义中监听器的注意事项" class="headerlink" title="流程定义中监听器的注意事项"></a>流程定义中监听器的注意事项</h5><ul>
+<li>事件监听器只能声明在process元素中，作为extensionElements的子元素。 监听器不能定义在流程的单个activity下。</li>
+<li>delegateExpression中的表达式无法访问execution上下文，这与其他表达式不同（比如gateway）。 它只能引用定义在流程引擎配置的beans属性中声明的bean，或者使用spring（未使用beans属性）中所有实现了监听器接口的spring-bean。</li>
+<li>在使用监听器的 class 属性时，只会创建一个实例。记住监听器实现不会依赖成员变量， 确认是多线程安全的。</li>
+<li>当一个非法的事件类型用在events属性或throwEvent中时，流程定义发布时就会抛出异常。（会导致部署失败）。如果class或delegateExecution由问题（类不存在，不存在的bean引用，或代理类没有实现监听器接口），会在流程启动时抛出异常（或在第一个有效的流程定义事件被监听器接收时）。所以要保证引用的类正确的放在classpath下，表达式也要引用一个有效的实例。</li>
+</ul>
+<h5 id="通过API分发事件"><a href="#通过API分发事件" class="headerlink" title="通过API分发事件"></a>通过API分发事件</h5><p>我们提供了通过API使用事件机制的方法，允许大家触发定义在引擎中的任何自定义事件。 建议（不强制）只触发类型为CUSTOM的ActivitiEvents。可以通过RuntimeService触发事件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Dispatches the given event to any listeners that are registered.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> event event to dispatch.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> ActivitiException if an exception occurs when dispatching the event or when the &#123;<span class="doctag">@link</span> ActivitiEventDispatcher&#125;</span></span><br><span class="line"><span class="comment"> * is disabled.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> ActivitiIllegalArgumentException when the given event is not suitable for dispatching.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">dispatchEvent</span><span class="params">(ActivitiEvent event)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="支持的事件类型"><a href="#支持的事件类型" class="headerlink" title="支持的事件类型"></a>支持的事件类型</h5><p>下面是引擎中可能出现的所有事件类型。每个类型都对应org.activiti.engine.delegate.event.ActivitiEventType中的一个枚举值。</p>
+<p>Table 3.2. 支持的事件</p>
+<p>事件名称    描述    事件类型<br>ENGINE_CREATED  监听器监听的流程引擎已经创建完毕，并准备好接受API调用。 org.activiti…ActivitiEvent<br>ENGINE_CLOSED 监听器监听的流程引擎已经关闭，不再接受API调用。 org.activiti…ActivitiEvent<br>ENTITY_CREATED  创建了一个新实体。实体包含在事件中。  org.activiti…ActivitiEntityEvent<br>ENTITY_INITIALIZED  创建了一个新实体，初始化也完成了。如果这个实体的创建会包含子实体的创建，这个事件会在子实体都创建/初始化完成后被触发，这是与ENTITY_CREATED的区别。  org.activiti…ActivitiEntityEvent<br>ENTITY_UPDATED  更新了已存在的实体。实体包含在事件中。 org.activiti…ActivitiEntityEvent<br>ENTITY_DELETED  删除了已存在的实体。实体包含在事件中。 org.activiti…ActivitiEntityEvent<br>ENTITY_SUSPENDED  暂停了已存在的实体。实体包含在事件中。会被ProcessDefinitions, ProcessInstances 和 Tasks抛出。  org.activiti…ActivitiEntityEvent<br>ENTITY_ACTIVATED  激活了已存在的实体，实体包含在事件中。会被ProcessDefinitions, ProcessInstances 和 Tasks抛出。  org.activiti…ActivitiEntityEvent<br>JOB_EXECUTION_SUCCESS 作业执行成功。job包含在事件中。 org.activiti…ActivitiEntityEvent<br>JOB_EXECUTION_FAILURE 作业执行失败。作业和异常信息包含在事件中。 org.activiti…ActivitiEntityEvent and org.activiti…ActivitiExceptionEvent<br>JOB_RETRIES_DECREMENTED 因为作业执行失败，导致重试次数减少。作业包含在事件中。 org.activiti…ActivitiEntityEvent<br>TIMER_FIRED 触发了定时器。job包含在事件中。 org.activiti…ActivitiEntityEvent<br>JOB_CANCELED  取消了一个作业。事件包含取消的作业。作业可以通过API调用取消， 任务完成后对应的边界定时器也会取消，在新流程定义发布时也会取消。 org.activiti…ActivitiEntityEvent<br>ACTIVITY_STARTED  一个节点开始执行  org.activiti…ActivitiActivityEvent<br>ACTIVITY_COMPLETED  一个节点成功结束  org.activiti…ActivitiActivityEvent<br>ACTIVITY_SIGNALED 一个节点收到了一个信号 org.activiti…ActivitiSignalEvent<br>ACTIVITY_MESSAGE_RECEIVED 一个节点收到了一个消息。在节点收到消息之前触发。收到后，会触发ACTIVITY_SIGNAL或ACTIVITY_STARTED，这会根据节点的类型（边界事件，事件子流程开始事件） org.activiti…ActivitiMessageEvent<br>ACTIVITY_ERROR_RECEIVED 一个节点收到了一个错误事件。在节点实际处理错误之前触发。 事件的activityId对应着处理错误的节点。 这个事件后续会是ACTIVITY_SIGNALLED或ACTIVITY_COMPLETE， 如果错误发送成功的话。 org.activiti…ActivitiErrorEvent<br>UNCAUGHT_BPMN_ERROR 抛出了未捕获的BPMN错误。流程没有提供针对这个错误的处理器。 事件的activityId为空。  org.activiti…ActivitiErrorEvent<br>ACTIVITY_COMPENSATE 一个节点将要被补偿。事件包含了将要执行补偿的节点id。 org.activiti…ActivitiActivityEvent<br>VARIABLE_CREATED  创建了一个变量。事件包含变量名，变量值和对应的分支或任务（如果存在）。 org.activiti…ActivitiVariableEvent<br>VARIABLE_UPDATED  更新了一个变量。事件包含变量名，变量值和对应的分支或任务（如果存在）。 org.activiti…ActivitiVariableEvent<br>VARIABLE_DELETED  删除了一个变量。事件包含变量名，变量值和对应的分支或任务（如果存在）。 org.activiti…ActivitiVariableEvent<br>TASK_ASSIGNED 任务被分配给了一个人员。事件包含任务。 org.activiti…ActivitiEntityEvent<br>TASK_CREATED  创建了新任务。它位于ENTITY_CREATE事件之后。当任务是由流程创建时， 这个事件会在TaskListener执行之前被执行。  org.activiti…ActivitiEntityEvent<br>TASK_COMPLETED  任务被完成了。它会在ENTITY_DELETE事件之前触发。当任务是流程一部分时，事件会在流程继续运行之前， 后续事件将是ACTIVITY_COMPLETE，对应着完成任务的节点。  org.activiti…ActivitiEntityEvent<br>TASK_TIMEOUT  任务已超时，在TIMER_FIRED事件之后，会触发用户任务的超时事件， 当这个任务分配了一个定时器的时候。  org.activiti…ActivitiEntityEvent<br>PROCESS_COMPLETED 流程已结束。在最后一个节点的ACTIVITY_COMPLETED事件之后触发。 当流程到达的状态，没有任何后续连线时， 流程就会结束。 org.activiti…ActivitiEntityEvent<br>MEMBERSHIP_CREATED  用户被添加到一个组里。事件包含了用户和组的id。  org.activiti…ActivitiMembershipEvent<br>MEMBERSHIP_DELETED  用户被从一个组中删除。事件包含了用户和组的id。  org.activiti…ActivitiMembershipEvent<br>MEMBERSHIPS_DELETED 所有成员被从一个组中删除。在成员删除之前触发这个事件，所以他们都是可以访问的。 因为性能方面的考虑，不会为每个成员触发单独的MEMBERSHIP_DELETED事件。 org.activiti…ActivitiMembershipEvent</p>
+<p>引擎内部所有ENTITY_*事件都是与实体相关的。下面的列表展示了实体事件与实体的对应关系：</p>
+<ul>
+<li>ENTITY_CREATED, ENTITY_INITIALIZED, ENTITY_DELETED: Attachment, Comment, Deployment, Execution, Group, IdentityLink, Job, Model, ProcessDefinition, ProcessInstance, Task, User.</li>
+<li>ENTITY_UPDATED: Attachment, Deployment, Execution, Group, IdentityLink, Job, Model, ProcessDefinition, ProcessInstance, Task, User.</li>
+<li>ENTITY_SUSPENDED, ENTITY_ACTIVATED: ProcessDefinition, ProcessInstance/Execution, Task.</li>
+</ul>
+<h5 id="附加信息"><a href="#附加信息" class="headerlink" title="附加信息"></a>附加信息</h5><p>只有同一个流程引擎中的事件会发送给对应的监听器。。的那个你有很多引擎 - 在同一个数据库运行 - 事件只会发送给注册到对应引擎的监听器。其他引擎发生的事件不会发送给这个监听器，无论实际上它们运行在同一个或不同的JVM中。</p>
+<p>对应的事件类型（对应实体）都包含对应的实体。根据类型或事件，这些实体不能再进行更新（比如，当实例以被删除）。可能的话，使用事件提供的EngineServices来以安全的方式来操作引擎。即使如此，你需要小心的对事件对应的实体进行更新/操作。</p>
+<p>没有对应历史的实体事件，因为它们都有运行阶段的对应实体。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.jpg" alt="MiCai wechat" style="width: 200px; max-width: 100%;">
+    <div>扫一扫，关注微信订阅号</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="MiCai WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="MiCai Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    MiCai
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://micai-code.github.io/2020/04/09/Activiti-5-16-简介-学习-配置/" title="Activiti 5.16 简介 学习 配置">https://micai-code.github.io/2020/04/09/Activiti-5-16-简介-学习-配置/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Activiti/" rel="tag"># Activiti</a>
+          
+            <a href="/tags/工作流/" rel="tag"># 工作流</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/30/Java中10个常用的排序算法-1/" rel="next" title="Java中10个常用的排序算法">
+                <i class="fa fa-chevron-left"></i> Java中10个常用的排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/09/Activiti-5-16-API-讲解/" rel="prev" title="Activiti 5.16 API 讲解">
+                Activiti 5.16 API 讲解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+      <div id="gitalk-container"></div>
+      
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/micai_logo.jpg" alt="MiCai">
+            
+              <p class="site-author-name" itemprop="name">MiCai</p>
+              <p class="site-description motion-element" itemprop="description">MiCai is a Java developer</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+			  
+			  
+			  <div class="site-state-item site-state-categories">
+			    
+				  <a href="/categories/index.html">
+				
+			      <span class="site-state-item-count">42</span>
+			      <span class="site-state-item-name">categories</span>
+			    </a>
+			  </div>
+			
+
+			
+			  
+			  
+			  <div class="site-state-item site-state-tags">
+			    
+				  <a href="/tags/index.html">
+				
+			      <span class="site-state-item-count">41</span>
+			      <span class="site-state-item-name">tags</span>
+			    </a>
+			  </div>
+			
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sxdtzhaoxinguo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhaoxinguo@yahoo.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/micai-code" target="_blank" title="Gitee">
+                      
+                        <i class="fa fa-fw fa-gitee"></i>Gitee</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/sxdtzhaoxinguo" title="MiCai`s CSDN Blog" target="_blank">MiCai`s CSDN Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activiti-5-16-用户手册"><span class="nav-number">1.</span> <span class="nav-text">Activiti 5.16 用户手册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-1-2-3-简介-学习-配置"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1-2-3 简介 学习 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协议"><span class="nav-number">2.1.</span> <span class="nav-text">协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载"><span class="nav-number">2.2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码"><span class="nav-number">2.3.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#必要的软件"><span class="nav-number">2.4.</span> <span class="nav-text">必要的软件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JDK-6"><span class="nav-number">2.4.1.</span> <span class="nav-text">JDK 6+</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Eclipse-Indigo-和-Juno"><span class="nav-number">2.4.2.</span> <span class="nav-text">Eclipse Indigo 和 Juno</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-2-开始学习"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2. 开始学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一分钟入门"><span class="nav-number">3.1.</span> <span class="nav-text">一分钟入门</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Activiti"><span class="nav-number">3.2.</span> <span class="nav-text">安装Activiti</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Activiti数据库"><span class="nav-number">3.3.</span> <span class="nav-text">安装Activiti数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引入Activiti-jar和依赖"><span class="nav-number">3.4.</span> <span class="nav-text">引入Activiti jar和依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下一步"><span class="nav-number">3.5.</span> <span class="nav-text">下一步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-3-配置"><span class="nav-number">4.</span> <span class="nav-text">Chapter 3. 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建ProcessEngine"><span class="nav-number">4.1.</span> <span class="nav-text">创建ProcessEngine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ProcessEngineConfiguration-bean"><span class="nav-number">4.2.</span> <span class="nav-text">ProcessEngineConfiguration bean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库配置"><span class="nav-number">4.3.</span> <span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JNDI数据库配置"><span class="nav-number">4.4.</span> <span class="nav-text">JNDI数据库配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用"><span class="nav-number">4.4.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置"><span class="nav-number">4.4.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持的数据库"><span class="nav-number">4.5.</span> <span class="nav-text">支持的数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据库表"><span class="nav-number">4.6.</span> <span class="nav-text">创建数据库表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解数据库表的命名"><span class="nav-number">4.7.</span> <span class="nav-text">理解数据库表的命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库升级"><span class="nav-number">4.8.</span> <span class="nav-text">数据库升级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启用Job执行器"><span class="nav-number">4.9.</span> <span class="nav-text">启用Job执行器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置邮件服务器"><span class="nav-number">4.10.</span> <span class="nav-text">配置邮件服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置历史"><span class="nav-number">4.11.</span> <span class="nav-text">配置历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为表达式和脚本暴露配置"><span class="nav-number">4.12.</span> <span class="nav-text">为表达式和脚本暴露配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置部署缓存"><span class="nav-number">4.13.</span> <span class="nav-text">配置部署缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志"><span class="nav-number">4.14.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射诊断上下文"><span class="nav-number">4.15.</span> <span class="nav-text">映射诊断上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件处理"><span class="nav-number">4.16.</span> <span class="nav-text">事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件监听器实现"><span class="nav-number">4.16.1.</span> <span class="nav-text">事件监听器实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置与安装"><span class="nav-number">4.16.2.</span> <span class="nav-text">配置与安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在运行阶段添加监听器"><span class="nav-number">4.16.3.</span> <span class="nav-text">在运行阶段添加监听器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为流程定义添加监听器"><span class="nav-number">4.16.4.</span> <span class="nav-text">为流程定义添加监听器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#让监听器执行用户定义的逻辑"><span class="nav-number">4.16.5.</span> <span class="nav-text">让监听器执行用户定义的逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#监听抛出BPMN事件"><span class="nav-number">4.16.6.</span> <span class="nav-text">监听抛出BPMN事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#流程定义中监听器的注意事项"><span class="nav-number">4.16.7.</span> <span class="nav-text">流程定义中监听器的注意事项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过API分发事件"><span class="nav-number">4.16.8.</span> <span class="nav-text">通过API分发事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#支持的事件类型"><span class="nav-number">4.16.9.</span> <span class="nav-text">支持的事件类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#附加信息"><span class="nav-number">4.16.10.</span> <span class="nav-text">附加信息</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MiCai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Visitor
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Total Visit
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  
+  <script type="text/javascript">
+    var title = location.pathname.substr(0, 50);
+    var gitalk = new Gitalk({
+      clientID: '1a75ca5322c01ec87aa2',
+      clientSecret: 'd7ceb1c394b5dcc1b1625df137efdd52d1aa9db7',
+      repo: 'gitalk',
+      owner: 'micai-code',
+      admin: ['micai-code'],
+      id: title,
+      labels: ['Gitalk'],
+      perPage: 10,
+      pagerDirection: 'last',
+      createIssueManually: true,
+      distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
+  </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7OrkOItlL6f1vceqnRWJCTUj-gzGzoHsz", "OwDIgcpqe7v3xe1ItE60Kwla");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
